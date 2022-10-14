@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>FutureLearn-VR: Playing With Motion</title>
+    <meta name="description" content="FutureLearn-VR: Playing With Motion">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: #FAFAFA">
+	  <a-assets>
+		<img id="grid" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAdSURBVChTY8APGIH4////EA4mYILSOMAwlWZgAAA9/AMPtjk6fAAAAABJRU5ErkJggg==">
+		<a-mixin id="greenMov" 	animation__p="property:position; from:2 0 0; to:5 0 -4; dur:1500; dir:alternate; loop:0;easing:linear;"></a-mixin>
+	  </a-assets>
+      <a-box id="redBlock"   position="0 0 0" color="red" 
+		animation="property:position; from:0 0 0; to:-4 0 -4; dur:3000; dir:alternate; loop:0;easing:linear;"	
+	  ></a-box>
+      <a-box id="greenBlock" position="2 0 0" color="green" mixin="greenMov"></a-box>
+      <a-box id="block3" position="0 0 2" color="blue"
+		animation="property:rotation.y;from:0;to:360;dur:1000;dir:normal;loop:3;easing:linear;">
+	  </a-box> 
+	  
+      <a-plane position="0.5 -0.5 0.5" rotation="-90 0 0" width="10" height="10" color="#fff" material="src:#grid;repeat:10 10"></a-plane>
+      <a-camera position="2 3 10" ></a-camera>
+    </a-scene>
+  </body>
+</html>

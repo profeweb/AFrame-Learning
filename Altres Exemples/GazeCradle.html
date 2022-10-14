@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>FutureLearn-VR: Interactive Newton's Cradle</title>
+    <meta
+      name="description"
+      content="FutureLearn-VR: Interactive Newton's Cradle"
+    />
+        <script src="../js/aframe.1.0.4.min.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: #aaa">
+      <a-assets>
+        <a-mixin
+          id="pillar"
+          geometry="primitive: cylinder; height:4;radius:0.1;"
+          material="color: silver;"
+        ></a-mixin>
+        <a-mixin
+          id="bar"
+          rotation="0 0 90"
+          geometry="primitive: cylinder; height:6.4;radius:0.1;"
+          material="color: silver;"
+        ></a-mixin>
+        <a-mixin
+          id="string"
+          geometry="primitive:cylinder;height:3.0;radius:0.03"
+          material="color:silver; transparent:true;opacity:0.5;"
+        >
+        </a-mixin>
+        <a-mixin
+          id="strPA"
+          position="0 -1.4  0.75"
+          rotation=" 30 0 0"
+        ></a-mixin>
+        <a-mixin
+          id="strPB"
+          position="0 -1.4 -0.75"
+          rotation="-30 0 0"
+        ></a-mixin>
+        <a-mixin
+          id="sphere"
+          position="0 -2.6 0"
+          geometry="primitive:sphere; radius:0.4;"
+          material="color:gold"
+          shadow
+        ></a-mixin>
+        <a-mixin
+          id="spinTable"
+          animation__y="property:rotation.y;  from:0; to:360; dir:normal;
+                               loop:true; dur:7200; easing:linear;startEvents:spinOn;pauseEvents:spinPause;resumeEvents:spinMore"
+        ></a-mixin>
+        <a-mixin
+          id="swingLeft"
+          animation__l="property:rotation.z;  from:0; to:60; dir:alternate;
+                   						 loop:2; dur:400; easing:easeOutSine;startEvents:swingLeft;"
+        ></a-mixin>
+        <a-mixin
+          id="swingRight"
+          animation__r="property:rotation.z;  from:0; to:-60; dir:alternate;
+                   						 loop:2; dur:400; easing:easeOutSine;startEvents:swingRight;"
+        ></a-mixin>
+      </a-assets>
+
+      <a-cylinder
+        id="cradleTable"
+        class="table"
+        mixin="spinTable"
+        position="0 0 -8"
+        radius="5"
+        height="0.25"
+        color="#FFC65D"
+        shadow
+      >
+        <a-entity position="-3 2   1.5" mixin="pillar"></a-entity>
+        <a-entity position=" 3 2   1.5" mixin="pillar"></a-entity>
+        <a-entity position="-3 2  -1.5" mixin="pillar"></a-entity>
+        <a-entity position=" 3 2  -1.5" mixin="pillar"></a-entity>
+        <a-entity position=" 0 4   1.5" mixin="bar"></a-entity>
+        <a-entity position="0 4  -1.5" mixin="bar"></a-entity>
+        <a-entity id="leftBall" position="1.6 4 0" mixin="swingLeft">
+          <a-entity mixin="string strPA"></a-entity
+          ><a-entity mixin="string strPB"></a-entity>
+          <a-entity mixin="sphere" id="left" class="clickableBall"></a-entity>
+        </a-entity>
+        <a-entity id="rightBall" position="-1.6 4 0" mixin="swingRight">
+          <a-entity mixin="string strPA"></a-entity
+          ><a-entity mixin="string strPB"></a-entity>
+          <a-entity mixin="sphere" id="right" class="clickableBall"></a-entity>
+        </a-entity>
+        <a-entity id="mid0" position="0.8 4 0">
+          <a-entity mixin="string strPA"></a-entity
+          ><a-entity mixin="string strPB"></a-entity
+          ><a-entity mixin="sphere"></a-entity>
+        </a-entity>
+        <a-entity id="mid1" position="0.0 4 0">
+          <a-entity mixin="string strPA"></a-entity
+          ><a-entity mixin="string strPB"></a-entity
+          ><a-entity mixin="sphere"></a-entity>
+        </a-entity>
+        <a-entity id="mid2" position="-0.8 4 0">
+          <a-entity mixin="string strPA"></a-entity
+          ><a-entity mixin="string strPB"></a-entity
+          ><a-entity mixin="sphere"></a-entity>
+        </a-entity>
+      </a-cylinder>
+      <a-entity
+        light="type: directional;  color: #FFF; intensity: 0.8"
+        position="-1 1 1"
+      ></a-entity>
+      <a-entity
+        light="type: directional;  color: #FFF; intensity: 0.8"
+        position=" 1 1 1"
+      ></a-entity>
+      <a-camera look-controls mouse-cursor>
+        <a-entity id="cursor" raycaster="objects: .clickableBall, .table"
+            cursor="fuse: true;"                  
+            material="color: black; shader: flat"
+            position="0 0 -2"
+            geometry="primitive: ring;radiusInner: 0.16; radiusOuter: 0.24;"                     
+            animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+            animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.1 0.1 0.1"
+            animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
+            >
+        </a-entity>
+      </a-camera>
+      
+    </a-scene>
+    <script>
+      let cradleEvt = "spinOn";
+
+      window.onload = function() {
+        //set up response to first click on either ball
+        setFirstSwing("left", "leftBall", "swingLeft");
+        setFirstSwing("right", "rightBall", "swingRight");
+        
+        //set triggers for continued swinging
+        setTrigger("leftBall", "swingRight", "rightBall");
+        setTrigger("rightBall", "swingLeft", "leftBall");
+
+        //set up table to spin or stop based on clicks
+        setTableSpin();
+      };
+
+      function setTableSpin() {
+        let table = document.getElementById("cradleTable");
+        table.addEventListener("click", function() {
+          //control the spin-animation of the cradle's base using a named event
+          table.emit(cradleEvt);
+          //once we have started the spinning, we may only want to pause or restart it
+          cradleEvt =
+            cradleEvt == "spinOn" || cradleEvt == "spinMore"
+              ? "spinPause"
+              : "spinMore";
+        });
+      }
+
+      function setTrigger(source, evt, target) {
+        //when the animation on the source is completed,
+        //we emit an event for the target to start its animation
+        let sourceEntity = document.getElementById(source);
+        let targetEntity = document.getElementById(target);
+        sourceEntity.addEventListener("animationcomplete", function(e) {
+          targetEntity.emit(evt);
+        });
+      }
+
+      function setFirstSwing(ball, ballParent, swingEvt) {
+        let lb = document.getElementById("left");
+        let rb = document.getElementById("right");
+        let hnd = ball == "left" ? lb : rb;
+        hnd.addEventListener(
+          "click",
+          function _clicked(evt) {
+            evt.stopPropagation(); //so that the event doesn't bubble up to table and start its spinning
+            //start swinging the ball which was clicked on
+            document.getElementById(ballParent).emit(swingEvt);
+            
+            //the next two lines disable interactivity for the two balls
+            //this is required since the swing action is started only once
+            lb.classList.remove("clickableBall");
+            rb.classList.remove("clickableBall");
+          }
+        );
+      }
+    </script>
+  </body>
+</html>

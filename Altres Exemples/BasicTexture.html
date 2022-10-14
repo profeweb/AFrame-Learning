@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>FutureLearn-VR: Basic Textures for Earth-Moon system</title>
+    <meta name="description" content="FutureLearn-VR: Playing With Motion">
+	<!--AFrame 1.0.4 library can be directly used from their CDN by uncommenting the line below-->
+	<!--script src="https://aframe.io/releases/1.0.4/aframe.min.js "></script-->
+	<!--Normally, it is advisable to host the library on your own if possible as done by the line below--> 
+	<script src="../js/aframe.1.0.4.min.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: #000" shadow="type: pcfsoft">
+	  <a-assets>
+		<img id="moon" src="../assets/vw/moon.jpg">
+		<img id="earth" src="../assets/vw/earth_daymap.jpg">
+		<a-mixin id="rotY" animation__y="property:rotation.y;from:0;to:360;dir:normal;loop:true;dur:2000;easing:linear;"></a-mixin>
+		<a-mixin id="revY" animation__y="property:rotation.y;from:30;to:390;dir:normal;loop:true;dur:54000;easing:linear;"></a-mixin>
+		<a-mixin id="rotY2" animation__y="property:rotation.y;from:0;to:360;dir:normal;loop:true;dur:54000;easing:linear;"></a-mixin>
+	  </a-assets>
+	  <!--Actual dimensions: Diameters: Earth: 12600km, Moon: 3400km; Distance: 384,400km			; E-Rot: 1 day, M-Rev: 27 days, M-Rot: 27 days
+		  Simulated        : Diameters: Earth: 1u,      Moon: 0.27u ; Distance: real:30u; used: 5u	; E-Rot: 2s   , M-Rev: 54s,     M-Rot: 81 s
+	  -->
+      <a-entity id="earth_moon_system" scale="1.5 1.5 1.5">
+		<a-sphere material="src:#earth;" radius="0.5" mixin="rotY" shadow></a-sphere>
+		<a-entity id="moon_offset" mixin="revY">
+			<a-sphere material="src:#moon;" position="-5 0 0" mixin="rotY2" radius="0.135" shadow></a-sphere>
+		</a-entity>
+	  </a-entity>
+      <a-camera position="0 5 20" fov="45" ></a-camera>
+	    <a-entity light="type: directional;castShadow: true; intensity: 1.0; " color="white"  position="-1 0 10" ></a-entity>
+    </a-scene>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>FutureLearn-VR: Colour Exercise</title>
+    <meta name="description" content="FutureLearn-VR: Colours Exercise">
+	<!--AFrame 1.0.4 library can be directly used from their CDN by uncommenting the line below-->
+	<!--script src="https://aframe.io/releases/1.0.4/aframe.min.js "></script-->
+	<!--Normally, it is advisable to host the library on your own if possible as done by the line below--> 
+	<script src="../js/aframe.1.0.4.min.js"></script>
+  </head>
+  <body>
+    
+     
+    <a-scene background="color: #FAFAFA" id="ascene">
+		<a-assets>
+			<a-mixin id="cube" geometry="primitive: box" scale="0.6 0.6 0.6"></a-mixin>
+		</a-assets>
+      <a-camera position="0 0 0" ></a-camera>
+    </a-scene>
+	
+	<script>
+		let rad=3; //radius of sphere of clearance
+		let grid=8; //maximum number of cubes in +/- of each axis
+		document.getElementById("ascene").addEventListener("loaded",function(){
+			//when scene is ready, populate cubes
+			buildCubeGrid(document.getElementById("ascene"));
+		});
+		
+		function buildCubeGrid(scene){
+			for(let x=-1*grid;x<=grid;x+=2){
+				for(let y=-1*grid;y<=grid;y+=2){
+					for(let z=-1*grid;z<=grid;z+=2){
+						let dist3= x*x+y*y+z*z;
+						if(dist3>rad*rad){//this is a coordinate outside a sphere of radius = rad
+							scene.appendChild(buildCube(x,y,z));
+						}
+					}
+				}
+			}
+		}
+		
+		function buildCube(xPos,yPos,zPos){
+			col = getColour(xPos,yPos,zPos); //get the colour and opacity based on the position 
+			let cube = document.createElement("a-entity");
+			cube.setAttribute("mixin","cube");
+			cube.setAttribute("material","opacity: "+col.opacity+"; color:"+col.color+"; transparent: true");
+			cube.setAttribute("position",[xPos,yPos,zPos].join(" "));
+			return cube;
+		}
+		
+
+		function getColour(x,y,z){
+		//modify this function to demonstrate a different colouring scheme, 
+		//compute r,g,b individually as values between 0-255
+		//also compute opacity between 0-1
+		//use the hex function below to create the hex colour triplet to be returned 
+			let r = Math.floor(Math.abs(x)*25.5);
+			let g = Math.floor(Math.abs(y)*25.5);
+			let b = Math.floor(Math.abs(z)*25.5);
+			let o = (x*x+y*y+z*z)/(3*grid*grid);
+			
+			return {opacity:o,color:"#"+hex(r)+hex(g)+hex(b)};
+			
+		}
+		
+		function hex(val){
+			if(val>255) return 0;
+			else return (val<10?"0":"")+val.toString(16);
+		}
+	</script>
+  </body>
+</html>

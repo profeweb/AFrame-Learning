@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>FutureLearn-VR: Bot Dance</title>
+    <meta name="description" content="FutureLearn-VR: Bot Dance" />
+	<!--AFrame 1.0.4 library can be directly used from their CDN by uncommenting the line below-->
+	<!--script src="https://aframe.io/releases/1.0.4/aframe.min.js "></script-->
+	<!--Normally, it is advisable to host the library on your own if possible as done by the line below--> 
+	<script src="../js/aframe.1.0.4.min.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: #aaa">
+      <a-assets>       
+        <a-mixin id="twirl" 
+                 animation__y="property:rotation.y;  from:0; to:360; dir:normal;
+                               loop:true; dur:7200; easing:linear;">
+        </a-mixin>
+        <a-mixin
+          id="eyeTorus"
+          geometry="primitive:torus;radius:1.0;radius-tubular:0.2"
+          material="color:#44d;"
+        ></a-mixin>
+        <a-mixin
+          id="eyeBall"
+          geometry="primitive:sphere;radius:0.8;"
+          position="0 0 0.5"
+          material="color:#99e;"
+        ></a-mixin>
+        <a-mixin
+          id="headCyl"
+          geometry="primitive:cylinder;radius:5;height:8"
+          material="color:#228"
+        ></a-mixin>
+        <a-mixin
+          id="headCap"
+          geometry="primitive:cylinder;radius:3;height:2"
+          position="0 5 0"
+          material="color:#66b"
+        ></a-mixin>
+        <a-mixin
+          id="neckBall"
+          geometry="primitive:sphere;radius:2;"
+          position="0 -5 0"
+          material="color:#99e;"
+        ></a-mixin>
+        <a-mixin
+          id="ballJoin"
+          geometry="primitive:sphere;radius:2.5;"
+          material="color:#99e;" scale="0.8 0.8 0.8"
+        ></a-mixin>
+        <a-mixin
+          id="arm"
+          geometry="primitive:cylinder;radius:3;height:10"
+          material="color:#228"
+        ></a-mixin>
+        <a-mixin
+          id="foot"
+          geometry="primitive:cylinder;radius:3;height:16"
+          material="color:#228"
+        ></a-mixin>
+        <a-mixin
+          id="hook"
+          geometry="primitive:torus;radius:5.0;radius-tubular:0.6;arc:180"
+          material="color:#44d;"
+        ></a-mixin>
+        <a-mixin id="bar"
+          geometry="primitive:cylinder;radius:3;height:27"
+          rotation="0 0 90"
+          material="color:#228"></a-mixin>
+        <a-mixin id="chestBlock"
+          geometry="primitive:box;width:8;height:6;depth:8"
+          material="color:#66b;"></a-mixin>
+        <a-mixin id="wiring"
+          material="color:#99e;" geometry="arc:360;p:3;q:4;radius:2.5;radius-tubular:0.3" ></a-mixin>
+        <a-mixin id="footPad" rotation="-90 0 0"
+          material="color:#44d;side:double" geometry="primitive:sphere;phiStart:0;phiLength:180;radius:8;" ></a-mixin>
+      </a-assets>
+      
+      <a-entity id="robot" mixin="twirl" position="0 7.8 -10">
+        <a-entity id="torsoTop">
+          <a-entity id="head" position="0 4.8 0" scale="0.2 0.2 0.2">
+            <a-entity mixin="headCyl">
+              <a-entity mixin="headCap"></a-entity>
+              <a-entity id="eyes" position="0 1 4.7">
+                <a-entity mixin="eyeTorus" position="-2 0 0">
+                  <a-entity mixin="eyeBall"></a-entity>
+                </a-entity>
+                <a-entity id="eyeLeft" mixin="eyeTorus" position="2 0 0">
+                  <a-entity mixin="eyeBall"></a-entity>
+                </a-entity>
+              </a-entity>
+              <a-entity id="neckJoint" mixin="neckBall"></a-entity>
+            </a-entity>
+          </a-entity>
+          <a-entity id="arms">
+            <a-entity id="armRight" scale="0.2 0.2 0.2" position="-3 4 0">
+              <a-entity mixin="ballJoin" position="0 -5 0" rotation="0 0 -150"> 
+                <a-entity mixin="arm" position="0 -6 0">
+                  <a-entity mixin="ballJoin" position="0 -6 0" rotation="-20 0 0" >
+                    <a-entity mixin="arm" position="0 -6 0"> 
+                      <a-entity mixin="ballJoin" position="0 -6 0" >
+                        <a-entity mixin="hook" position="0 -7 0" rotation="-20 0 0"></a-entity>
+                      </a-entity>
+                    </a-entity>
+                  </a-entity>
+                </a-entity>
+              </a-entity>
+            </a-entity>
+            <a-entity id="armLeft" scale="0.2 0.2 0.2" position="3 4 0">
+              <a-entity mixin="ballJoin" position="0 -5 0" rotation="0 0 40"> 
+                <a-entity mixin="arm" position="0 -6 0">
+                  <a-entity mixin="ballJoin" position="0 -6 0" rotation="-30 0 0" >
+                    <a-entity mixin="arm" position="0 -6 0"> 
+                      <a-entity mixin="ballJoin" position="0 -6 0" >
+                        <a-entity mixin="hook" position="0 -7 0" rotation="-30 0 0"></a-entity>
+                      </a-entity>
+                    </a-entity>
+                  </a-entity>
+                </a-entity>
+              </a-entity>
+            </a-entity><!--end left arm-->
+          </a-entity>
+          <a-entity id="chest" scale="0.2 0.2 0.2" position="0 3 0"> 
+            <a-entity mixin="bar"></a-entity>
+            <a-entity id="chestRest">
+              <a-entity mixin="chestBlock" position="0 -4 0" scale="3 1 1"></a-entity>
+              <a-entity mixin="chestBlock" position="-8 -10 0" scale="1 1 1"></a-entity>
+              <a-torus-knot id="wires"     position="0 -10 0" mixin="wiring">              </a-torus-knot>
+              <a-entity mixin="chestBlock" position=" 8 -10 0" scale="1 1 1"></a-entity>
+              <a-entity mixin="chestBlock" position="0 -16 0" scale="3 1 1"></a-entity>
+            </a-entity>
+          </a-entity>
+        </a-entity>
+        <a-entity id="torsoBottom" scale="0.2 0.2 0.2" position="0 -1 0">
+          <a-entity id="pelvis" mixin="bar" scale="1 0.8 1"> </a-entity>
+          <a-entity id="legs"> 
+            <a-entity id="leftLeg">
+              <a-entity mixin="ballJoin" position="8 -4 0" rotation="-10 0 0">
+                <a-entity mixin="foot" position="0 -8 0">
+                  <a-entity mixin="ballJoin" position="0 -10 0" rotation="20 0 0">
+                    <a-entity mixin="foot" position="0 -8 0">
+                      <a-entity mixin="ballJoin" position="0 -10 0" rotation="-10 0 0">
+                        <a-entity mixin="footPad" position="0 -10 0" >
+                          <a-ring radius-outer="8" material="side:double;color:#99e;"></a-ring>
+                        </a-entity>
+                      </a-entity>
+                    </a-entity>
+                  </a-entity>
+                </a-entity>
+              </a-entity>
+            </a-entity><!--end left leg-->
+            <a-entity id="rightLeg">
+              <a-entity mixin="ballJoin" position="-8 -4 0" rotation="-10 0 0">
+                <a-entity mixin="foot" position="0 -8 0">
+                  <a-entity mixin="ballJoin" position="0 -10 0" rotation="20 0 0">
+                    <a-entity mixin="foot" position="0 -8 0">
+                      <a-entity mixin="ballJoin" position="0 -10 0" rotation="-10 0 0">
+                        <a-entity mixin="footPad" position="0 -10 0" >
+                          <a-ring radius-outer="8" material="side:double;color:#99e;"></a-ring>
+                        </a-entity>
+                      </a-entity>
+                    </a-entity>
+                  </a-entity>
+                </a-entity>
+              </a-entity>
+            </a-entity><!--end right leg-->
+          </a-entity>
+        </a-entity>
+      </a-entity>
+    </a-scene>
+    <script>
+      document.addEventListener("click",function(){
+          //respond to user click
+      });
+    </script>
+  </body>
+</html>

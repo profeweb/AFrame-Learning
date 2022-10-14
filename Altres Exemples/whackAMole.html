@@ -1,0 +1,261 @@
+<html>
+ <head>
+	<meta charset="UTF-8">
+    <meta name="description" content="FutureLearn-VR: Simple VR Experience: Whack-A-Mole">
+	<title>FutureLearn-VR: Simple VR Experience: Whack-A-Mole</title>
+   <script src="../js/aframe.1.0.4.min"></script>
+ </head>
+ <body> 
+	<a-scene id="ascene"  debug>
+		<a-assets>		
+			<a-mixin id="popup"
+				animation__up="property:position.y;to:0.1;dur:750;dir:normal;loop:1;easing:easeOutSine;startEvents:popup;"		animation__dn="property:position.y;to:-2;dur:850;dir:normal;loop:1;easing:linear;startEvents:popdn;delay:1600;"
+			>
+			</a-mixin>
+		</a-assets>
+		
+		<a-entity id="none" class="moleTemplate" position="0 0 0" rotation="0 0 0">
+			<a-entity class="dolly" position="0 0 0" rotation="0 0 0">
+				<a-cylinder class="hole" color="green" open-ended="true" position="0 -0.3 0" material="side: double;"></a-cylinder>
+					<a-entity class="mole"  rotation="0 0 0" position="0 -2 0" mixin="popup">
+						<a-sphere class="noggin colorMe" color="brown" radius="0.8" position="0 1 0" opacity="1" ></a-sphere>
+						<a-cylinder class="neck colorMe" color="brown" radius="0.8" position="0 0.4 0" height="1.1"  opacity="1" ></a-cylinder>
+						<a-entity class="face" position="-0.8 0.38 0">
+							<a-entity>
+								<a-sphere color="tan" scale="0.1 1 1" radius="0.3"></a-sphere>
+								<a-sphere color="black" radius="0.14" position="0 -0.1 0"></a-sphere>
+							</a-entity>
+							<a-entity position="0.06 0.6 0.3">
+								<a-sphere color="white" scale="0.2 1 1" radius="0.18" rotation="0 10 0"></a-sphere>
+								<a-sphere color="#444444" radius="0.1"></a-sphere>
+							</a-entity>
+							<a-entity position="0.06 0.6 -0.3">
+								<a-sphere color="white" scale="0.2 1 1" radius="0.18"  rotation="0 -10 0"></a-sphere>
+								<a-sphere color="#444444" radius="0.1"></a-sphere>
+							</a-entity>
+						</a-entity>
+					</a-entity>
+			</a-entity>
+		</a-entity>
+		
+		
+	
+	
+		<a-entity id="ground" geometry="primitive: circle; radius: 100" rotation="90 0 0"  position="0 -0.2 0" material="side: double; color:#D2691E; opacity:1.0"></a-entity>
+		
+		
+
+		<a-entity id="camera" camera="active: true" look-controls wasd-controls position="0 1.6 0">
+			<a-entity id="cursor" raycaster="objects: .noggin, .neck"				  
+				  animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+				  animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 600; from: 1 1 1; to: 0.1 0.1 0.1"
+				  animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
+				  cursor="fuse: true;fuseTimeout: 500"
+				  material="color: black; shader: flat"
+				  position="0 0 -2"
+				  geometry="primitive: ring;radiusInner: 0.16; radiusOuter: 0.24;">
+			</a-entity>
+		</a-entity>
+		
+		<a-sky color="azure"></a-sky>	
+   </a-scene>
+   
+   <script>
+    
+		// game logic
+		// at start 'x' mole-holes appear, random rotation between -90 & +90 and between 3-10m
+		// every 2-3 seconds, a new mole gets pushed up
+		// when the player looks at the mole, the fuse-cursor starts to shrink
+		// if shrink in time, remove mole from game
+		// after all moles have been hunted, the golden mole appears
+		// after golden mole has been whacked, game restarts
+	
+		let game={golden:false,siTick:-1,maxMoles:5,minDist:3};
+
+		
+		function requestFullScreen(){
+			if(document.fullscreenElement !== null){//already full screen
+				return;
+			}
+			
+			var element = document.querySelector("#ascene");
+			
+			element.requestFullscreen()
+			.then(function() {
+				// element has entered fullscreen mode successfully
+			})
+			.catch(function(error) {
+				// element could not enter fullscreen mode
+				// error message
+				console.log(error.message);
+			});		
+		}
+		
+		document.getElementById("ascene").addEventListener("loaded",function(){
+			/*when scene is ready, populate moles*/
+			document.getElementById("ascene").addEventListener('click',function(){requestFullScreen();});
+			gameInit();
+		});;
+		
+		function gameInit(){
+			game.golden=false;
+			game.scene = document.getElementById("ascene");
+			game.moles = moleFactory(game.maxMoles,game.minDist,game.scene,false);
+			startTimer();
+		}
+		
+		function moleFactory(howMany,minDist,sceneHnd,gold=false){
+			let moleTemplate = document.getElementsByClassName("moleTemplate")[0];
+			let positions = getPlacements(howMany,minDist);
+			let moles = [];
+			for(let i=0;i<howMany;i++){
+				let clone = moleTemplate.cloneNode(true); //deep clone
+				let moleId = "mole"+((i<9)?"0":"")+i;
+				clone.setAttribute("id",moleId);
+				clone.className = "moleNHole";
+				//set the rotation to position in a semi-circular arc
+				clone.setAttribute("rotation", [0,positions[i].rY,0].join(" "));
+				//set the position to push the mole away from viewer
+				clone.firstElementChild.setAttribute("position",[positions[i].dX,0,0].join(" "));
+				if(gold){//is this a golden mole?
+					clone.firstElementChild.firstElementChild.setAttribute("color","red");
+					let moleBodies = clone.getElementsByClassName("colorMe");
+					moleBodies[0].setAttribute("color","goldenrod");
+					moleBodies[1].setAttribute("color","goldenrod");
+				}
+				sceneHnd.appendChild(clone);//now the mole is visible to user
+				moles.push({state:"UG",dom:clone,id:moleId}); //save state of the mole
+				clone.getElementsByClassName("mole")[0].addEventListener('animationcomplete__up',function(evt){
+					//prepare the mole to go underground after animation delay
+					evt.target.emit("popdn");
+				});
+				clone.getElementsByClassName("mole")[0].addEventListener('animationcomplete__dn',function(evt){
+					//mole is properly underground, update status to UG
+					setUnderground(evt.target.parentNode.parentNode.id);
+				});
+			}
+			return moles;
+		}
+		
+		//overly complicated approach to randomly place the mole-holes
+		function populateOptions(){
+			let arr=[];
+			let distances = [4,5,6,7,8,9,10,11]; //create a list of displacements positions
+			let rotation = [];
+			for(let i=0;i<8;i++){//create a semi-randomized rotation angles
+				rotation.push(90-(i-4)*24-Math.floor(Math.random()*7.5));
+			}
+			
+			for(let i=0;i<distances.length;i++){
+				for(let j=0;j<rotation.length;j++){
+					let dx=distances[i];
+					let ry=rotation[j];
+					arr.push({dX:dx,rY:ry,x:dx*Math.cos(ry*Math.PI/180.0),z:-1*dx*Math.sin(ry*Math.PI/180.0)});
+				}
+			}//the array now has a list of displacements with semi-randomized rotation angles
+			return arr;
+		}
+   
+		function getPlacements(maxCnt,minDist){
+			let arr = populateOptions();
+			let finalList = [];
+			
+			while(finalList.length<maxCnt){
+				let rIdx = Math.floor(arr.length*Math.random());
+				//pull the candidate out of the array permanently, 
+				//it is either good and never reused 
+				//or too close to existing and never used 
+				let candidate = arr.splice(rIdx,1)[0]; 
+				let farEnough = true;
+				for(let i=0;i<finalList.length;i++){
+					if(sqDist(finalList[i].x,finalList[i].z,candidate.x,candidate.z)<minDist*minDist){ //not far enough
+						farEnough=false;
+						break;
+					}				
+				}
+				if(farEnough){
+					finalList.push(candidate);
+					//console.log("getPlacements>pushed",candidate, finalList.length, maxCnt);
+				}	
+				else{
+					//console.log("getPlacements>reject",candidate, finalList.length, maxCnt);
+				}
+			}			
+			return finalList;			
+		}
+		
+		function sqDist(x1,y1,x2,y2){ //distance check function
+			return (x1-x2)*(x1-x2)+(y1-y2)*(y1-y2);
+		}
+   
+		
+		function startTimer(){
+			game.siTick=setInterval(function(){
+				//console.log("Tick");
+				setTimeout(function(){
+						tPop(game);
+					},
+					Math.floor(Math.random()*100)+100)
+			},2000);
+		}
+		
+		function tPop(gameHnd){
+			//get a list of moles that are underground
+			let undergroundMoles = gameHnd.moles.filter(mole=>mole.state=="UG");
+			if(undergroundMoles.length>0){ //pop-up a random one, if available
+				let rnd=Math.floor(Math.random()*undergroundMoles.length);
+				//emit the event on the correct entity
+				undergroundMoles[rnd].dom.getElementsByClassName("mole")[0].emit("popup");
+				//console.log("Popup",undergroundMoles[rnd].dom.id);
+				undergroundMoles[rnd].state="AG"; //above ground
+			}
+			else{//this could be because all moles are above ground or have been whacked
+				if(gameHnd.moles.length<1){//if all moles whacked, moles.length is zero
+					if(gameHnd.golden){ //golden mole was also shown and whacked
+						console.log("Restarting game");
+						clearInterval(gameHnd.siTick); //clear the previous tick function
+						gameInit();
+					}
+					else{//time to show golden mole
+						game.moles = moleFactory(1,game.minDist,game.scene,true);
+						//console.log("Golden Mole", game.moles[0]);
+						gameHnd.golden = true; //the main golden mole is spawned
+					}
+				}
+				/*else{
+					//all moles above ground				
+				}*/
+			}	
+		}
+		
+		function setUnderground(id){
+			//we need to update state of the mole which just went underground
+			let mole = game.moles.find(mole=>mole.id==id);
+			if(mole)mole.state="UG";
+			
+		}
+		
+		document.addEventListener("click",function(evt){
+			//gaze-interaction handler
+			quashMole(evt.target);
+		});
+		
+		function quashMole(domTarget){
+			if(domTarget.classList.contains('noggin')||domTarget.classList.contains('neck')){ //either one is fine
+				//console.log("qM",domTarget.parentNode.parentNode.parentNode);
+				let domMole = domTarget.parentNode.parentNode.parentNode;
+				let moleIdx = game.moles.findIndex(mole=>mole.id==domMole.id&&mole.state=="AG");
+				if(moleIdx>-1){
+					game.scene.removeChild(game.moles[moleIdx].dom);
+					game.moles.splice(moleIdx,1);
+				}
+				else{
+					console.log("not found",domMole.id);
+				}
+			}
+			
+		}
+   </script>
+   
+ </body>
+</html>

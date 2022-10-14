@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>FutureLearn-VR: Rotation Exercise</title>
+    <meta name="description" content="FutureLearn-VR: Rotation Exercise" />
+	<!--AFrame 1.0.4 library can be directly used from their CDN by uncommenting the line below-->
+	<!--script src="https://aframe.io/releases/1.0.4/aframe.min.js "></script-->
+	<!--Normally, it is advisable to host the library on your own if possible as done by the line below--> 
+	<script src="../js/aframe.1.0.4.min.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: aliceblue">
+      <a-assets>        
+        <a-mixin id="axisTip" geometry="primitive:cone; radiusBottom: 0.15; height:0.5" rotation="0 0 -90" position="5 0 0"></a-mixin>
+      </a-assets>
+      
+      <a-entity id="dolly" rotation="0 0 0">
+      <!-- Model Airplane -->
+          <a-entity id="airplane" position="2 0 0">
+            <a-cone id="fuselage" rotation="0 0 -90" color="#bbb" radius-bottom="0.30" radius-top="0.3" height="2">
+              <a-sphere id="wings"   scale="0.10 0.40 2.50" color="darkred" position="0 0.1 0"></a-sphere> 
+              <a-sphere id="elevatr" scale="0.10 0.20 1.00" color="darkred" position="0 -0.9 0"></a-sphere> 
+              <a-sphere id="nose"    scale="0.30 0.45 0.30" color="#bbb"    position="0 1 0"></a-sphere> 
+              <a-sphere id="tailcap" scale="0.30 0.25 0.30" color="#bbb"    position="0 -1 0"></a-sphere> 
+              <a-sphere id="radome"  scale="0.15 0.15 0.15" color="#444"    position="0 1.35 0"></a-sphere>
+              <a-sphere id="rudder"  scale="0.30 0.25 0.10" color="black" position="-0.3 -0.9 0"></a-sphere> 
+              <a-torus id="cockpit"  scale="0.15 0.15 0.15" color="#444"    position="-0.2 1.1 0" rotation="0 90 0"  ></a-torus>
+            </a-cone>
+          </a-entity>
+      </a-entity>
+      
+      
+      <!-- Axis definitions -->
+      <a-entity id="axisHelper">
+        <a-entity line__x="start:0, 0, 0; end:5, 0, 0; color:red;" line__y="start:0, 0, 0; end:0, 5, 0; color:green;" line__z="start:0, 0, 0; end:0, 0, 5; color:blue;"></a-entity>
+        <a-entity id="y-axis" rotation="0 0 90"><a-entity mixin="axisTip" material="color:green;"></a-entity></a-entity>
+        <a-entity id="lblY" position="0 5.6 0" text="color: seagreen; align: left; side:double; value:Y-axis; wrapCount:6; width: 2; height: auto;opacity:1; transparent:true;"></a-entity>
+        <a-entity id="z-axis" rotation="0 -90 0"><a-entity mixin="axisTip" material="color:blue;"></a-entity></a-entity>
+        <a-entity id="lblZ" position="-0.1 0.6 5.6" text="color: cornflowerblue;  side:double;  align: left; value:Z-axis; wrapCount:6; width: 1; height: auto;opacity:1; transparent:true;"></a-entity>
+        <a-entity mixin="axisTip" material="color:red;"></a-entity>
+        <a-entity id="lblX" position="5.6 0.6 0"  text="color: tomato;  side:double; align: left; value:X-axis; wrapCount:6; width: 2; height: auto;opacity:1; transparent:true;"></a-entity>
+      </a-entity>
+      <a-camera position="2 3 10"></a-camera>
+    </a-scene>
+  </body>
+</html>
