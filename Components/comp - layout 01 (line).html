@@ -1,0 +1,22 @@
+<html>
+  <head>
+      <title>My A-Frame Scene</title>
+      <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+      <script src="https://supermedium.com/superframe/components/layout/dist/aframe-layout-component.min.js"></script>
+  </head>
+  <body>
+      <a-scene>
+
+          <!- Basic color sky -->
+          <a-sky color="#222"></a-sky>
+
+          <!-- Layout line -->
+          <a-entity geometry="primitive: sphere" layout="type: line; margin: 5; align: start" position="0 5 -10"></a-entity>
+          <a-entity geometry="primitive: sphere" layout="type: line; margin: 5; align: center" position="0 0 -10"></a-entity>
+          <a-entity geometry="primitive: sphere" layout="type: line; margin: 5; align: end" position="0 -5 -10"></a-entity>
+
+      </a-scene>
+  </body>
+</html>
+
+
