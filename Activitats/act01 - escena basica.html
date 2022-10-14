@@ -1,0 +1,40 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+  	<a-scene>
+
+        <!- Basic color sky -->
+        <a-sky color="#222222"></a-sky>
+
+        <!- Basic box -->
+        <a-box position="-1 0.5 -3" rotation="0 45 0" color="#EF2D5E"></a-box>
+
+        <!-Basic sphere -->
+        <a-sphere position="0 1.25 -5" radius="1.25" color="#4CC3D9"></a-sphere>
+
+        <!-Basic cylinder -->
+        <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+
+        <!-Basic cone -->
+        <a-cone position="-3 0.75 -4" radius-bottom="1" radius-top="0" height="1.5" color="#FF5DC6"></a-cone>
+
+        <!-Basic torus -->
+        <a-torus position="0 0.75 -4" arc="360" radius="5" radius-tubular="0.2" color="tile"></a-torus>
+
+        <!-- Basic ring. -->
+        <a-ring position="3 1.5 -3" color="teal" radius-inner="1" radius-outer="1.5"></a-ring>
+
+        <!-- Basic icosahedron. -->
+        <a-icosahedron  position="3 2.0 -2" color="#FF926B" radius="1"></a-icosahedron>
+
+        <!-Basic torus-knot -->
+        <a-torus-knot position="2 1.5 -4"  color="magenta" p="3" q="6" radius="5" radius-tubular="0.1"></a-torus-knot>
+
+        <!- Basic plane -->
+        <a-plane position="0 0 -4" rotation="-90 0 0" width="8" height="4" color="#C8A4F7"> </a-plane>
+
+    </a-scene>
+  </body>
+</html>
