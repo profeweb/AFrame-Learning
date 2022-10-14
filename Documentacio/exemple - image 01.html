@@ -1,0 +1,18 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+      <a-scene>
+          <a-assets>
+              <img id="my-image" src="../img/Brick2947.jpg">
+          </a-assets>
+
+          <!-- Emprant el sistema gestor d'assets. -->
+          <a-image position="-2 0.5 -3"  src="#my-image"></a-image>
+
+          <!-- Emprant la URL inline. No recomanat però còmode per a web developers. -->
+          <a-image position="+2 0.5 -3"  src="../img/Brick2947.jpg"></a-image>
+      </a-scene>
+  </body>
+</html>
