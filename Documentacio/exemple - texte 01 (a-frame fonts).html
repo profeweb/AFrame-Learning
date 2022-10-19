@@ -1,0 +1,22 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+  	<a-scene>
+
+      <a-sky color="#222222"></a-sky>
+
+      <!-- Basic text amb nom de font A-frame. -->
+        <a-text font="mozillavr" value="Via stock font name" color="tomato" position="0 1.5 -2" align="center"></a-text>
+
+        <!-- Basic text amb CDN de font A-frame. -->
+        <a-text font="https://cdn.aframe.io/fonts/mozillavr.fnt" color="tile" value="Via URL" position="0 2 -2" align="center"></a-text>
+
+        <!-- Basic text amb font A-frame descarregada. -->
+        <a-text value="Hello World" font="fonts/DejaVu-sdf.fnt" fontImage="fonts/DejaVu-sdf.png" color="orange" position="0 0.5 -2" align="center"></a-text>
+
+
+    </a-scene>
+  </body>
+</html>
