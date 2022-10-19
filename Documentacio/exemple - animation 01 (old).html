@@ -1,0 +1,18 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+  </head>
+  <body>
+      <a-scene>
+          <a-torus-knot position="0 2 -8" color="#C699F7" arc="180" p="2" q="7" radius="1" radius-tubular="0.1">
+              <a-animation attribute="position" dur="3000" from="0 2 -8" to="0 2 -3" repeat="indefinite" direction="alternate" > </a-animation>
+              <a-animation attribute="rotation" dur="3000" to="0 180 360" repeat="indefinite" direction="alternate"> </a-animation>
+              <a-animation attribute="material.color" dur="3000" from="#C699F7" to="#E34B30" repeat="indefinite" direction="alternate"> </a-animation>
+              <a-animation attribute="geometry.radius" dur="3000" from=".1" to=".8" repeat="indefinite" direction="alternate"> </a-animation>
+          </a-torus-knot>
+          <a-sky color="skyblue">
+              <a-animation attribute="material.color" dur="3000" to="#C699F7" from="#E34B30" repeat="indefinite" direction="alternate"> </a-animation>
+          </a-sky>
+      </a-scene>
+  </body>
+</html>
