@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+        <script src="../Components/aframe-troika-text.min.js"></script>
+    </head>
+    <body>
+        <a-scene background="color: #000">
+            <!-- Custom moving light to demonstrate MeshStandardMaterial -->
+            <a-entity
+                    light="color: #FFF; intensity: 0.5"
+                    animation="property: position; from: -1 0 1; to: 1 0 1; loop: true; dir: alternate; dur: 2000; easing: easeInOutQuad;"
+            ></a-entity>
+
+            <a-entity
+                    position="0 1.6 -2"
+                    troika-text="value: Hello troika-text component!; color:#F99;"
+                    troika-text-material="shader: standard; metalness: 0.8; roughness: 0.4;"
+            ></a-entity>
+
+            <a-troika-text
+                    position="0 1.4 -2"
+                    color="#99F"
+                    value="Hello a-troika-text primitive!"
+                    material="shader: standard; metalness: 0.8; roughness: 0.4;"
+            ></a-troika-text>
+
+        </a-scene>
+    </body>
+</html>

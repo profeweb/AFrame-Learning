@@ -1,0 +1,41 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="../Components/aframe-troika-text.min.js"></script>
+</head>
+<body>
+<a-scene background="color: #000">
+    <a-entity
+            position="0 1.6 -2"
+            troika-text="value: Hello troika-text component!; color:#F99;"
+    ></a-entity>
+
+    <a-troika-text
+            position="0 1.4 -2"
+            color="#99F"
+            value="Hello a-troika-text primitive!"
+    ></a-troika-text>
+
+    <a-troika-text
+            position="0 1.2 -2"
+            color="green"
+            outline-width="5%"
+            outline-color="blue"
+            stroke-width="2%"
+            stroke-color="red"
+            value="Outlines and strokes"
+    ></a-troika-text>
+
+
+    <a-troika-text
+            position="0 1.0 -2"
+            color="#ccc"
+            curve-radius="1"
+            value="Curvy curvy curvy"
+    ></a-troika-text>
+
+</a-scene>
+
+</body>
+</html>
