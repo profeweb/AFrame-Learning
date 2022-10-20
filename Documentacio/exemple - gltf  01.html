@@ -3,15 +3,14 @@
 	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
   </head>
   <body>
-  	<a-scene background="color:#333">
+  	<a-scene background="color:#666">
 
-        <a-scene>
             <a-assets>
+                <!-- https://mars.nasa.gov/system/resources/gltf_files/25042_Perseverance.glb -->
                 <a-asset-item id="perseverance" src="models/Perseverance.glb"></a-asset-item>
             </a-assets>
 
             <a-entity gltf-model="#perseverance" position="0 0 -5"></a-entity>
-        </a-scene>
  
     </a-scene>
   </body>
