@@ -1,12 +1,49 @@
 <html>
 <head>
-    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <meta charset="utf-8">
+    <title>aframe-fonts</title>
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
 </head>
 <body>
-<a-scene background="color:#FFCCCC">
+<a-scene>
 
-    <a-entity text="font:monoid; value: Via stock font name." position="0 1.6 -2"></a-entity>
+
+    <!-- Conjunt d'entitats de text -->
+    <a-entity text="value:Hello; color:#FFFFFF; shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/berkshireswash/BerkshireSwash-Regular.json;" scale="15 15 15" position="6.7 1 -2"></a-entity>
+    <a-entity text="value:Hello; color:#FFFFFF; shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/creepster/Creepster-Regular.json;" scale="15 15 15" position="6.7 1 -2"></a-entity>
+    <a-entity text="value:Hello; color:#FFFFFF; shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/crimsontext/CrimsonText-Regular.json;" scale="15 15 15" position="6.7 1 -2"></a-entity>
+    <a-entity text="value:Hello; color:#FFFFFF; shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/giveyouglory/GiveYouGlory.json;" scale="15 15 15" position="6.7 1 -2"></a-entity>
+    <a-entity text="value:Hello; color:#FFFFFF; shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/miltoniantattoo/MiltonianTattoo-Regular.json;" scale="15 15 15" position="6.7 1 -2"></a-entity>
+    <a-entity text="value:Hello; color:#FFFFFF; shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/snippet/Snippet.json;" scale="15 15 15" position="6.7 1 -2"></a-entity>
+    <a-entity text="value:Hello; color:#FFFFFF; shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/specialelite/SpecialElite-Regular.json;" scale="15 15 15" position="6.7 1 -2"></a-entity>
+    <a-entity text="value:Hello; color:#FFFFFF; shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/syncopate/Syncopate-Regular.json;" scale="15 15 15" position="6.7 1 -2"></a-entity>
+    <a-entity text="value:Hello; color:#FFFFFF; shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/yesteryear/Yesteryear-Regular.json;" scale="15 15 15" position="6.7 1 -2"></a-entity>
 
 </a-scene>
+
+<script>
+    let els = document.querySelectorAll('[text]');
+    let current = 0, total = els.length;
+
+    let hideAll = ()=> {
+        for (let el of els) {
+            el.setAttribute('visible', false);
+        }
+    }
+
+    function show(){
+        hideAll();
+        if (current > total-1) {
+            current = 0;
+        }
+        els[current].setAttribute('visible', true);
+        current++;
+    }
+
+    show();
+    setInterval(show, 500);
+
+</script>
+
 </body>
 </html>
