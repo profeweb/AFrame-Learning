@@ -1,0 +1,45 @@
+<html>
+<head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+</head>
+<body>
+<a-scene>
+
+    <!-- sostre -->
+    <a-box position="0 4 -4" width="4" height="1.5" depth="0.10" rotation="90 0 0" color="#CCFFCC" shadow="cast:true; receive: true" ></a-box>
+
+    <!-- racó -->
+    <a-box position="-3 0.5 -5" width="3" height="6" depth="0.15" rotation="0 90 0" color="tomato" shadow="cast:true; receive: true" ></a-box>
+    <a-box position= "-2 0.5 -5"  width="2" height="6" depth="0.15" rotation="0 0 0" color="tomato" shadow="cast:true; receive: true"></a-box>
+
+    <!-- primitives -->
+
+    <a-box position="-1 1 -3" rotation="0 45 0" color="#4CC3D9" shadow="cast:true"
+           animation__rotation = "property: rotation.y; dur: 5000; easing: linear; from:0; to:360; loop: true">
+    </a-box>
+
+    <a-sphere position="0 2.5 -3" radius="0.5" color="#EF2D5E" shadow="cast:true; receive: true"></a-sphere>
+
+    <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow="cast:true; receive: true"></a-cylinder>
+
+    <a-plane position="0 0 -4" rotation="-90 0 0" scale="1000 1000 1" repeat="100 100" shadow="receive: true"></a-plane>
+
+
+    <a-sky color="#000"></a-sky>
+
+
+    <!-- Llum Puntual (Point) -->
+    <a-entity light="type: point; intensity: 0.75; distance:20; decay:5; castShadow:true; shadowCameraVisible: true;"
+              position="0 2 -2">
+    </a-entity>
+
+    <!-- Llum Direccional -->
+    <a-entity light="type: directional; color: #FFF; intensity:0.2; castShadow:true; shadowCameraVisible: true;"
+              position="0 1 0" direction="#target2">
+        <a-entity id="target2" position="-1 0 3"></a-entity>
+    </a-entity>
+
+
+</a-scene>
+</body>
+</html>

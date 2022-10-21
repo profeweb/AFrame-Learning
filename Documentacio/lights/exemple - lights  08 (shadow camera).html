@@ -7,20 +7,10 @@
 
     <!-- Assets -->
     <a-assets>
-
         <img id="firefox" src="../img/firefox.png"/>
         <img id="checked" src="../img/checked.jpg"/>
-
-        <a-cubemap id="pisa">
-            <img src="https://threejs.org/examples/textures/cube/pisa/px.png">
-            <img src="https://threejs.org/examples/textures/cube/pisa/nx.png">
-            <img src="https://threejs.org/examples/textures/cube/pisa/py.png">
-            <img src="https://threejs.org/examples/textures/cube/pisa/ny.png">
-            <img src="https://threejs.org/examples/textures/cube/pisa/pz.png">
-            <img src="https://threejs.org/examples/textures/cube/pisa/nz.png">
-        </a-cubemap>
-
     </a-assets>
+
 
     <!-- sostre -->
     <a-box position="0 4 -4" width="4" height="1.5" depth="0.10" rotation="90 0 0" color="#CCFFCC"></a-box>
@@ -31,20 +21,25 @@
 
     <!-- primitives -->
 
-    <a-box id="meuTarget" position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+    <a-box position="-1 1 -3" rotation="0 45 0" color="#4CC3D9" shadow="cast:true"
+           animation__rotation = "property: rotation.y; dur: 5000; easing: linear; from:0; to:360; loop: true">
+    </a-box>
 
     <a-sphere position="0 2.5 -3" radius="0.5" color="#EF2D5E"></a-sphere>
 
     <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
 
-    <a-plane src="#checked" position="0 0 -4" rotation="-90 0 0" scale="1000 1000 1" repeat="100 100"></a-plane>
+    <a-plane position="0 0 -4" rotation="-90 0 0" scale="1000 1000 1" repeat="100 100" color="#CC00FF" shadow="receive: true"></a-plane>
 
     <a-image src="#firefox" scale="0.5 0.5 1" position="-1 2 -2"></a-image>
 
     <a-sky color="#FFCCCC"></a-sky>
 
-    <!-- Llum Probe -->
-    <a-light type="probe" envMap="#pisa" position="0 2 -3"></a-light>
+
+    <!-- Llum Puntual (Point) -->
+    <a-entity light="type: point; intensity: 0.75; distance:20; decay:5; castShadow:true; shadowCameraVisible: true;"
+              position="0 2 -2">
+    </a-entity>
 
 
 </a-scene>
