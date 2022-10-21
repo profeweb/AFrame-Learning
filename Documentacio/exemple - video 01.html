@@ -1,0 +1,41 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body >
+
+  <script>
+      AFRAME.registerComponent('play-on-click', {
+          init: function () {
+              this.onClick = this.onClick.bind(this);
+          },
+          play: function () {
+              window.addEventListener('click', this.onClick);
+          },
+          pause: function () {
+              window.removeEventListener('click', this.onClick);
+          },
+          onClick: function (evt) {
+              var videoEl = this.el.getAttribute('material').src;
+              if (!videoEl) { return; }
+              this.el.object3D.visible = true;
+              videoEl.play();
+          }
+      });
+  </script>
+
+    <a-scene background="color:#222">
+
+        <a-assets>
+            <video id="videoBunny" crossorigin="anonymous" preload="auto" src="https://cdn.aframe.io/videos/bunny.mp4"></video>
+        </a-assets>
+
+        <!-- Basic video. -->
+        <a-entity material="shader: flat; src: #videoBunny" geometry="primitive: plane; width: 16; height: 9;"
+                  position="0 1.8 -15" rotation="0 0 0" play-on-click visible="true">
+        </a-entity>
+
+    </a-scene>
+
+  </body>
+</html>
