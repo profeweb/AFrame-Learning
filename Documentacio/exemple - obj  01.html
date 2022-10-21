@@ -1,0 +1,19 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+  	<a-scene background="color:#FCC">
+
+            <a-assets>
+                <!-- https://www.cgtrader.com/items/1017599/download-page -->
+                <a-asset-item id="jeep-obj" src="models/jeep/Jeep_Renegade_2016_obj/Jeep_Renegade_2016.obj"></a-asset-item>
+                <a-asset-item id="jeep-mtl" src="models/jeep/Jeep_Renegade_2016_obj/Jeep_Renegade_2016.mtl"></a-asset-item>
+
+            </a-assets>
+
+            <a-obj-model src="#jeep-obj" mtl="#jeep-mtl" position="0 0 -5" rotation="0 45 0"></a-obj-model>
+ 
+    </a-scene>
+  </body>
+</html>
