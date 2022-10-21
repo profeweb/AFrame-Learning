@@ -33,11 +33,12 @@
 
     <a-sky color="#FFCCCC"></a-sky>
 
-    <!-- Llum Ambiental (No direccional) -->
-    <a-entity light="type: ambient; color: #FCC; intensity:0.2"></a-entity>
 
-    <!-- Llum Spot -->
-    <a-entity light="type: directional; color: #FFF; intensity:0.6" position="0 1 0" ></a-entity>
+    <!-- Llum Puntual (Point) -->
+    <a-entity light="type: point; intensity: 0.75; distance:10; decay:2"
+              position="0 2 -3">
+    </a-entity>
+
 
 </a-scene>
 </body>
