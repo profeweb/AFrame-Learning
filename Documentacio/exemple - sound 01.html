@@ -1,0 +1,36 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+
+      <script>
+          AFRAME.registerComponent('audiohandler', {
+              init: function() {
+                  let playing = false;
+                  let audio = document.querySelector("#so");
+                  this.el.addEventListener('click', () => {
+                      if (!playing) {
+                          audio.play();
+                      } else {
+                          audio.pause();
+                          audio.currentTime = 0;
+                      }
+                      playing = !playing;
+                  });
+              }
+          })
+
+      </script>
+
+    <a-scene cursor="rayOrigin:mouse">
+
+      <a-assets>
+          <audio id="so" src="audio/loop.mp3"></audio>
+      </a-assets>
+
+      <a-box color="red" position= "0  1.5 -5" audiohandler></a-box>
+
+    </a-scene>
+  </body>
+</html>
