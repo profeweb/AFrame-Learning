@@ -21,7 +21,7 @@
 
     <!-- primitives -->
 
-    <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+    <a-box id="meuTarget" position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
 
     <a-sphere position="0 2.5 -3" radius="0.5" color="#EF2D5E"></a-sphere>
 
@@ -33,11 +33,10 @@
 
     <a-sky color="#FFCCCC"></a-sky>
 
-    <!-- Llum Ambiental (No direccional) -->
-    <a-entity light="type: ambient; color: #FCC; intensity:0.2"></a-entity>
 
-    <!-- Llum Spot -->
-    <a-entity light="type: directional; color: #FFF; intensity:0.6" position="0 1 0" ></a-entity>
+    <!-- Llum Spot (direccional) -->
+    <a-entity light="type: spot; distance:10; decay:0.5; penumbra:0.05; color: #FFF; intensity:0.9; target:#meuTarget"
+              position="0 2.5 -3" ></a-entity>
 
 </a-scene>
 </body>
