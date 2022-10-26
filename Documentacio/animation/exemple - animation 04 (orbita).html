@@ -1,0 +1,43 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+      <script>
+
+          AFRAME.registerComponent('infoorbita', {
+
+              schema: {
+                  // Conjunt d'atributs del component:
+                  angle: {type: 'number'},
+              },
+
+              tick: function (time, timeDelta) {
+                  this.data.angle = document.querySelector("#orbita").getAttribute("rotation").z;
+                  document.querySelector("a-text").setAttribute("value", "Orbita: "+Math.round(this.data.angle));
+              }
+          });
+
+      </script>
+  	<a-scene>
+
+        <!-- Animació de la orbita d'una esfera. -->
+        <a-entity id="orbita" position="0 1.6 -10" rotation="0 0 0"
+                  animation="property: rotation;
+                             to: 0 0 360;
+                             loop: true;
+                             easing:linear;
+                             dur: 10000">
+            <a-sphere position="5 0 0" color="tomato" radius="0.5"></a-sphere>
+        </a-entity>
+
+
+        <!-- Ajuda visual de l'animació -->
+            <!-- Rotació Y -->
+            <a-text value="Orbita: 0" color="#000" position="0 1.6 -3" align="center" infoorbita></a-text>
+            <a-ring position="0 1.6 -10" color="teal" radius-inner="4.9" radius-outer="5"></a-ring>
+        <!-- Fi  de l'ajuda visual de l'animació -->
+
+    </a-scene>
+  </body>
+</html>

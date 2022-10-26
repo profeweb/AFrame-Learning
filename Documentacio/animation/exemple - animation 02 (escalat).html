@@ -1,0 +1,40 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+      <script>
+
+          AFRAME.registerComponent('infoescala', {
+
+              schema: {
+                  // Conjunt d'atributs del component:
+                  escala: {type: 'number'},
+              },
+
+              tick: function (time, timeDelta) {
+                  this.data.escala = document.querySelector("a-sphere").getAttribute("scale").y;
+                  document.querySelector("a-text").setAttribute("value", "Escala: "+this.data.escala.toFixed(2));
+              }
+          });
+
+      </script>
+  	<a-scene>
+
+        <!-- Animació de l'escala d'una esfera. -->
+        <a-sphere position="0 1.6 -3" scale="1 1 1" color="tomato"
+               animation="property: scale;
+                          to: 0.5 0.5 0.5;
+                          dur: 20000;
+                          easing: linear;
+                          loop: true" >
+        </a-sphere>
+
+        <!-- Ajuda visual de l'animació -->
+            <!-- Rotació Y -->
+            <a-text value="Escala: 1" color="#000" position="0 3 -3" align="center" infoescala></a-text>
+        <!-- Fi  de l'ajuda visual de l'animació -->
+
+    </a-scene>
+  </body>
+</html>

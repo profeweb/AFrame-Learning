@@ -1,0 +1,40 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+      <script>
+
+          AFRAME.registerComponent('inforotacio', {
+
+              schema: {
+                  // Conjunt d'atributs del component:
+                  angle: {type: 'number'},
+              },
+
+              tick: function (time, timeDelta) {
+                  this.data.angle = document.querySelector("a-box").getAttribute("rotation").y;
+                  document.querySelector("a-text").setAttribute("value", "Y Rotation: "+Math.round(this.data.angle));
+              }
+          });
+
+      </script>
+  	<a-scene>
+
+        <!-- Animació de la posició d'una box. -->
+        <a-box position="0 1.6 -3" rotation="0 0 0" color="tomato"
+               animation="property: rotation;
+                          to: 0 360 0;
+                          dur: 20000;
+                          easing: linear;
+                          loop: false" >
+        </a-box>
+
+        <!-- Ajuda visual de l'animació -->
+            <!-- Rotació Y -->
+            <a-text value="Y Rotation: 0" color="#000" position="0 3 -3" align="center" inforotacio></a-text>
+        <!-- Fi  de l'ajuda visual de l'animació -->
+
+    </a-scene>
+  </body>
+</html>
