@@ -3,34 +3,38 @@
 	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
   </head>
   <body>
+  <script>
+
+      AFRAME.registerComponent('infoposicio', {
+
+          schema: {
+              // Conjunt d'atributs del component:
+              posicio: {type: 'number'},
+          },
+
+          tick: function (time, timeDelta) {
+              this.data.posicio = document.querySelector("a-box").getAttribute("position").x;
+              document.querySelector("#info").setAttribute("value", "X: "+this.data.posicio.toFixed(1));
+          }
+      });
+
+  </script>
   	<a-scene>
 
-        <!-- Comparació Easings (linear, easeInQuad, easeOutQuad, easeInOutQuad. -->
-        <a-box position="-5 3 -5" color="tomato" animation="property: position; to: 5 3 -5; dur: 2000; easing: linear; loop: true" >
-            <a-text value="linear" position="0 0 0.51" align="center" color="#000"></a-text>
-        </a-box>
-
-        <a-box position="-5 2 -5" color="orange" animation="property: position; to: 5 2 -5; dur: 2000; easing: easeInQuad; loop: true" >
-            <a-text value="easeInQuad" position="0 0 0.51" align="center" color="#000"></a-text>
-        </a-box>
-
-        <a-box position="-5 1 -5" color="gold" animation="property: position; to: 5 1 -5; dur: 2000; easing: easeOutQuad; loop: true" >
-            <a-text value="easeOutQuad" position="0 0 0.51" align="center" color="#000"></a-text>
-        </a-box>
-
-        <a-box position="-5 0 -5" color="cyan" animation="property: position; to: 5 0 -5; dur: 2000; easing: easeInOutQuad; loop: true" >
-            <a-text value="easeInOutQuad" position="0 0 0.51" align="center" color="#000"></a-text>
-        </a-box>
+        <!-- Animació de la posició d'una box. -->
+        <a-box position="-5 1.6 -5" color="tomato" animation="property: position; to: 5 1.6 -5; dur: 5000; easing: linear; loop: true" ></a-box>
 
         <!-- Ajuda visual de l'animació -->
             <!-- Origen -->
-            <a-text value="X:-5" color="#000" position="-5 5 -5.5" align="center"></a-text>
-            <a-box position="-5 4 -5" width="0.1" height="0.1" depth="0" color="#000"></a-box>
+            <a-text value="X:-5" color="#000" position="-5 3 -5" align="center"></a-text>
+            <a-box position="-5 2.5 -5" width="0.1" height="0.1" depth="0" color="#000"></a-box>
             <!-- Destí -->
-            <a-text value="X:+5" color="#000" position="+5 5 -5" align="center"></a-text>
-            <a-box position="+5 4 -5" width="0.11" height="0.1" depth="0" color="#000"></a-box>
+            <a-text value="X:+5" color="#000" position="+5 3 -5" align="center"></a-text>
+            <a-box position="+5 2.5 -5" width="0.11" height="0.1" depth="0" color="#000"></a-box>
             <!-- Línia entre origen i destí -->
-            <a-box position="0 4 -5" width="10" height="0.01" depth="0" color="#000"></a-box>
+            <a-box position="0 2.5 -5" width="10" height="0.01" depth="0" color="#000"></a-box>
+            <!-- Valor de la posició Y -->
+            <a-text id="info" value="X: -5" color="#000" position="0 3 -3" align="center" infoposicio></a-text>
         <!-- Fi  de l'ajuda visual de l'animació -->
 
     </a-scene>
