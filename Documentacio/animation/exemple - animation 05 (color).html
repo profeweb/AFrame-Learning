@@ -1,0 +1,45 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+  <script>
+
+      AFRAME.registerComponent('infocolor', {
+
+          schema: {
+              // Conjunt d'atributs del component:
+              r: {type: 'number'},
+              g: {type: 'number'},
+              b: {type: 'number'},
+          },
+
+          tick: function (time, timeDelta) {
+
+              let colorString = document.querySelector("a-box").getAttribute("color");
+              let colors = colorString.split(")");
+              colors = colors[0].split("(");
+              colors = colors[1].split(",");
+
+              this.data.r = colors[0];
+              this.data.g = colors[1];
+              this.data.b = colors[2];
+
+              document.querySelector("#info").setAttribute("value", "RGB: "+this.data.r+", "+this.data.g+", "+this.data.b);
+          }
+      });
+
+  </script>
+  	<a-scene>
+
+        <!-- Animació de la posició d'una box. -->
+        <a-box position="0 1 -3" rotation="0 45 0" color="rgb(255, 0, 0)" animation="property: color; to: rgb(0, 50, 255); dur: 10000; easing: linear; loop: true" ></a-box>
+
+        <!-- Ajuda visual de l'animació -->
+            <!-- Valor del color RGB -->
+            <a-text id="info" value="RGB: 255, 0, 0" color="#000" position="0 2 -3" align="center" infocolor></a-text>
+        <!-- Fi  de l'ajuda visual de l'animació -->
+
+    </a-scene>
+  </body>
+</html>
