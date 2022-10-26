@@ -6,10 +6,12 @@
 <a-scene background="color:#222">
 
     <!-- Animació de múltiples propietats d'una box. -->
-    <a-box position="0 1.6 -5" scale="1 1 1" depth="2" height="2" width="2"
-           animation__color    = "property: material.color; dur: 2000; easing: linear; dir: alternate; from:#CC3300; to:#FFCCCC; loop: true"
-           animation__rotation = "property: rotation.y; dur: 2000; easing: linear; dir: alternate; from:0; to:360; loop: true"
+    <a-box position="-3 1.6 -8" scale="1 1 1" depth="2" height="2" width="2"
+           animation__color    = "property: material.color; dur: 2000; easing: linear; dir: alternate; from:#CC3300; to:#0033CC; loop: true"
+           animation__rotateY  = "property: rotation.y; dur: 2000; easing: linear; dir: alternate; from:0; to:360; loop: true"
+           animation__rotateX  = "property: rotation.x; dur: 5000; easing: linear; dir: alternate; from:0; to:360; loop: true"
            animation__scale    = "property: scale; dur: 5000; easing: linear; dir: reverse; from:1 1 1; to:2 2 2; loop: true"
+           animation__position = "property: position; dur: 3000; easing: easeInOutQuad; dir: alternate; from:-3 1.6 -8; to:3 1-6 -8; loop: true"
     ></a-box>
 
 </a-scene>
