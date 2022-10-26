@@ -1,0 +1,59 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+  	<a-scene>
+
+        <!-- Comparació Easings d'Entrada (easeInQuad, easeInCubic, ...) -->
+        <a-entity position="0 0 -0.3" rotation="5 0 0">
+        <a-box position="-5 4 -8" color="tomato" animation="property: position; to: 5 4 -8; dur: 2000; easing: easeInQuad; loop: true" >
+            <a-text value="easeInQuad" position="0 0 0.51" align="center" color="#000"></a-text>
+        </a-box>
+
+        <a-box position="-5 3 -8" color="orange" animation="property: position; to: 5 3 -8; dur: 2000; easing: easeInCubic; loop: true" >
+            <a-text value="easeInCubic" position="0 0 0.51" align="center" color="#000"></a-text>
+        </a-box>
+
+        <a-box position="-5 2 -8" color="gold" animation="property: position; to: 5 2 -8; dur: 2000; easing: easeInQuart; loop: true" >
+            <a-text value="easeInQuart" position="0 0 0.51" align="center" color="#000"></a-text>
+        </a-box>
+
+        <a-box position="-5 1 -8" color="cyan" animation="property: position; to: 5 1 -8; dur: 2000; easing: easeInQuint; loop: true" >
+            <a-text value="easeInQuint" position="0 0 0.51" align="center" color="#000"></a-text>
+        </a-box>
+
+        <a-box position="-5 0 -8" color="salmon" animation="property: position; to: 5 0 -8; dur: 2000; easing: easeInSine; loop: true" >
+            <a-text value="easeInSine" position="0 0 0.51" align="center" color="#000"></a-text>
+        </a-box>
+
+        <a-box position="-5 -1 -8" color="pink" animation="property: position; to: 5 -1 -8; dur: 2000; easing: easeInExpo; loop: true" >
+            <a-text value="easeInExpo" position="0 0 0.51" align="center" color="#000"></a-text>
+        </a-box>
+
+        <a-box position="-5 -2 -8" color="lime" animation="property: position; to: 5 -2 -8; dur: 2000; easing: easeInCirc; loop: true" >
+            <a-text value="easeInCirc" position="0 0 0.51" align="center" color="#000"></a-text>
+        </a-box>
+
+        <a-box position="-5 -3 -8" color="gray" animation="property: position; to: 5 -3 -8; dur: 2000; easing: easeInBack; loop: true" >
+            <a-text value="easeInBack" position="0 0 0.51" align="center" color="#000"></a-text>
+        </a-box>
+
+        <a-box position="-5 -4 -8" color="blue" animation="property: position; to: 5 -4 -8; dur: 2000; easing: easeInElastic; loop: true" >
+            <a-text value="easeInElastic" position="0 0 0.51" align="center" color="#000"></a-text>
+        </a-box>
+
+        <!-- Ajuda visual de l'animació -->
+            <!-- Origen -->
+            <a-text value="X:-5" color="#000" position="-5 6 -8.5" align="center"></a-text>
+            <a-box position="-5 5.3 -8.5" width="0.1" height="0.1" depth="0" color="#000"></a-box>
+            <!-- Destí -->
+            <a-text value="X:+5" color="#000" position="+5 6 -8.5" align="center"></a-text>
+            <a-box position="+5 5.3 -8.5" width="0.11" height="0.1" depth="0" color="#000"></a-box>
+            <!-- Línia entre origen i destí -->
+            <a-box position="0 5.3 -8.5" width="10" height="0.01" depth="0" color="#000"></a-box>
+        <!-- Fi  de l'ajuda visual de l'animació -->
+        </a-entity>
+    </a-scene>
+  </body>
+</html>
