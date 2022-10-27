@@ -62,6 +62,7 @@
   <a-scene>
 
       <a-box position-listener position="0 1.5 -3" color="tomato"></a-box>
+      <a-text value="Position" position="0 2 -2" color="black" align="center"></a-text>
 
   </a-scene>
   <script>
@@ -76,6 +77,8 @@
       document.querySelector('a-box')
           .addEventListener('positionChanged', e => {
               console.log('New Position:', e.detail);
+              let pos = "X: "+e.detail.x.toFixed(2)+", Y: "+ e.detail.y.toFixed(2);
+              document.querySelector("a-text").setAttribute('value', pos);
           });
   </script>
   </body>
