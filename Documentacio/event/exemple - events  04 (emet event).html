@@ -1,0 +1,36 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+  <a-scene>
+
+      <a-entity cursor="rayOrigin:mouse">
+
+          <a-entity geometry="primitive:box"  id="b1" position="-1 1.6 -3"  color="red" ></a-entity>
+          <a-entity geometry="primitive:box"  id="b2" position="1 1.6 -3"  color="green" ></a-entity>
+
+      </a-entity>
+  </a-scene>
+  <script>
+
+      function avisat(){
+          console.log("SENTIT AVIS");
+
+          document.querySelector("#b2").setAttribute('scale', {x: 2, y: 2, z: 2});
+      }
+
+      document.querySelector("#b1").addEventListener("click", function() {
+          let alertEvent = new Event('avis');
+          document.querySelector("a-scene").dispatchEvent(alertEvent);
+          console.log("EMIT")
+      });
+
+      document.querySelector("#b2").addEventListener("avis", function(){
+          console.log("AVIS");
+          document.querySelector("#b2").setAttribute("color", "red");
+      });
+
+  </script>
+  </body>
+</html>
