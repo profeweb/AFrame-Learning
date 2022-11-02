@@ -45,37 +45,44 @@
   <script>
       AFRAME.registerComponent('rotation-listener', {
           tick() {
-              const newValue = this.el.getAttribute('rotation');
-              const stringCoords = AFRAME.utils.coordinates.stringify(newValue);
-              if (this.lastValue !== stringCoords) {
+              const newValue = this.el.getAttribute('rotation').y;
+              console.log(newValue);
+              if (this.lastValue !== newValue) {
                   this.el.emit('rotationChanged', newValue);
-                  this.lastValue = stringCoords;
+                  this.lastValue = newValue;
               }
           },
       });
   </script>
   <div id="overlay">
       <div>
-          <button onclick="move();">MOVE</button>
+          <button onclick="rotate();">ROTATE</button>
       </div>
   </div>
   <a-scene>
 
       <a-box rotation-listener position="0 1.5 -3" color="tomato"></a-box>
+      <a-text value="Angle:" position="0 2.5 -2" color="black" align="center"></a-text>
 
   </a-scene>
   <script>
 
-      function move(){
+      function rotate(){
           let rotY = Math.random()*360;
           let angle = "0 "+rotY+" 0";
+          console.log("ROT Y: " + rotY);
           document.querySelector('a-box').setAttribute("rotation", angle);
       }
 
-      document.querySelector('a-box')
-          .addEventListener('rotationChanged', e => {
-              console.log('New Angle:', e.detail);
-          });
+      document.addEventListener('DOMContentLoaded', function () {
+
+          document.querySelector('a-box')
+              .addEventListener('rotationChanged', e => {
+                  console.log('Event details:', e.detail);
+                  let angle = "Angle: " + e.detail.toFixed(3);
+                  document.querySelector("a-text").setAttribute('value', angle);
+              });
+      });
   </script>
   </body>
 </html>
