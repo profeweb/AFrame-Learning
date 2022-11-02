@@ -22,6 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     startButton.addEventListener('click', function (e) {
         splash.style.display = 'none';
-        emitEvent('scene-started', ['#planet', '#shuttle-light', '#shuttle-light', '#shuttle', '#shuttle']);
+        emitEvent('scene-started', ['#planet', '#shuttle-light', '#shuttle']);
     });
 });
