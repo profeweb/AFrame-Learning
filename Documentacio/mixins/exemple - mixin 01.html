@@ -1,0 +1,22 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+  	<a-scene>
+
+      <!-- Assets -->
+        <a-assets>
+            <!-- Mixins -->
+            <a-mixin id="red" material="color: red"></a-mixin>
+            <a-mixin id="blue" material="color: blue"></a-mixin>
+            <a-mixin id="cube" geometry="primitive: box"></a-mixin>
+        </a-assets>
+
+        <!-- Entitats amb mixins -->
+        <a-entity mixin="red cube"></a-entity>
+        <a-entity mixin="blue cube"></a-entity>
+ 
+    </a-scene>
+  </body>
+</html>
