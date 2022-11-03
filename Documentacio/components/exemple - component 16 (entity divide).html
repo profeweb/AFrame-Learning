@@ -1,0 +1,67 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent('divisible', {
+
+        schema: {
+          num: {type:'number', default: 2},
+        },
+
+        init: function () {
+
+          var el = this.el;
+
+          let wi = el.getAttribute('width') / this.data.num;
+          console.log("Width: "+wi);
+
+          // Crea entitats amb els mixins
+          for (var i = 0; i < this.data.num; i++) {
+            var entity = document.createElement('a-box');
+            entity.setAttribute('position', getPosition(i, el.getAttribute('width'), this.data.num));
+            entity.setAttribute('width', wi);
+            entity.setAttribute('height', el.getAttribute('height'));
+            entity.setAttribute('depth', el.getAttribute('depth'));
+            entity.setAttribute('material', 'color', getRandomColor());
+            el.appendChild(entity);
+          }
+        }
+
+      });
+
+      function getPosition(index, w, total) {
+        let wi = w / total;
+        let x = - w/2.0 + wi*index + wi/2.0;
+        let y = 0;
+        let z = 0;
+        return x+" "+y+" "+z;
+      }
+
+      function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+    </script>
+
+    <a-scene background="color:#222">
+
+      <a-entity rotation="-45 0 0" position="0 1 -3">
+
+        <a-entity divisible="num:2" position="0 0 0" width="6" height="1" depth="1"></a-entity>
+        <a-entity divisible="num:3" position="0 2 0" width="6" height="1" depth="1"></a-entity>
+        <a-entity divisible="num:4" position="0 4 0" width="6" height="1" depth="1"></a-entity>
+        <a-entity divisible="num:5" position="0 6 0" width="6" height="1" depth="1"></a-entity>
+        <a-entity divisible="num:6" position="0 8 0" width="6" height="1" depth="1"></a-entity>
+
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>
