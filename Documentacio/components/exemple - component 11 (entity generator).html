@@ -1,0 +1,57 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent('generator', {
+
+        schema: {
+          mixin: {default: ''},
+          num: {default: 10}
+        },
+
+        init: function () {
+
+          var data = this.data;
+
+          // Crea entitats amb els mixins
+          for (var i = 0; i < data.num; i++) {
+            var entity = document.createElement('a-entity');
+            entity.setAttribute('mixin', data.mixin);
+            entity.setAttribute('position', getRandomPosition());
+            this.el.appendChild(entity);
+          }
+        }
+
+      });
+
+      function getRandomPosition() {
+        let x = Math.random()*10 - 5;
+        let y = Math.random()*8 - 4;
+        let z = - 5;
+        return x+" "+y+" "+z;
+      }
+
+    </script>
+
+    <a-scene>
+
+      <!-- Assets -->
+      <a-assets>
+        <!-- Mixins -->
+        <a-mixin id="red" material="color: red"></a-mixin>
+        <a-mixin id="blue" material="color: blue"></a-mixin>
+        <a-mixin id="cub" geometry="primitive: box"></a-mixin>
+        <a-mixin id="bolla" geometry="primitive: sphere"></a-mixin>
+      </a-assets>
+
+      <!-- Entitats -->
+      <a-entity position="0 0 -5">
+        <a-entity generator="mixin:red cub; num:3"></a-entity>
+        <a-entity generator="mixin:blue bolla; num:5"></a-entity>
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>
