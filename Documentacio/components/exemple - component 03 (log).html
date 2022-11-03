@@ -1,0 +1,26 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <script>
+        AFRAME.registerComponent('log', {
+
+          schema: {
+            message: { type: 'string', default: 'Hello' }
+          },
+
+          init: function () {
+            var idElement = this.el.getAttribute('id');
+            console.log(idElement+ " diu "+ this.data.message);
+          }
+
+        });
+    </script>
+
+    <a-scene>
+      <a-box id="b1" log="message:Hello World!"   position="-1 1.6 -3" color="red"></a-box>
+      <a-box id="b2" log                          position="+1 1.6 -3" color="blue"></a-box>
+    </a-scene>
+  </body>
+</html>

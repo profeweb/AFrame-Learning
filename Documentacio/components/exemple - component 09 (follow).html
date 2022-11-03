@@ -1,0 +1,104 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <style>
+      #overlay {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px 0;
+        /*   height: 100px; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: #ffffff;
+      }
+      #overlay > div {
+        text-align: center;
+      }
+      #overlay > div > button {
+        background: transparent;
+        color: #ffffff;
+        border: 1px solid #ffffff;
+        padding: 0.8em 2em;
+        cursor: pointer;
+        text-transform: uppercase;
+      }
+
+      a-scene {
+        display: block;
+        position: relative;
+        height: 100%;
+        width: 100%;
+      }
+
+      #app {
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent('follow', {
+        
+        schema: {
+          target: {type: 'selector'},
+          speed: {type: 'number'}
+        },
+
+        init: function () {
+          this.directionVec3 = new THREE.Vector3();
+        },
+
+        tick: function (time, timeDelta) {
+
+          var directionVec3 = this.directionVec3;
+
+          var targetPosition = this.data.target.object3D.position;
+          var currentPosition = this.el.object3D.position;
+
+          directionVec3.copy(targetPosition).sub(currentPosition);
+
+          var distance = directionVec3.length();
+
+          if (distance <= 1) { return; }
+
+          var factor = this.data.speed / distance;
+          ['x', 'y', 'z'].forEach(function (axis) {
+            directionVec3[axis] *= factor * (timeDelta / 1000);
+          });
+
+          this.el.setAttribute('position', {
+            x: currentPosition.x + directionVec3.x,
+            y: currentPosition.y + directionVec3.y,
+            z: currentPosition.z + directionVec3.z
+          });
+        }
+
+
+      });
+
+      function mou(){
+        let x = Math.random()*20 - 10;
+        let y = Math.random()*8 - 4;
+        let z = "-10";
+        let newPosition = x + " " + y + " "+z;
+        document.querySelector("#target-box").setAttribute("position", newPosition);
+      }
+
+    </script>
+    <div id="overlay">
+      <div>
+        <button onclick="mou();">MOU TARGET</button>
+      </div>
+    </div>
+    <a-scene>
+      <a-sphere id="target-box" color="#5E82C5" position="-3 0 -10"></a-sphere>
+      <a-sphere follow="target: #target-box; speed: 1" color="#FF6B6B"  position="3 0 -10"></a-sphere>
+    </a-scene>
+  </body>
+</html>
