@@ -6,12 +6,17 @@
     <script>
       AFRAME.registerComponent("hover", {
 
+        schema: {
+          escala:{type:'number', default:1.1}
+        },
+
         init: function () {
 
           var el = this.el;
+          var s  = this.data.escala + " " + this.data.escala + this.data.escala;
 
           el.addEventListener("mouseenter", function () {
-            el.setAttribute("scale", "1.1 1.1 1.1");
+            el.setAttribute("scale", s);
           });
 
           el.addEventListener("mouseleave", function () {
@@ -25,9 +30,9 @@
 
       <a-entity cursor="rayOrigin:mouse;" raycaster="objects: .clickable"></a-entity>
 
-      <a-box class="clickable" hover position="-2.5 1.6 -3" color="red"></a-box>
-      <a-sphere class="clickable" hover position="0 1.6 -3" color="green"></a-sphere>
-      <a-cylinder class="clickable" hover position="2.5 1.6 -3" color="blue"></a-cylinder>
+      <a-box class="clickable" hover="escala:1.1" position="-2.5 1.6 -3" color="red"></a-box>
+      <a-box class="clickable" hover="escala:1.5" position="0 1.6 -3" color="green"></a-box>
+      <a-box class="clickable" hover="escala:2" position="2.5 1.6 -3" color="blue"></a-box>
 
     </a-scene>
   </body>

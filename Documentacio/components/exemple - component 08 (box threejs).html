@@ -21,6 +21,7 @@
           this.material = new THREE.MeshStandardMaterial({color: data.color});
           this.mesh = new THREE.Mesh(this.geometry, this.material);
           el.setObject3D('mesh', this.mesh);
+          console.log("INIT");
         },
 
         update: function (oldData) {
@@ -38,10 +39,12 @@
           if (data.color !== oldData.color) {
             el.getObject3D('mesh').material.color = new THREE.Color(data.color);
           }
+          console.log("UPDATE");
         },
 
         remove: function () {
           this.el.removeObject3D('mesh');
+          console.log("REMOVE");
         }
 
       });
@@ -49,7 +52,7 @@
     </script>
 
     <a-scene>
-        <a-entity capsa="width:1; height:1.5; depth:2; color:tomato;" position="0 1.6 -3"></a-entity>
+        <a-entity id="c" capsa="width:1; height:1.5; depth:2; color:tomato;" position="0 1.6 -3"></a-entity>
     </a-scene>
   </body>
 </html>

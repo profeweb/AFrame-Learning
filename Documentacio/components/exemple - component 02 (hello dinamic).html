@@ -53,7 +53,7 @@
 
         // Afegeix el component 'hello' a l'escena
         function addComponent(){
-          document.querySelector('a-scene').setAttribute('hello', '');
+          document.querySelector('#capsa').setAttribute('hello', '');
         }
 
     </script>
@@ -63,7 +63,7 @@
       </div>
     </div>
     <a-scene>
-        <a-entity geometry="primitive:box" position="0 1.6 -3"></a-entity>
+        <a-entity id="capsa" geometry="primitive:box" position="0 1.6 -3"></a-entity>
     </a-scene>
   </body>
 </html>
