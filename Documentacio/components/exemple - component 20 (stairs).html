@@ -1,0 +1,47 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent('stairs', {
+
+        schema: {
+          width:{type:'number', default: 2},
+          height:{type:'number', default: 2},
+          depth:{type:'number', default: 2},
+          num: {type:'number', default: 2},
+        },
+
+        init: function () {
+
+          for (var i = 0; i < this.data.num; i++) {
+            var entity = document.createElement('a-box');
+            entity.setAttribute('width', this.data.width);
+            entity.setAttribute('height', this.data.height);
+            entity.setAttribute('depth', this.data.depth);
+            entity.setAttribute( 'color', this.el.getAttribute('color'));
+            entity.setAttribute('position', {
+              x: this.el.object3D.position.x,
+              y: this.el.object3D.position.y + this.data.height*i,
+              z: this.el.object3D.position.z - this.data.depth*i
+            })
+            this.el.appendChild(entity);
+          }
+        }
+
+      });
+
+    </script>
+
+    <a-scene background="color:#222">
+        <a-entity position=" -2 0 -5" rotation="0 45 0">
+          <a-entity stairs="num:20; width:4; height:0.15; depth:1" position="0 0 0" color="red"></a-entity>
+        </a-entity>
+
+      <a-entity position=" +2 0 -5" rotation="0 -45 0">
+        <a-entity stairs="num:30; width:2; height:0.15; depth:0.5" position="0 0 0" color="green"></a-entity>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
