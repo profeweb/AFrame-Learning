@@ -1,0 +1,97 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+      <style>
+          #overlay {
+              position: absolute;
+              z-index: 1;
+              top: 0;
+              left: 0;
+              width: 100%;
+              padding: 10px 0;
+              /*   height: 100px; */
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              opacity: 1;
+              background-color: rgba(0, 0, 0, 0.6);
+              color: #ffffff;
+          }
+          #overlay > div {
+              text-align: center;
+          }
+          #overlay > div > button {
+              background: transparent;
+              color: #ffffff;
+              border: 1px solid #ffffff;
+              padding: 0.8em 2em;
+              cursor: pointer;
+              text-transform: uppercase;
+          }
+
+          #overlay > div > a {
+              background: transparent;
+              color: #ffffff;
+              border: 1px solid #ffffff;
+              padding: 0.8em 2em;
+              cursor: pointer;
+              text-decoration: none;
+              text-transform: uppercase;
+          }
+
+          a-scene {
+              display: block;
+              position: relative;
+              height: 100%;
+              width: 100%;
+          }
+
+          #app {
+              position: relative;
+          }
+      </style>
+  </head>
+  <body>
+      <script>
+          function canviaCamera(idCamera){
+              document.querySelector(idCamera).setAttribute('camera', 'active', true);
+          }
+
+      </script>
+
+      <div id="overlay">
+          <div>
+              <button onclick="canviaCamera('#c1');">CAMERA 1</button>
+              <button onclick="canviaCamera('#c2');">CAMERA 2</button>
+              <button onclick="canviaCamera('#c3');">CAMERA 3</button>
+          </div>
+      </div>
+
+      <a-scene>
+
+          <!-- Elements de l'escena. -->
+          <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+          <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+          <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+          <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+          <a-sky color="#ECECEC"></a-sky>
+
+          <!-- Camera Superior-->
+          <a-entity id="superior" position="0 6 -3" rotation="-90 0 0">
+              <a-camera id="c1" active="true" direction="0 -1 0"></a-camera>
+          </a-entity>
+
+          <!-- Camera Lateral-->
+          <a-entity id="lateral"  position="-6 0.5 -4" rotation="0 -90 0">
+              <a-camera id="c2" active="false" direction="1 0 0"></a-camera>
+          </a-entity>
+
+          <!-- Camera Frontal-->
+          <a-entity id="frontal" position="0 1.6 3" rotation="0 0 0">
+              <a-camera id="c3" active="false" direction="0 0 -1"></a-camera>
+          </a-entity>
+
+
+      </a-scene>
+  </body>
+</html>
