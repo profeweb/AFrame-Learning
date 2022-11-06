@@ -34,11 +34,13 @@
 
       <!-- Registre de la Primitiva 'a-clock' -->
       AFRAME.registerPrimitive('a-clock', {
-          // Attaches the clock component by default
+
+          // Afegeix el component 'clock' per defecte
           defaultComponents: {
               clock: {}
           },
-          // Maps HTML attributes to the component's properties
+
+          // Mapeig dels atributs HTML a les propietats del component
           mappings: {
               position: 'clock.position',
               font: 'clock.font',
