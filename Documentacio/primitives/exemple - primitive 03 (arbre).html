@@ -1,0 +1,50 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+  <script>
+      <!-- Registre del Component 'tree' -->
+      AFRAME.registerComponent("tree",{
+
+          schema:{
+              sphereColor: {type: 'string', default: '#68b557'},
+              trunkColor: {type: 'string', default: '#947343'},
+          },
+
+          init:function(){
+
+              let base = document.createElement('a-cylinder');
+              base.setAttribute('position',"0 1 0");
+              base.setAttribute('radius',0.1);
+              base.setAttribute('radius-bottom',0.08);
+              base.setAttribute('color',this.data.trunkColor);
+              this.el.appendChild(base);
+
+              let sphere = document.createElement('a-sphere');
+              sphere.setAttribute('position',"0 1.5 0");
+              sphere.setAttribute('color',this.data.sphereColor);
+              base.appendChild(sphere);
+          }
+      });
+
+      <!-- Registre de la Primitiva 'a-tree' -->
+      AFRAME.registerPrimitive('a-tree', {
+          defaultComponents: {
+              tree: {},
+          },
+          mappings:{
+              sc:'tree.sphereColor',
+              tc:'tree.trunkColor'
+          }
+      });
+
+  </script>
+  <a-scene background="color:#222">
+      <!-- Instàncies de la primitiva 'a-tree' -->
+      <a-tree position="2 0 -4"></a-tree>
+      <a-tree position="-1 0 -5" sc="#b59a48"></a-tree>
+      <a-tree position="0 0 -10" sc="#12777a" tc="#154647"></a-tree>
+  </a-scene>
+  </body>
+</html>

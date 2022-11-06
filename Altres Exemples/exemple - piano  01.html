@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>A-Frame Piano Demo</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+</head>
+<body>
+<a-scene>
+
+    <a-assets>
+        <audio id="c-sound" src="https://copresence.herokuapp.com/sounds/C.wav" crossorigin="anonymous"></audio>
+        <audio id="d-sound" src="https://copresence.herokuapp.com/sounds/D.wav" crossorigin="anonymous"></audio>
+        <audio id="e-sound" src="https://copresence.herokuapp.com/sounds/E.wav" crossorigin="anonymous"></audio>
+        <audio id="f-sound" src="https://copresence.herokuapp.com/sounds/F.wav" crossorigin="anonymous"></audio>
+        <audio id="g-sound" src="https://copresence.herokuapp.com/sounds/G.wav" crossorigin="anonymous"></audio>
+        <audio id="a-sound" src="https://copresence.herokuapp.com/sounds/A.wav" crossorigin="anonymous"></audio>
+        <audio id="b-sound" src="https://copresence.herokuapp.com/sounds/B.wav" crossorigin="anonymous"></audio>
+
+        <a-mixin id="animatecla"
+                 animation__rota   = "property: rotation; startEvents:click; dur: 500; easing: easeInOutQuad; dir: alternate; from:0 0 0; to:200 0 0; loop:1"
+                 animation__escala = "property: scale; startEvents:click; dur: 500; easing: easeInOutQuad; dir: alternate; from:1 1 1; to:1.5 1.5 1.5; loop:1">
+        </a-mixin>
+
+    </a-assets>
+
+    <a-camera>
+        <a-cursor fuse="false"></a-cursor>
+    </a-camera>
+
+    <a-entity id="keyboard" scale="0.5 0.5 0.5" position="0 0.5 -3">
+        <a-box position="-4.5 0 0" mixin="animatecla" material="color:hsl(0,80%,60%);" sound="src: #c-sound; autoplay: false; on: click;"></a-box>
+        <a-box position="-3 0 0"  mixin="animatecla" material="color:hsl(51,80%,60%);" sound="src: #d-sound; autoplay: false; on: click;"></a-box>
+        <a-box position="-1.5 0 0"  mixin="animatecla" material="color:hsl(102,80%,60%);" sound="src: #e-sound; autoplay: false; on: click;"></a-box>
+        <a-box position="0 0 0"  mixin="animatecla" material="color:hsl(153,80%,60%);" sound="src: #f-sound; autoplay: false; on: click;"></a-box>
+        <a-box position="1.5 0 0"  mixin="animatecla" material="color:hsl(204,80%,60%);" sound="src: #g-sound; autoplay: false; on: click;"></a-box>
+        <a-box position="3 0 0"  mixin="animatecla" material="color:hsl(255,80%,60%);" sound="src: #a-sound; autoplay: false; on: click;"></a-box>
+        <a-box position="4.5 0 0"  mixin="animatecla" material="color:hsl(306,80%,60%);" sound="src: #b-sound; autoplay: false; on: click;"> </a-box>
+    </a-entity>
+
+    <a-sky color="skyblue"></a-sky>
+
+</a-scene>
+</body>
+</html>
