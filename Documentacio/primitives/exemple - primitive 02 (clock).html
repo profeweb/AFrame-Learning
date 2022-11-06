@@ -1,0 +1,57 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+  <script>
+      <!-- Registre del Component 'clock' -->
+      AFRAME.registerComponent('clock', {
+
+          schema: {
+              position: {type: 'vec3', default: {x: 0, y: 1.6, z: -1}},
+              color: {type: 'color', default: '#0f0'},
+              font: {type: 'string', default: 'monoid'}
+          },
+
+          init: function () {
+              this.clockEl = document.createElement('a-text');
+              this.el.appendChild(this.clockEl);
+              this.clockEl.setAttribute('position', this.data.position);
+              this.clockEl.setAttribute('color', this.data.color);
+              this.clockEl.setAttribute('font', this.data.font);
+              this.clockEl.setAttribute('align', 'center');
+          },
+
+          tick: function(){
+              this.clockEl.setAttribute('value', this.getTime());
+          },
+
+          getTime: function() {
+              var d = new Date();
+              return d.toLocaleTimeString();
+          }
+      });
+
+      <!-- Registre de la Primitiva 'a-clock' -->
+      AFRAME.registerPrimitive('a-clock', {
+          // Attaches the clock component by default
+          defaultComponents: {
+              clock: {}
+          },
+          // Maps HTML attributes to the component's properties
+          mappings: {
+              position: 'clock.position',
+              font: 'clock.font',
+              color: 'clock.color'
+          }
+      });
+
+  </script>
+  <a-scene background="color:#222">
+      <!-- Instàncies de la primitiva 'a-clock' -->
+      <a-clock font="mozillavr" color="#11f" position="0 0.5 0"></a-clock>
+      <a-clock font="sourcecodepro" color="#f11" position="0 0 0"></a-clock>
+      <a-clock font="monoid" color="#1f1" position="0 -0.5 0"></a-clock>
+  </a-scene>
+  </body>
+</html>

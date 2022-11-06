@@ -1,0 +1,38 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <script>
+        AFRAME.registerPrimitive('a-grid', {
+            defaultComponents: {
+                geometry: {
+                    primitive: 'plane',
+                    width: 75,
+                    height: 75
+                },
+                rotation: {x: -90, y: 0, z: 0},
+                material: {
+                    src: 'url(https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v1.16.3/assets/grid.png)',
+                    repeat: '75 75'
+                }
+            },
+            mappings: {
+                width: 'geometry.width',
+                height: 'geometry.height',
+                src: 'material.src'
+            }
+        });
+    </script>
+
+  	<a-scene>
+
+        <!-- Default grid. -->
+        <a-grid></a-grid>
+
+        <!-Custom grid -->
+        <a-grid src="../img/terra.jpg" position="0 2 0" material="side:back"></a-grid>
+ 
+    </a-scene>
+  </body>
+</html>
