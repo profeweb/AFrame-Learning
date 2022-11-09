@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    </head>
+    <body>
+        <a-scene>
+
+            <!-- component hand-controls (mà esquerra) -->
+            <<a-entity id="leftHand"
+                       hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc">
+            </a-entity>
+
+            <!-- component hand-controls (mà dreta) -->
+            <a-entity id="rightHand"
+                      hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc">
+            </a-entity>
+
+
+            <!-- Entitat box -->
+            <a-box color="#EF2D5E" position="0 1 -4" x-button-listener></a-box>
+
+        </a-scene>
+
+    </body>
+</html>
