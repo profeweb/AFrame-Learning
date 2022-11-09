@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+        <script src="../../Components/aframe-event-set-component.min.js"></script>
+    </head>
+    <body>
+        <script>
+            // Component que canvia les imatges de l'entitat sky
+            AFRAME.registerComponent('set-skytest', {
+                schema: {default:''},
+                init() {
+                    const sky = document.querySelector('a-sky');
+                    this.el.addEventListener('click', () => {
+                        sky.setAttribute('src', this.data);
+                    });
+                }
+            });
+        </script>
+
+        <a-scene>
+
+            <a-camera>
+                <a-cursor color="#4CC3D9" fuse="true" timeout="10"></a-cursor>
+            </a-camera>
+
+            <a-sky material="color: red; "></a-sky>
+
+            <a-entity id="middle" visible="true">
+
+                <!--Pla verd  -->
+                <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"
+                         event-set__down="_event: mousedown; material.wireframe: true"
+                         event-set__up="_event: mouseup; material.wireframe: false"
+                ></a-plane>
+
+                <!-- Esfera animada -->
+                <a-sphere id="ball" material="color: #39f436" position="0 5 -5"
+                    animation="property:position; from:0 3 -5; to:0 0 -5;
+                               dur:500; startEvents:bounce-start; pauseEvents:bounce-stop;
+                               dir:alternate; easing:easeInQuad; loop:true;">
+                </a-sphere>
+
+
+                <!--  Box de color blau canviant -->
+                <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"
+                       event-set__enter="_event: mouseenter; color: #8FF7FF"
+                       event-set__leave="_event: mouseleave; color: #4CC3D9">
+                </a-box>
+
+                <!-- Esfera vermella de tamany variable -->
+                <a-sphere id="sphereTrigger" position="0 1.25 -5" radius="1.25" color="#EF2D5E"
+                          event-set__down="_event: mousedown; scale: 2 2 2; color: #e342f5"
+                          event-set__up="_event: mouseup; scale: 1 1 1; color: #EF2D5E"
+                ></a-sphere>
+
+                <!--  Cilindre groc  -->
+                <a-cylinder id="cy" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"
+                            event-set__enter="_event: mouseenter; _target: #cylinderText; visible: true; color: red"
+                            event-set__leave="_event: mouseleave; _target: #cylinderText; visible: false">
+                </a-cylinder>
+
+                <!-- Text -->
+                <a-text id="cylinderText" value="This is a cylinder" align="center" color="#FFF" visible="false" position="0 -0.55 -1.5"
+                        geometry="primitive: plane; width: 1.75" material="color: #000"></a-text>
+            </a-entity>
+
+
+            <!-- clicar al tetraedre violeta per fer apareixer el pla violeta -->
+            <a-tetrahedron id="purpleTet" position="-4 2 -3" rotation="-90 0 0" width="4" height="4" color="#cc00ff" visible="true"
+                           event-set__down="_event: mousedown; material.wireframe: true"
+                           event-set__up="_event: mouseup; material.wireframe: false"
+                           event-set__leave="_event: mouseleave; material.wireframe: false"></a-tetrahedron>
+
+            <a-plane id="purplePlane" position="-2 0 -3" rotation="-90 0 0" width="4" height="4" color="#e342f5" visible="false"
+                     event-set__down="_event: mousedown; material.wireframe: true"
+                     event-set__up="_event: mouseup; material.wireframe: false"
+                     event-set__leave="_event: moulseleave; material.wireframe: false"></a-plane>
+
+
+            <!-- clicar en el tetrahedre blau per fer apareixer el pla blau.  -->
+            <a-tetrahedron id="blueTet" position="4 2 -3" rotation="-90 0 0" width="4" height="4" color="#4032a8" visible="true"
+                           event-set__down="_event: mousedown; material.wireframe: true"
+                           event-set__up="_event: mouseup; material.wireframe: false"
+                           event-set__leave="_event: moulseleave; material.wireframe: false"></a-tetrahedron>
+
+            <a-plane id="bluePlane" position="2 0 -3" rotation="-90 0 0" width="4" height="4" color="#0059ff" visible="true"
+                     event-set__down="_event: mousedown; material.wireframe: true"
+                     event-set__up="_event: mouseup; material.wireframe: false"
+                     event-set__leave="_event: moulseleave; material.wireframe: false"></a-plane>
+
+
+            <!-- Esferes Superiors Vermella i Groga  - click per canviar les imatges de l'entitat sky  -->
+
+            <a-sphere id ="red" color="#F44336" radius="1" position="-4 5 -5"
+                      set-skytest="https://c3.staticflickr.com/2/1475/26239222850_cabde81c39_k.jpg"></a-sphere>
+
+            <a-sphere color="#FFEB3B" radius="1" position="4 5 -5"
+                      set-skytest="https://c2.staticflickr.com/2/1688/25044226823_53c979f8a1_k.jpg"
+            ></a-sphere>
+
+        </a-scene>
+
+        <!-- Afegir els Event Listeners -->
+        <script>
+
+            document.addEventListener('DOMContentLoaded', function (){
+
+                    // Event Listener que controla l'animació de la bolla.
+                    var bouncing = false;
+                    document.addEventListener('click', function () {
+                        bouncing = !bouncing;
+                        var el = document.querySelector('#ball');
+                        el.emit(bouncing ? 'bounce-start' : 'bounce-stop');
+                        console.log("EMIT : "+ (bouncing ? 'bounce-start' : 'bounce-stop'));
+                    });
+
+                    // clicar en el tetraedre violeta i apareixerà el pla violeta.
+                    document.querySelector('#purpleTet').addEventListener('click', function () {
+                        console.log('purpleTetClicked')
+                        document.querySelector("#purplePlane").setAttribute("visible",true);
+                    });
+
+
+                    // clicar en el tetraedre blau i apareixerà el pla blau.
+                    document.querySelector('#blueTet').addEventListener('click', function () {
+                        console.log('purpleTetClicked')
+                        document.querySelector("#middle").setAttribute("visible",false);
+                    });
+
+            });
+
+        </script>
+    </body>
+</html>
