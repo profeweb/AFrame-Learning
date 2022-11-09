@@ -1,0 +1,24 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+  <a-scene>
+      <a-entity cursor="rayOrigin:mouse">
+
+          <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow
+                 animation="startEvents: click; property: position; from: -1 1.5 -3; to: -1 0.5 -3 dur: 1000">
+          </a-box>
+
+          <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow
+                    animation="startEvents: click; property: scale; from: 2 2 2; to: 1 1 1; dur: 1000">
+          </a-sphere>
+
+          <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow
+                      animation__enter="startEvents: mouseenter; property: scale; to: 2 2 2; dur: 1000"
+                      animation__leave="startEvents: mouseleave; property: scale; to: 1 1 1; dur: 1000">
+          </a-cylinder>
+      </a-entity>
+  </a-scene>
+  </body>
+</html>
