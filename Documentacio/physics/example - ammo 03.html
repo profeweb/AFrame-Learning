@@ -1,0 +1,65 @@
+<html>
+
+<head>
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="https://mixedreality.mozilla.org/ammo.js/builds/ammo.wasm.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
+  <script src="https://unpkg.com/aframe-haptics-component/dist/aframe-haptics-component.min.js"></script>
+  <script>
+    AFRAME.registerComponent('collision-listener-right', {
+      init: function() {
+        this.el.addEventListener('collidestart', function(e) {
+          document.querySelector('#right-hand').components.haptics.pulse(1, 150)
+
+        })
+      }
+    });
+    AFRAME.registerComponent('collision-listener-left', {
+      init: function() {
+        this.el.addEventListener('collidestart', function(e) {
+          document.querySelector('#left-hand').components.haptics.pulse(1, 150)
+        })
+      }
+    });
+  </script>
+</head>
+
+<body>
+<a-scene physics="driver: ammo; debug: false; debugDrawMode: 0;">
+  <a-assets>
+
+  </a-assets>
+
+  <a-entity camera position="0 1.6 0" look-controls wasd-controls> </a-entity>
+
+  <a-entity id="right-hand" position="0.15 1.4 -0.4" oculus-touch-controls="hand: right;model:false" vive-controls="hand: right;model:false" vive-focus-controls="hand: right;model:false" windows-motion-controls="hand: right;model:false" haptics>
+    <a-sphere color="blue" radius="0.06" ammo-body="type: kinematic; emitCollisionEvents: true;" ammo-shape="type: sphere" collision-listener-right></a-sphere>
+  </a-entity>
+
+  <a-entity id="left-hand" position="-0.15 1.4 -0.4" oculus-touch-controls="hand: left;model:false" vive-controls="hand: left;model:false" vive-focus-controls="hand: left;model:false" windows-motion-controls="hand: left;model:false" haptics>
+    <a-sphere color="orange" radius="0.06" ammo-body="type: kinematic; emitCollisionEvents: true;" ammo-shape="type: sphere" collision-listener-left></a-sphere>
+  </a-entity>
+</a-scene>
+
+</body>
+<script>
+  function addTarget() {
+    var target_ = document.createElement('a-box');
+    target_.setAttribute('class', "target_obj_");
+    target_.setAttribute('position', "0 1.5 -4");
+    target_.setAttribute('rotation', "0 0 0");
+    target_.setAttribute('width', "0.2")
+    target_.setAttribute('height', "0.2")
+    target_.setAttribute('depth', "0.2")
+    target_.setAttribute('color', "red");
+    target_.setAttribute('ammo-body', "type: dynamic;mass:1;gravity: 0 0 1 ; ");
+    target_.setAttribute('ammo-shape', "type: box");
+    document.querySelector('a-scene').appendChild(target_);
+  }
+
+  setInterval(function() {
+    addTarget()
+  }, 1000);
+</script>
+
+</html>
