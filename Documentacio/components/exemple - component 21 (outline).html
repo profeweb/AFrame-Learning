@@ -54,6 +54,7 @@
       <a-box class="clickable" outline="color:red ; pulse:true" position="-3 1.5 -5" color="blue"></a-box>
       <a-cylinder class="clickable" outline="color:yellow ; pulse:false" position="3 1.5 -5" color="red"></a-cylinder>
       <a-cone class="clickable" outline="color:red ; pulse:true" position="0 3.5 -5" color="yellow"></a-cone>
+      <a-cone id="tard" position="0 -1 -5" color="yellow"></a-cone>
     </a-scene>
   </body>
   <script>
@@ -74,6 +75,13 @@
       document.querySelector('a-cone').addEventListener('click', function(e) {
         e.target.removeAttribute('outline');
       });
+
+
+      setTimeout( function(){
+        var cono = document.querySelector('#tard');
+        cono.setAttribute('outline','color:orange');
+        cono.components.outline.pulse();
+      } , 5000);
 
 
     });
