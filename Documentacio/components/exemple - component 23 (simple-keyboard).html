@@ -1,0 +1,84 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <script>
+
+      AFRAME.registerComponent('keyboard-button', {
+        init: function() {
+          const el = this.el;
+
+          el.addEventListener('mousedown', function() {
+            el.setAttribute('material', 'opacity', '0.7');
+          });
+
+          el.addEventListener('mouseup', () => {
+            el.setAttribute('material', 'opacity', this.isMouseEnter ? '0.9' : '0');
+          });
+
+          el.addEventListener('mouseenter', () => {
+            console.log("MOUSE ENTER");
+            el.setAttribute('material', 'opacity', '0.9');
+            self.isMouseEnter = true;
+          });
+
+          el.addEventListener('mouseleave', () => {
+            el.setAttribute('material', 'opacity', '0');
+            self.isMouseEnter = false;
+          });
+        },
+      });
+
+    </script>
+
+    <a-scene background="color:#222">
+
+      <a-assets>
+        <a-mixin id="tecla" geometry="primitive:plane;width:1;height:1" material="color:#AAA;opacity:1" ></a-mixin>
+      </a-assets>
+
+      <a-camera>
+        <a-entity cursor="fuse:true; fuseTimeout:1500"  raycaster="objects:[keyboard-button]" position="0 0 -1"
+                  geometry="primitive:sphere; radius:0.01"
+                  material="color: #FF0; shader:flat; opacity:0.5">
+        </a-entity>
+      </a-camera>
+
+      <a-text id="input" font="dejavu" color="#FFF" value="Input value..." position="-0.2 2 -2"></a-text>
+
+      <a-entity id="teclat" position="0 1.5 -5">
+
+        <a-entity id="teclaA"  position="-2 0 0" mixin="tecla" keyboard-button>
+          <a-text value="A" color="black" align="center"></a-text>
+        </a-entity>
+
+        <a-entity id="teclaS"  position="-1 0 0" mixin="tecla" keyboard-button>
+          <a-text value="S" color="black" align="center"></a-text>
+        </a-entity>
+
+        <a-entity id="teclaD"  position="0 0 0" mixin="tecla" keyboard-button>
+          <a-text value="D" color="black" align="center"></a-text>
+        </a-entity>
+
+      </a-entity>
+
+    </a-scene>
+    <script>
+      var input = ''
+      function updateInput(e) {
+        var code = parseInt(e.detail.code);
+        switch(code) {
+          case 8:
+            input = input.slice(0, -1)
+            break
+          default:
+            input = input + e.key;
+            break
+        }
+        document.querySelector('#input').setAttribute('value', input + '_')
+      }
+      document.addEventListener('keypress', updateInput);
+    </script>
+  </body>
+</html>

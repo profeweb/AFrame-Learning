@@ -83,7 +83,7 @@
 
             this.amt += this.data.velocitat;
 
-            if(this.amt>=1){
+            if(this.amt>=1+this.data.velocitat){
               this.end = true;
             }
 
@@ -112,7 +112,7 @@
 
       <a-sphere id="inici"  position="-10 1 -15" material="color:black" radius="0.1"></a-sphere>
       <a-sphere id="final" position="+10 1 -15" material="color:black" radius="0.1"></a-sphere>
-      <a-sphere id="bolla" slide="origin:#inici; target:#final;" material="color:red" radius="0.5"></a-sphere>
+      <a-sphere id="bolla" slide="origin:#inici; target:#final;velocitat:0.5;" material="color:red" radius="0.5"></a-sphere>
 
     </a-scene>
   </body>
