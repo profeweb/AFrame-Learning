@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Compositor Layer Example • A-Frame</title>
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="page-turn.js"></script>
+  <script src="toggle-layer.js"></script>
+  <script src="button.js"></script>
+</head>
+<body>
+<a-scene raycaster="objects: [button];" cursor="rayOrigin: mouse">
+
+  <!-- Assets (video, imatges) -->
+  <a-assets>
+
+    <video id="bunny" autoplay preload="auto" crossorigin="anonymous" width="1920" height="1080">
+      <source src="https://cdn.aframe.io/videos/bunny.mp4"/>
+    </video>
+    <img id="panel" crossOrigin="anonymous" src="panel.png">
+    <img id="ghibli" crossOrigin="anonymous" src="ghibli.jpg">
+  </a-assets>
+
+  <!-- Layer -->
+  <a-entity layer="src: #panel; width: 1.920; height: 1.038" position="0 1.8 -1.5"></a-entity>
+
+  <!-- Controladors Laser -->
+  <a-entity id="leftHand" toggle-layer laser-controls="hand: left" raycaster="objects: [button]"></a-entity>
+  <a-entity id="rightHand" toggle-layer laser-controls="hand: right" raycaster="objects: [button]"></a-entity>
+
+  <!-- Botons -->
+  <a-entity page-turn="direction: forward" id="nextButton" button="label: Next" position="0.5 1.1 -1.5"></a-entity>
+  <a-entity page-turn="direction: backward" id="previousButton" button="label: Previous" position="-0.5 1.1 -1.5"></a-entity>
+
+</a-scene>
+</body>
+</html>
