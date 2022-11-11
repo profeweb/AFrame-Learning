@@ -11,7 +11,10 @@
 
     <!-- keyboard -->
     <a-text id="entrada" font="dejavu" color="#000" value="" scale="0.5 0.5 0.5" position="-0.2 2 -1"></a-text>
-    <a-entity id="keyboard" position="-0.2 1.6 -0.5" a-keyboard></a-entity>
+    <a-entity id="keyboard" position="-0.2 1.6 -0.5"
+            a-keyboard="baseTexture: base.jpg; keyTexture: key.jpeg;"
+    >
+    </a-entity>
 
     <!-- Mouse input -->
     <a-entity id="mouseCursor" raycaster="objects: .collidable" cursor="rayOrigin: mouse"></a-entity>
