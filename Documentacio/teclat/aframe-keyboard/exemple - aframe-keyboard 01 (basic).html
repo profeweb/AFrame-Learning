@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="aframe-keyboard.min.js"></script>
+    <title>Keyboard Sample</title>
+</head>
+<body>
+<a-scene background="color:#222">
+
+    <!-- keyboard -->
+    <a-text id="entrada" font="dejavu" color="#000" value="" scale="0.5 0.5 0.5" position="-0.2 2 -1"></a-text>
+    <a-entity id="keyboard" position="-0.2 1.6 -0.5"
+            a-keyboard="baseTexture: base.jpg; keyTexture: key.jpeg;"
+    >
+    </a-entity>
+
+    <!-- Mouse input -->
+    <a-entity id="mouseCursor" raycaster="objects: .collidable" cursor="rayOrigin: mouse"></a-entity>
+
+
+</a-scene>
+<script>
+
+    function updateInput(e) {
+        let code = parseInt(e.detail.code)
+        let text =  document.querySelector('#entrada').getAttribute('value');
+        console.log(text);
+        switch(code) {
+            case 8: text = text.slice(0, -1); break;
+            case 6:
+                console.log('TEXT ENVIAT: '+text);
+                document.querySelector('#entrada').setAttribute('color', 'blue');
+                keyboard.parentNode.removeChild(keyboard);
+                return;
+            default:
+                text += e.detail.value; break;
+        }
+        document.querySelector('#entrada').setAttribute('value', text);
+    }
+    document.addEventListener('a-keyboard-update', updateInput)
+</script>
+</body>
+</html>
