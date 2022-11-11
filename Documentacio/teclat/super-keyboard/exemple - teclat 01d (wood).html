@@ -5,7 +5,7 @@
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <script src="https://rawgit.com/aframevr/aframe/c4aa63e/dist/aframe-master.min.js"></script>
 
-    <script src="../../Components/a-frame-super-keyboard/aframe-super-keyboard.min.js"></script>
+    <script src="../../../Components/a-frame-super-keyboard/aframe-super-keyboard.min.js"></script>
 </head>
 <body>
     <script>
@@ -44,7 +44,7 @@
                                        {"key":"g", "x":0.415, "y":0.541, "w":0.08, "h":0.154}, {"key":"h", "x":0.495, "y":0.541, "w":0.079, "h":0.154}, {"key":"j", "x":0.575, "y":0.541, "w":0.079, "h":0.154}, {"key":"k", "x":0.654, "y":0.541, "w":0.08, "h":0.154}, {"key":"l", "x":0.734, "y":0.541, "w":0.08, "h":0.154}, {"key":"z", "x":0.177, "y":0.696, "w":0.079, "h":0.154}, {"key":"x", "x":0.256, "y":0.696, "w":0.08, "h":0.154}, {"key":"c", "x":0.336, "y":0.696, "w":0.079, "h":0.154}, {"key":"v", "x":0.415, "y":0.696, "w":0.08, "h":0.154}, {"key":"b", "x":0.495, "y":0.696, "w":0.08, "h":0.154}, {"key":"n", "x":0.575, "y":0.696, "w":0.079, "h":0.154}, {"key":"m", "x":0.654, "y":0.696, "w":0.08, "h":0.154}]};
 
                 this.el.components['super-keyboard'].addCustomModel('wood', model);
-                //this.el.setAttribute('super-keyboard', {imagePath: '../../Components/a-frame-super-keyboard/', model: 'wood'});
+                this.el.setAttribute('super-keyboard', {imagePath: '../../../Components/a-frame-super-keyboard/', model: 'wood'});
             }
         });
     </script>
@@ -55,7 +55,7 @@
 
         <!-- Exemple de super-keyboard customitzat -->
         <a-entity id="keyboard" position="0 1.276 -0.5" rotation="-20 0 0"
-                super-keyboard="hand: #mouseCursor; imagePath:../../Components/a-frame-super-keyboard/;
+                super-keyboard="hand: #mouseCursor; imagePath:../../../Components/a-frame-super-keyboard/;
                                 keyColor: #fff; inputColor: #97f079;
                                 label: Hola!\nIntrodueix el teu nom?:; labelColor: #c9b08b;
                                 keyPressColor: #fff; keyHoverColor: #3a3521;

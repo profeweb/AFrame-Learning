@@ -3,7 +3,7 @@
 <head>
     <title>A-Frame: Simple Keyboard Input</title>
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-    <script src="../../Components/a-frame-super-keyboard/aframe-super-keyboard.min.js"></script>
+    <script src="../../../Components/a-frame-super-keyboard/aframe-super-keyboard.min.js"></script>
 </head>
 
 <body>
@@ -15,22 +15,17 @@
             let self = this;
 
             this.el.addEventListener('superkeyboardinput', function(event) {
-
                 let text = event.detail.value;
-                console.log("Input: " + text);
 
-                // Crea el nou item dins l'entitat #llista
-                let nouItem = document.createElement('a-text');
-                nouItem.setAttribute('position', getPosition());
-                nouItem.setAttribute('value', text);
-                nouItem.setAttribute('color', 'white');
-                nouItem.setAttribute('align', 'center');
-                nouItem.setAttribute('class', 'item');
-                document.querySelector('#llista').appendChild(nouItem);
+                // text també accessible a través de: self.el.getAttribute("super-keyboard")["value"]
+
+                console.log("Input: " + text);
 
                 // esborra la barra d'entrada (sense fer que el teclat desaparegui).
                 self.el.setAttribute( "super-keyboard", "value", "" );
 
+                // canvia el color de l'esfera
+                document.getElementById("sphere").setAttribute("color", text);
             });
 
             // Event de tancament del teclat (dismiss) per part de l'usuari
@@ -49,12 +44,6 @@
 
     });
 
-    function getPosition() {
-        let num = document.querySelectorAll('.item').length;
-        let y = num * 0.2;
-        return "0 "+y+" 0";
-    }
-
 </script>
 
 <a-scene background="color:#222">
@@ -62,11 +51,11 @@
     <!-- Cursor per Desktop mode -->
     <a-entity id="mouseCursor" cursor="rayOrigin: mouse"></a-entity>
 
-    <!-- Llista d'elements introduits amb el teclat -->
-    <a-entity id="llista" position="0 2 -1"></a-entity>
+    <!-- Esfera que canvia en funcio del teclat -->
+    <a-sphere id="sphere" radius="2" position="0 2 -8" color="gray" material="" geometry=""></a-sphere>
 
     <!-- Super-teclat amb configuració de password -->
-    <a-entity id="keyboard" super-keyboard="hand: #mouseCursor; imagePath:../../Components/a-frame-super-keyboard/"
+    <a-entity id="keyboard" super-keyboard="hand: #mouseCursor; imagePath:../../../Components/a-frame-super-keyboard/"
               position="0 1.5 -0.5" rotation="-30 0 0"  keyboard-input>
     </a-entity>
 </a-scene>

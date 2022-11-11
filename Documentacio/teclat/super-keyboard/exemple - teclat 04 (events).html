@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A-Frame: Simple Keyboard Input</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="../../../Components/a-frame-super-keyboard/aframe-super-keyboard.min.js"></script>
+    <style>
+        #overlay {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 0;
+            /*   height: 100px; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+        }
+        #overlay > div {
+            text-align: center;
+        }
+        #overlay > div > button {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            padding: 0.8em 2em;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        #overlay > div > a {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            padding: 0.8em 2em;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        a-scene {
+            display: block;
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        #app {
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+<script>
+
+    AFRAME.registerComponent('keyboard-events', {
+
+        init: function() {
+
+            // Event d'entrada de teclat (tecla retorn del teclat)
+            this.el.addEventListener('superkeyboardinput', function(event) {
+                console.log("PITJAT RETORN ("+event.detail.value+")");
+                document.querySelector('#keyboard').setAttribute('visible', false);
+                document.querySelector('#consola').setAttribute('value', "HAS PITJAT RETORN ("+event.detail.value+")");
+            });
+
+            // Event de canvi del valor del teclat (value)
+            this.el.addEventListener('superkeyboardchange', function(event) {
+                console.log("CANVIAT EL VALOR DEL TECLAT");
+                document.querySelector('#consola').setAttribute('value', "CANVIAT EL VALOR DEL TECLAT ("+event.detail.value+")");
+            });
+
+            // Event de tancament del teclat (dismiss) per part de l'usuari
+            this.el.addEventListener('superkeyboarddismiss', function(event) {
+                console.log("TANCAT EL TECLAT");
+                document.querySelector('#keyboard').setAttribute('visible', false);
+                document.querySelector('#consola').setAttribute('value', "HAS TANCAT EL TECLAT");
+            });
+        },
+
+    });
+
+    function keyboardVisibility(b){
+        console.log("VISIBLE EL TECLAT: "+b);
+        document.querySelector('#keyboard').setAttribute('super-keyboard', 'show', b);
+        document.querySelector('#keyboard').setAttribute('visible', b);
+    }
+
+</script>
+<div id="overlay">
+    <div>
+        <button onclick="keyboardVisibility(true);">SHOW KEYBOARD</button>
+        <button onclick="keyboardVisibility(false);">HIDE KEYBOARD</button>
+    </div>
+</div>
+
+<a-scene background="color:#222">
+
+    <!-- Cursor per Desktop mode -->
+    <a-entity id="mouseCursor" cursor="rayOrigin: mouse"></a-entity>
+
+    <!-- Esfera que canvia en funcio del teclat -->
+    <a-text id="consola" value="" align="center" position="0 3 -3" color="white"></a-text>
+
+    <!-- Super-teclat amb configuració de password -->
+    <a-entity id="keyboard" super-keyboard="hand: #mouseCursor; imagePath:../../../Components/a-frame-super-keyboard/"
+              position="0 1.5 -0.5" rotation="-30 0 0"  keyboard-events>
+    </a-entity>
+</a-scene>
+
+</body>
+</html>
