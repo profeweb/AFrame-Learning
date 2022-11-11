@@ -1,0 +1,24 @@
+<html>
+     
+  <head>
+      <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="js/aframe-extras.js"></script>
+  </head>
+  <body>
+    <a-scene background="color:#222">
+
+        <!-- Asset (GLB model) -->
+         <a-assets>
+            <a-asset-item id="bird" response-type="arraybuffer" src="models/robot.glb"></a-asset-item>
+        </a-assets>
+
+        <!-- Entitat GLTF-Model -->
+        <!-- Animacions: 'idle', 'pockets', 'hiphop', 'chicken' -->
+        <a-entity gltf-model="#bird"
+                  position="0 0.5 -10" rotation="0 -60 0" scale="0.01 0.01 0.01"
+                    animation-mixer="clip:idle; loop:infinite;">
+        </a-entity>
+    </a-scene>
+
+  <body>
+</html>
