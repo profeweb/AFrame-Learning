@@ -6,26 +6,47 @@
     <script>
 
       AFRAME.registerComponent('keyboard-button', {
+
+        schema:{
+          tecla : {type:'string'}
+        },
+
         init: function() {
+
           const el = this.el;
+          this.isMouseEnter = false;
+          var data = this.data;
+
+
+          // Text de la tecla
+
+          let text = document.createElement('a-text');
+          text.setAttribute('value', this.data.tecla);
+          text.setAttribute('align', 'center');
+          text.setAttribute('color', 'black');
+          el.appendChild(text);
+
+
+          // Event Listeners
 
           el.addEventListener('mousedown', function() {
-            el.setAttribute('material', 'opacity', '0.7');
+            el.setAttribute('material', 'opacity', '1');
+            el.emit('keyboardPressed', {tecla : data.tecla});
           });
 
           el.addEventListener('mouseup', () => {
-            el.setAttribute('material', 'opacity', this.isMouseEnter ? '0.9' : '0');
+            el.setAttribute('material', 'opacity', this.isMouseEnter ? '0.9' : '0.5');
           });
 
           el.addEventListener('mouseenter', () => {
             console.log("MOUSE ENTER");
             el.setAttribute('material', 'opacity', '0.9');
-            self.isMouseEnter = true;
+            this.isMouseEnter = true;
           });
 
           el.addEventListener('mouseleave', () => {
-            el.setAttribute('material', 'opacity', '0');
-            self.isMouseEnter = false;
+            el.setAttribute('material', 'opacity', '0.5');
+            this.isMouseEnter = false;
           });
         },
       });
@@ -35,7 +56,7 @@
     <a-scene background="color:#222">
 
       <a-assets>
-        <a-mixin id="tecla" geometry="primitive:plane;width:1;height:1" material="color:#AAA;opacity:1" ></a-mixin>
+        <a-mixin id="tecla" geometry="primitive:plane;width:1;height:1" material="color:#AAA;opacity:0.5" ></a-mixin>
       </a-assets>
 
       <a-camera>
@@ -45,40 +66,29 @@
         </a-entity>
       </a-camera>
 
-      <a-text id="input" font="dejavu" color="#FFF" value="Input value..." position="-0.2 2 -2"></a-text>
+      <a-text id="input" font="dejavu" color="#FFF" value="" position="0 2 -2" align="center"></a-text>
 
-      <a-entity id="teclat" position="0 1.5 -5">
+      <a-entity id="teclat" position="0 1 -5">
 
-        <a-entity id="teclaA"  position="-2 0 0" mixin="tecla" keyboard-button>
-          <a-text value="A" color="black" align="center"></a-text>
-        </a-entity>
-
-        <a-entity id="teclaS"  position="-1 0 0" mixin="tecla" keyboard-button>
-          <a-text value="S" color="black" align="center"></a-text>
-        </a-entity>
-
-        <a-entity id="teclaD"  position="0 0 0" mixin="tecla" keyboard-button>
-          <a-text value="D" color="black" align="center"></a-text>
-        </a-entity>
+        <a-entity position="-2 0 0" mixin="tecla" keyboard-button="tecla:1"></a-entity>
+        <a-entity position="-1 0 0" mixin="tecla" keyboard-button="tecla:2">></a-entity>
+        <a-entity position="0 0 0" mixin="tecla" keyboard-button="tecla:3"></a-entity>
+        <a-entity position="-2 -1 0" mixin="tecla" keyboard-button="tecla:4"></a-entity>
+        <a-entity position="-1 -1 0" mixin="tecla" keyboard-button="tecla:5">></a-entity>
+        <a-entity position="0 -1 0" mixin="tecla" keyboard-button="tecla:6"></a-entity>
+        <a-entity position="-2 -2 0" mixin="tecla" keyboard-button="tecla:7"></a-entity>
+        <a-entity position="-1 -2 0" mixin="tecla" keyboard-button="tecla:8">></a-entity>
+        <a-entity position="0 -2 0" mixin="tecla" keyboard-button="tecla:9"></a-entity>
 
       </a-entity>
 
     </a-scene>
     <script>
-      var input = ''
       function updateInput(e) {
-        var code = parseInt(e.detail.code);
-        switch(code) {
-          case 8:
-            input = input.slice(0, -1)
-            break
-          default:
-            input = input + e.key;
-            break
-        }
-        document.querySelector('#input').setAttribute('value', input + '_')
+        let tecla = parseInt(e.detail.tecla);
+        document.querySelector('#input').setAttribute('value', tecla);
       }
-      document.addEventListener('keypress', updateInput);
+      document.addEventListener('keyboardPressed', updateInput);
     </script>
   </body>
 </html>
