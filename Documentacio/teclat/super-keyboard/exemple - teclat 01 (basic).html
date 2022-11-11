@@ -16,8 +16,10 @@
     <!-- Laser per VR mode -->
     <a-entity id="hand" laser-controls="hand: right"></a-entity>
 
-    <!-- Canviar la propietta 'hand' a `#hand` en el mode VR. -->
-    <a-entity id="keyboard" super-keyboard="hand: #mouseCursor; imagePath:../../../Components/a-frame-super-keyboard/"
+    <!-- Canviar la propietat 'hand' a `#hand` en el mode VR. -->
+    <a-entity id="keyboard"
+              super-keyboard="hand: #mouseCursor;
+              imagePath:../../../Components/a-frame-super-keyboard/"
               position="0 1.5 -0.5" rotation="-30 0 0">
     </a-entity>
 </a-scene>
