@@ -1,0 +1,53 @@
+<html>
+<head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+</head>
+<body>
+    <script>
+        AFRAME.registerComponent('exposicio', {
+            schema: {
+                informacio: {type: 'asset'}
+            },
+
+            init: function () {
+                this.loader = new THREE.FileLoader();
+            },
+
+            update: function (oldData) {
+
+                const data = this.data;
+                if (AFRAME.utils.deepEqual(oldData, data)) {
+                    return;
+                }
+                if (data.informacio && data.informacio !== oldData.informacio) {
+                    this.loader.load(data.informacio, this.onDataLoaded.bind(this));
+                }
+            },
+
+            onDataLoaded: function (file) {
+                let obres = JSON.parse(file);
+                for (let obra of obres) {
+                    let entity = document.createElement('a-entity');
+                    entity.setAttribute('geometry', 'primitive', obra['primitiva']);
+                    entity.setAttribute('position', obra['x']+" "+obra['y']+" "+obra['z']);
+                    entity.setAttribute('material', 'color', obra['color']);
+                    this.el.appendChild(entity);
+
+                    let info = document.createElement('a-text');
+                    info.setAttribute('value', obra['info']);
+                    info.setAttribute('color', 'black');
+                    info.setAttribute('align', 'center');
+                    info.setAttribute('position', "0 -1 0");
+                    entity.appendChild(info);
+
+                };
+            }
+        });
+
+    </script>
+    <a-scene cursor="rayOrigin:mouse">
+       <a-entity id="sala" position="0 1.5 -5" exposicio="informacio:data02.json"></a-entity>
+    </a-scene>
+</body>
+</html>

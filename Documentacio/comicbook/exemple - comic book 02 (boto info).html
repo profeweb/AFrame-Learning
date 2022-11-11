@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+      <head>
+          <meta charset="utf-8">
+          <title>Comic Book A-Frame</title>
+          <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+          <script src="info-message.js"></script>
+          <script src="page-controls.js"></script>
+      </head>
+      <body>
+          <a-scene background="color: #d471aa" info-message="htmlSrc: #messageText; height: 400">
+              <a-assets>
+                  <a-asset-item id="messageText" src="message.html"></a-asset-item>
+                  <img id="page1" crossOrigin="anonymous" src="https://cdn.aframe.io/examples/comicbook/page1.jpg">
+                  <img id="page2" crossOrigin="anonymous" src="https://cdn.aframe.io/examples/comicbook/page2.jpg">
+                  <img id="page3" crossOrigin="anonymous" src="https://cdn.aframe.io/examples/comicbook/page3.jpg">
+                  <img id="page4" crossOrigin="anonymous" src="https://cdn.aframe.io/examples/comicbook/page4.jpg">
+                  <img id="page5" crossOrigin="anonymous" src="https://cdn.aframe.io/examples/comicbook/page5.jpg">
+              </a-assets>
+
+              <a-entity layer="src: #page1; height: 3; width: 1.9505"></a-entity>
+
+              <a-entity hand-controls="hand: left" page-controls ></a-entity>
+              <a-entity hand-controls="hand: right" page-controls></a-entity>
+          </a-scene>
+      </body>
+</html>

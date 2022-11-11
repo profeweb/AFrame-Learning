@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Geometry Gallery</title>
+</head>
+<body>
+<a-scene background="color: #112">
+
+  <a-assets>
+
+    <a-mixin id="box" geometry="primitive: box; depth: .125; height: .125; width: .125"></a-mixin>
+    <a-mixin id="circle" geometry="primitive: circle; radius: .2; segments: 100; thetaStart: 0; thetaLength: 360"></a-mixin>
+    <a-mixin id="cylinder" geometry="primitive: cylinder; radius: 0.2; height: .5;
+                           segmentsRadial: 50; segmentsHeight: 50:
+                           openEnded: true; thetaStart: 0; thetaLength: 360">
+    </a-mixin>
+    <a-mixin id="ring" geometry="primitive: ring; radiusInner: .3; radiusOuter: .5;
+                            segmentsTheta: 50"></a-mixin>
+    <a-mixin id="sphere" geometry="primitive: sphere; radius: .1"></a-mixin>
+    <a-mixin id="torus" geometry="primitive: torus; arc: 720; radius: .3; radiusTubular: .05;
+                            segmentsTubular: 10;"></a-mixin>
+    <a-mixin id="torus-knot" geometry="primitive: torusKnot; p: 3; q: 7; radius: .25;
+                            segmentsRadial: 10; radiusTubular: .07; segmentsTubular: 32">
+    </a-mixin>
+
+    <a-mixin id="column" geometry="primitive: box; depth: .75; height: 1.2; width: .75" material="color: #FFF" position="0 .6 0"></a-mixin>
+    <a-mixin id="column-bottom" geometry="primitive: box; depth: 1;
+                                              height: .1; width: 1;" material="color: #FFF" position="0 .1 0">
+    </a-mixin>
+    <a-mixin id="column-light" light="type: point; intensity: 0.5;
+                                          distance: 5;" position="0 1.5 0">
+    </a-mixin>
+    <a-mixin id="object-on-column" position="0 1.2 0"></a-mixin>
+
+    <a-mixin id="yoyo" animation__yoyo="dir: alternate; loop: true"></a-mixin>
+    <a-mixin id="spin" animation__spin="property: object3D.rotation.y; to: 360; loop: true; easing: linear; dur: 10000"></a-mixin>
+    <a-mixin id="spinX" mixin="spin" animation__spin="property: object3D.rotation.x"></a-mixin>
+    <a-mixin id="color" material="color: #FFFFC3"></a-mixin>
+    <a-mixin id="doubleside" material="side: double"></a-mixin>
+    <img id="carpet" src="carpet.jpg">
+    <img id="floor" src="marble.jpg">
+  </a-assets>
+  <a-camera position="0 1.6 4" camera="" rotation="" look-controls="" wasd-controls=""></a-camera>
+
+  <a-entity light="type: ambient; color: #444"></a-entity>
+  <a-entity light="type: directional; color: #EEE" position="0 1 1"></a-entity>
+
+  <a-entity geometry="primitive: cylinder; height: .2; radius: 12;" material="color: #BABABA; src: #floor;
+                          metalness: .2; repeat: 50 20; roughness: .1" position="0 0 0"></a-entity>
+
+  <a-entity geometry="primitive: box; depth: 20; height: 0.025; width: 2" material="color: #440000; metalness: 0; src: #carpet;
+                          repeat: 3 40; roughness: 1" position="0 .2 0">
+  </a-entity>
+
+  <a-entity position="-2.5 0 1">
+    <a-entity mixin="column" geometry="" material="" position="">
+      <a-entity mixin="column-light" light="" position=""></a-entity>
+      <a-entity mixin="object-on-column color box spin" animation__spin="to: 360 360 0" position="" material="" geometry=""></a-entity>
+      <a-entity mixin="object-on-column color box spin" position=".18 1.2 .1" animation__spin="to: 360 360 0" material="" geometry=""></a-entity>
+      <a-entity mixin="object-on-column color box spin" position="-.18 1.2 -.2" animation__spin="to: 360 360 0" material="" geometry=""></a-entity>
+    </a-entity>
+    <a-entity mixin="column-bottom" geometry="" material="" position=""></a-entity>
+  </a-entity>
+
+  <a-entity position="-2.5 0 -2">
+    <a-entity mixin="column" geometry="" material="" position="">
+      <a-entity mixin="column-light" light="" position=""></a-entity>
+      <a-entity mixin="object-on-column color doubleside circle spin" position="" material="" geometry="" animation__spin=""></a-entity>
+      <a-entity mixin="object-on-column color doubleside circle spin" position="" material="" geometry="" animation__spin=""></a-entity>
+    </a-entity>
+    <a-entity mixin="column-bottom" geometry="" material="" position=""></a-entity>
+  </a-entity>
+
+  <a-entity position="-2.5 0 -5">
+    <a-entity mixin="column" geometry="" material="" position="">
+      <a-entity mixin="column-light" light="" position=""></a-entity>
+      <a-entity mixin="object-on-column color cylinder spin spinX" position="" material="" geometry="" animation__spin=""></a-entity>
+    </a-entity>
+    <a-entity mixin="column-bottom" geometry="" material="" position=""></a-entity>
+  </a-entity>
+
+  <a-entity position="2.5 0 1">
+    <a-entity mixin="column" geometry="" material="" position="">
+      <a-entity mixin="column-light" light="" position=""></a-entity>
+      <a-entity mixin="object-on-column color doubleside ring spin" animation__spin="dur: 6000" position="" material="" geometry=""></a-entity>
+      <a-entity mixin="object-on-column color doubleside ring spin spinX" position="" material="" geometry="" animation__spin=""></a-entity>
+    </a-entity>
+    <a-entity mixin="column-bottom" geometry="" material="" position=""></a-entity>
+  </a-entity>
+
+  <a-entity position="2.5 0 -2">
+    <a-entity mixin="column" geometry="" material="" position="">
+      <a-entity mixin="column-light" light="" position=""></a-entity>
+      <a-entity mixin="object-on-column color sphere yoyo" animation__yoyo="property: position; from: -0.2 1 0; to: -0.2 1.8 0" position="-.2 1.2 0" material="" geometry=""></a-entity>
+      <a-entity mixin="object-on-column color sphere yoyo" animation__yoyo="property: position; from: 0 1.8 0; to: 0 1 0" position="" material="" geometry=""></a-entity>
+      <a-entity mixin="object-on-column color sphere yoyo" position=".2 1 0" animation__yoyo="property: position; to: 0.2 1.8 0" material="" geometry=""></a-entity>
+    </a-entity>
+    <a-entity mixin="column-bottom" geometry="" material="" position=""></a-entity>
+  </a-entity>
+
+  <a-entity position="2.5 0 -5">
+    <a-entity mixin="column" geometry="" material="" position="">
+      <a-entity mixin="column-light" light="" position=""></a-entity>
+      <a-entity mixin="object-on-column color torus spin" position="" material="" geometry="" animation__spin=""></a-entity>
+    </a-entity>
+    <a-entity mixin="column-bottom" geometry="" material="" position=""></a-entity>
+  </a-entity>
+
+  <a-entity position="2.5 0 -8">
+    <a-entity mixin="column" geometry="" material="" position="">
+      <a-entity mixin="column-light" light="" position=""></a-entity>
+      <a-entity mixin="object-on-column color torus-knot spin" position="" material="" geometry="" animation__spin=""></a-entity>
+    </a-entity>
+    <a-entity mixin="column-bottom" geometry="" material="" position=""></a-entity>
+  </a-entity>
+  <canvas class="a-canvas a-grab-cursor" data-aframe-canvas="true" data-engine="three.js r137" width="1139" height="979"></canvas><div class="a-loader-title" style="display: none;">Geometry Gallery</div><div class="a-enter-vr" aframe-injected=""><button class="a-enter-vr-button" title="Enter VR mode with a headset or fullscreen mode on a desktop. Visit https://webvr.rocks or https://webvr.info for more information." aframe-injected=""></button></div><div class="a-enter-ar a-hidden" aframe-injected=""><button class="a-enter-ar-button" title="Enter AR mode with a headset or handheld device. Visit https://webvr.rocks or https://webvr.info for more information." aframe-injected=""></button></div><div class="a-orientation-modal a-hidden" aframe-injected=""><button aframe-injected="">Exit VR</button></div></a-scene>
+
+
+<div class="rs-base"><div class="rs-container" style="height: auto;"><h1>Framerate</h1><div class="rs-group"><div class="rs-counter-base"><canvas width="200" height="10" class="rs-canvas" style="width: 200px; height: 10px;"></canvas><span class="rs-counter-id">raf</span><div class="rs-counter-value">24.3</div></div><div class="rs-counter-base"><canvas width="200" height="10" class="rs-canvas" style="width: 200px; height: 10px;"></canvas><span class="rs-counter-id">fps</span><div class="rs-counter-value">53.74</div></div></div><h1>Three.js - Memory</h1><div class="rs-group"><div class="rs-counter-base"><canvas width="200" height="10" class="rs-canvas" style="width: 200px; height: 10px;"></canvas><span class="rs-counter-id">Geometries</span><div class="rs-counter-value">12</div></div><div class="rs-counter-base"><canvas width="200" height="10" class="rs-canvas" style="width: 200px; height: 10px;"></canvas><span class="rs-counter-id">Programs</span><div class="rs-counter-value">4</div></div><div class="rs-counter-base"><canvas width="200" height="10" class="rs-canvas" style="width: 200px; height: 10px;"></canvas><span class="rs-counter-id">Textures</span><div class="rs-counter-value">2</div></div></div><h1>Three.js - Render</h1><div class="rs-group"><div class="rs-counter-base"><canvas width="200" height="10" class="rs-canvas" style="width: 200px; height: 10px;"></canvas><span class="rs-counter-id">Calls</span><div class="rs-counter-value">29</div></div><div class="rs-counter-base alarm"><canvas width="200" height="10" class="rs-canvas" style="width: 200px; height: 10px;"></canvas><span class="rs-counter-id">Triangles</span><div class="rs-counter-value">13916</div></div><div class="rs-counter-base"><canvas width="200" height="10" class="rs-canvas" style="width: 200px; height: 10px;"></canvas><span class="rs-counter-id">Points</span><div class="rs-counter-value">0</div></div></div><h1>A-Frame</h1><div class="rs-group"><div class="rs-counter-base"><canvas width="200" height="10" class="rs-canvas" style="width: 200px; height: 10px;"></canvas><span class="rs-counter-id">Entities</span><div class="rs-counter-value">73</div></div><div class="rs-counter-base"><canvas width="200" height="10" class="rs-canvas" style="width: 200px; height: 10px;"></canvas><span class="rs-counter-id">Load Time</span><div class="rs-counter-value">1277</div></div></div></div></div></body></html>
