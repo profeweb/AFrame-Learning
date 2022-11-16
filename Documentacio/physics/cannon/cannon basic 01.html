@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exemple- Fisíca amb AMMO</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://mixedreality.mozilla.org/ammo.js/builds/ammo.wasm.js"></script>
+    <script src="aframe-physics-system.js"></script>
+    <script src="components/bounce.js"></script>
+</head>
+<body>
+<a-scene physics="debug: true; gravity: -9.8;">
+    <a-camera near=0.001></a-camera>
+
+    <a-box position="-1 5 -5" rotation="0 45 0" color="#4CC3D9" shadow body="shape: box;"></a-box>
+    <a-box id="target" position="1 3.75 -4" rotation="0 45 0" color="purple" shadow body="shape: box;"></a-box>
+    <a-sphere position="0 10 -10" radius="1.25" color="#EF2D5E" shadow body="shape: sphere;"></a-sphere>
+    <a-cone position="-1 3.75 -4" radius-bottom="1.25" color="green" shadow bounce body="type: static; shape: cone; addCollideEventListener: true; collisionFlags: 4" constraint="target: #target;"></a-cone>
+    <a-torus position="-1 3.75 -7" radius="1.25" scale="0.5 0.5 0.5" color="red" shadow body="shape: capsule; cylinderAxis: z;"></a-torus>
+    <a-torus-knot position="0 3.75 -5" radius="1.25" scale="0.5 0.5 0.5" color="blue" shadow body="addCollideEventListener: false;"></a-torus-knot>
+    <a-cylinder segments-height="1" segments-radial="10" position="1 4.0 -5" radius="0.5" height="1.5" color="#FFC65D" shadow body="shape: cylinder"></a-cylinder>
+    <a-plane position="0 2 -4" rotation="90 0 0" width="1" height="1" color="#7BC8A4" shadow body="type: static; mass: 0; shape: box;"></a-plane>
+    <a-torus-knot position="0 0 -7" radius="1.25" scale="5 0.1 5" rotation="0 90 0" color="#7BC8A4" shadow body="type: static; mass: 0; shape: box;"></a-torus-knot>
+    <a-sky color="#ECECEC"></a-sky>
+</a-scene>
+</body>
+</html>
