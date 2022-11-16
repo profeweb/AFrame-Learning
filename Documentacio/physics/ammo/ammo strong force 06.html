@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exemple - Stress Test AMMO</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+    <script src="https://mixedreality.mozilla.org/ammo.js/builds/ammo.wasm.js"></script>
+    <script src="aframe-physics-system.js"></script>
+    <script src="components/force-pushable.js"></script>
+    <script src="components/grab.js"></script>
+</head>
+<body>
+<a-scene stats="true"
+         environment
+         physics="driver: ammo">
+    <!-- Player -->
+    <a-entity camera look-controls wasd-controls position="0 1.6 0">
+        <a-entity cursor
+                  raycaster="objects:[force-pushable]"
+                  position="0 0 -0.5"
+                  geometry="primitive: circle; radius: 0.01; segments: 4;"
+                  material="color: #FF4444; shader: flat"></a-entity>
+    </a-entity>
+
+    <a-entity id="left-hand" ammo-body="type: kinematic; emitCollisionEvents: true" ammo-shape="type: sphere; fit: manual; sphereRadius: 0.02;"
+              hand-controls="hand: left" grab></a-entity>
+    <a-entity id="right-hand" ammo-body="type: kinematic; emitCollisionEvents: true" ammo-shape="type: sphere; fit: manual; sphereRadius: 0.02;"
+              hand-controls="hand: right" grab></a-entity>
+
+    <!-- Terrain -->
+    <a-box width="75" height="0.1" depth="75" ammo-body="type: static" ammo-shape visible="false"></a-box>
+
+    <!-- Blocks -->
+    <a-box position="0 0.5 -2" color="#a50026" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="1 0.5 -2" color="#d73027" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="2 0.5 -2" color="#f46d43" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="3 0.5 -2" color="#fdae61" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="0 1.5 -2" color="#fee08b" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="1 1.5 -2" color="#ffffbf" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="2 1.5 -2" color="#d9ef8b" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="3 1.5 -2" color="#a6d96a" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="0 2.5 -2" color="#a50026" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="1 2.5 -2" color="#66bd63" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="2 2.5 -2" color="#1a9850" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="3 2.5 -2" color="#006837" ammo-body ammo-shape force-pushable></a-box>
+
+    <a-box position="0 0.5 2" color="#a50026" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="1 0.5 2" color="#d73027" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="2 0.5 2" color="#f46d43" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="3 0.5 2" color="#fdae61" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="0 1.5 2" color="#fee08b" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="1 1.5 2" color="#ffffbf" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="2 1.5 2" color="#d9ef8b" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="3 1.5 2" color="#a6d96a" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="0 2.5 2" color="#a50026" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="1 2.5 2" color="#66bd63" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="2 2.5 2" color="#1a9850" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="3 2.5 2" color="#006837" ammo-body ammo-shape force-pushable></a-box>
+
+    <a-box position="0 0.5 4" color="#a50026" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="1 0.5 4" color="#d73027" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="2 0.5 4" color="#f46d43" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="3 0.5 4" color="#fdae61" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="0 1.5 4" color="#fee08b" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="1 1.5 4" color="#ffffbf" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="2 1.5 4" color="#d9ef8b" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="3 1.5 4" color="#a6d96a" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="0 2.5 4" color="#a50026" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="1 2.5 4" color="#66bd63" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="2 2.5 4" color="#1a9850" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="3 2.5 4" color="#006837" ammo-body ammo-shape force-pushable></a-box>
+
+    <a-box position="0 0.5 6" color="#a50026" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="1 0.5 6" color="#d73027" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="2 0.5 6" color="#f46d43" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="3 0.5 6" color="#fdae61" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="0 1.5 6" color="#fee08b" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="1 1.5 6" color="#ffffbf" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="2 1.5 6" color="#d9ef8b" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="3 1.5 6" color="#a6d96a" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="0 2.5 6" color="#a50026" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="1 2.5 6" color="#66bd63" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="2 2.5 6" color="#1a9850" ammo-body ammo-shape force-pushable></a-box>
+    <a-box position="3 2.5 6" color="#006837" ammo-body ammo-shape force-pushable></a-box>
+</a-scene>
+</body>
+</html>
