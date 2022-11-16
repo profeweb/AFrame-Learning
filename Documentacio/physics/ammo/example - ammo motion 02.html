@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://mixedreality.mozilla.org/ammo.js/builds/ammo.wasm.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.js"></script>
+</head>
+
+<body>
+<script>
+    AFRAME.registerComponent("moving-dynamic-body", {
+        init: function() {
+            // wait until the physics engine is ready
+            this.el.addEventListener("body-loaded", e => {
+                // cache the ammo-body component
+                this.ammoComponent = this.el.components["ammo-body"];
+                // use this vector to zero the velocity
+                // keep in mind this needs to be deleted manually from the memory with Ammo.destroy(this.zeroSpeed)
+                this.zeroSpeed = new Ammo.btVector3(0, 0, 0);
+            });
+        }
+
+        ,
+        tick: function() {
+            // wait for the physics
+            if (!this.ammoComponent) return;
+
+            // restore stuff if the "teleport magic" has been done in the last renderloop.
+            // this should probably be done in steps instead of tick
+            if (this.collisionFlag === 2) {
+                // this just tells us that we reverted to normal
+                this.collisionFlag = 0;
+                // restore the original collision flags
+                this.ammoComponent.updateCollisionFlags();
+                // reset the speed, or the body will bounce away
+                this.ammoComponent.body.setLinearVelocity(this.zeroSpeed);
+            }
+
+            // if the body is below 1m
+            if (this.el.object3D.position.y < 1) {
+                // set the THREEJS position.y
+                this.el.object3D.position.y = 2;
+                // change the collision flag to the KINEMATIC_BODY
+                this.collisionFlag = 2;
+                // apply the flag
+                this.ammoComponent.body.setCollisionFlags(this.collisionFlag);
+                // sync the physisc transforms to the THREEJS transform
+                this.ammoComponent.syncToPhysics();
+            }
+        }
+    });
+</script>
+
+<a-scene physics="driver: ammo; debug: true; debugDrawMode: 1;" renderer="colorManagement:true">
+    <a-box id="test1" ammo-body="type: dynamic" ammo-shape="type: box" material="color:#dd1111" height="0.1" width="0.1" depth="0.1" position="0 2 -1" moving-dynamic-body>
+    </a-box>
+</a-scene>
+</body>
+</html>
