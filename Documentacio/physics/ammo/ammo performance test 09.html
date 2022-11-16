@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Physics Benchmark Test - Ammo</title>
+    <meta name="description" content="Physics Benchamrk Test - Ammo">
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://mixedreality.mozilla.org/ammo.js/builds/ammo.wasm.js"></script>
+    <script src="aframe-physics-system.js"></script>
+    <script src="components/pinboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/diarmidmackenzie/aframe-examples@latest/components/stats-panel.js"></script>
+</head>
+<body>
+<a-scene physics="driver: ammo; stats: events"
+         stats
+         stats-panel
+         stats-group="label: Average Physics Tick Times (msecs)"
+         stats-row__1="event:physics-tick-timer; property: total; label: Total"
+         stats-row__2="event:physics-tick-timer; property: wrapper; label: Wrapper"
+         stats-row__3="event:physics-tick-timer; property: engine; label: Engine"
+         tick-time-display="sceneOutputEl: #tickTimerScene">
+    <a-entity id="pinboard" pinboard="physics: ammo; height:20; width: 20" position = "0 0 -20" rotation = "45 0 0">
+    </a-entity>
+
+    <a-entity id="pinboard" ball-recycler="physics: ammo; ballCount: 100; width: 15; depth: 15; yKill: -8" position="0 8 -20">
+    </a-entity>
+    <a-plane id="tickTimerScene"
+             position="0 12 -30"
+             width="30"
+             height="3"
+             color="black"
+             text="value: Average tick (msecs): measuring...; wrapCount: 40; zOffset: 0.01">
+    </a-plane>
+</a-scene>
+</body>
+</html>
