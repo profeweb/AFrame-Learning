@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>A-Frame Physics Extras Example</title>
+  <script src="https://aframe.io/releases/0.7.0/aframe.js"></script>
+  <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v2.1.0/dist/aframe-physics-system.min.js"></script>
+  <!-- <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script> -->
+  <script src="https://unpkg.com/aframe-layout-component@4.2/dist/aframe-layout-component.min.js"></script>
+</head>
+<body>
+<a-scene physics>
+
+  <!-- Assets (mixins) -->
+  <a-assets>
+    <a-mixin id="cub1" dynamic-body geometry="width: 0.5; height: 0.5; depth: 0.5" material="color:blue;"></a-mixin>
+    <a-mixin id="cub2" dynamic-body geometry="width: 0.5; height: 0.5; depth: 0.5" material="color:red;"></a-mixin>
+    <a-mixin id="bolla" geometry="primitive: sphere; radius: 0.1"
+             dynamic-body="mass: 0.001"
+             material="color: yellow"></a-mixin>
+  </a-assets>
+
+  <!-- Cossos fusionats hereden la posició i rotació del l'entitat pare -->
+  <a-entity position="1.5 0.5 -2" rotation="0 0 -5" dynamic-body="shape: none" body-merger="dynamic-body">
+    <a-text value="Cossos dinamics fusionats" color="white" position="0 1.5 0.51" anchor="center" width="0.5" wrap-count="10"></a-text>
+    <a-box mixin="cub1" position="-0.5 0.25 -2" ></a-box>
+    <a-box mixin="cub1"  position="0.5 0.25 -2" ></a-box>
+    <a-box mixin="cub1"  position="0 2.318 -2" ></a-box>
+    <a-box mixin="cub1" position="0 1.364 -2" ></a-box>
+  </a-entity>
+
+  <!-- Cossos independents igoren la posició i rotació de l'entitat pare -->
+  <a-entity position="-1.5 0.5 -4" rotation="0 0 0">
+    <a-text value="Cossos dinamics no fussionats" color="black" position="0 1.5 0.51" anchor="center" width="0.5" wrap-count="10"></a-text>
+    <a-box mixin="cub2" position="-2 0.25 -4" ></a-box>
+    <a-box mixin="cub2" position="-1 0.25 -4" ></a-box>
+    <a-box mixin="cub2" position="-1.5 2.318 -4" ></a-box>
+    <a-box mixin="cub2" position="-1.5 1.364 -4" ></a-box>
+  </a-entity>
+
+  <a-entity mixin="bolla" position="-2.5 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="-2.24 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="-1.97 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="-1.71 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="-1.45 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="-1.18 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="-0.92 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="-0.66 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="-0.39 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="-0.13 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="0.13 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="0.39 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="0.66 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="0.92 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="1.18 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="1.45 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="1.71 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="1.97 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="2.24 4 -4"></a-entity>
+  <a-entity mixin="bolla" position="2.5 4 -4"></a-entity>
+
+  <!-- Terra (static-body) -->
+  <a-box static-body width="20" depth="10" height="0.02" material="color:#222"></a-box>
+
+</a-scene>
+</body>
+</html>
