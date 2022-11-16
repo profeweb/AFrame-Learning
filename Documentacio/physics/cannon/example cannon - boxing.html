@@ -2,12 +2,11 @@
 <html>
 <head>
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-    <script src="https://mixedreality.mozilla.org/ammo.js/builds/ammo.wasm.js"></script>
     <script src="../aframe-physics-system.js"></script>
 </head>
 
 <body>
-<a-scene physics="debug: false; debugDrawMode: 0;">
+<a-scene physics="debug: true; debugDrawMode: 0;">
     <a-assets>
 
     </a-assets>
@@ -28,13 +27,13 @@
     function addTarget() {
         var target_ = document.createElement('a-box');
         target_.setAttribute('class', "target_obj_");
-        target_.setAttribute('position', "0 1.5 -4");
+        target_.setAttribute('position', "0 2 -0.4");
         target_.setAttribute('rotation', "0 0 0");
         target_.setAttribute('width', "0.2")
         target_.setAttribute('height', "0.2")
         target_.setAttribute('depth', "0.2")
         target_.setAttribute('color', "red");
-        target_.setAttribute('dynamic-body', "mass:1;shape: box");
+        target_.setAttribute('dynamic-body', "mass:0.1;shape: box");
         target_.setAttribute('velocity', "0 0 1");
         document.querySelector('a-scene').appendChild(target_);
     }
