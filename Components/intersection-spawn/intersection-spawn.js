@@ -1,7 +1,8 @@
 /**
- * Aferra entitat al punt d'intersecció del click.
- * `<a-entity intersection-spawn="mixin: box; material.color: red">` genera una entitat
- * `<a-entity mixin="box" material="color: red">` en el punt d'intersecció.
+ * Spawn entity at the intersection point on click, given the properties passed.
+ *
+ * `<a-entity intersection-spawn="mixin: box; material.color: red">` will spawn
+ * `<a-entity mixin="box" material="color: red">` at intersection point.
  */
 AFRAME.registerComponent('intersection-spawn', {
     schema: {
@@ -14,20 +15,19 @@ AFRAME.registerComponent('intersection-spawn', {
         const el = this.el;
 
         el.addEventListener(data.event, evt => {
-
-            // Crea l'entitat.
+            // Create element.
             const spawnEl = document.createElement('a-entity');
 
-            // Estableix la posició en el punt d'intersecció.
+            // Snap intersection point to grid and offset from center.
             spawnEl.setAttribute('position', evt.detail.intersection.point);
 
-            // Estableix components i propietats
+            // Set components and properties.
             Object.keys(data).forEach(name => {
                 if (name === 'event') { return; }
                 AFRAME.utils.entity.setComponentProperty(spawnEl, name, data[name]);
             });
 
-            // Afegeix l'entitat a l'escena.
+            // Append to scene.
             el.sceneEl.appendChild(spawnEl);
         });
     }
