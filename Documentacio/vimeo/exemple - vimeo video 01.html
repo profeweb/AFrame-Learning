@@ -1,0 +1,67 @@
+<html>
+  <head>
+      <title>Vimeo A-Frame Component</title>
+	  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+      <script src="../../Components/a-frame-vimeo/aframe-vimeo-component.min.js"></script>
+  </head>
+  <body>
+  <script>
+      AFRAME.registerComponent('boxplaypause',
+          {
+              dependencies: ['vimeo'],
+
+
+
+
+              init: function ()
+              {
+                  self = this.el;
+                  vimeoPlayer = self.components.vimeo;
+
+                  //alert("It's loaded!"+box)
+
+                  //Register on self click event that triggers the player
+                  self.addEventListener('click', function ()
+                  {
+                      console.log(vimeoPlayer.player.isPlaying());
+                      if (vimeoPlayer.player.isPlaying() == false)
+                      {
+                          self.components.vimeo.play();
+                          self.play
+                          console.log('play');
+
+                      } else
+                      {
+                          self.components.vimeo.pause();
+                          console.log('pause');
+                          self.pause
+
+                      }
+                  });
+
+              }
+
+          });
+  </script>
+  <a-scene >
+
+      <a-entity id="rig" position="0 0 0">
+          <a-camera id="camera" stereocam="eye:left;" camera="" position="" rotation="" look-controls="" wasd-controls="">
+          </a-camera>
+          <a-entity id="controllerright" position="2.3 -2.7 -16.3" oculus-go-controls="hand: right" oculus-touch-controls="hand: right" laser-controls="hand:right" raycaster="objects: .vimeovideo; far: 5" daydream-controls="" gearvr-controls="" magicleap-controls="" vive-controls="" vive-focus-controls="" windows-motion-controls="" generic-tracked-controller-controls="">
+          </a-entity>
+          <a-entity id="controllerleft" position="2.3 -2.7 -16.3" oculus-touch-controls="hand: left">
+          </a-entity>
+          <a-entity cursor="rayOrigin:mouse" raycaster=""></a-entity>
+      </a-entity>
+
+
+      <a-entity geometry="primitive:box" class="vimeovideo" vimeo="id: 286283827; autoplay:false" scale="2 2 2" position="0 2 -3" boxplaypause="">
+      </a-entity>
+
+      <a-entity vimeo="id: 189090747; autoplay: false;" class="vimeovideo" geometry="primitive:box" scale="2 2 2" position="3 2 -2">
+      </a-entity>
+
+  </a-scene>
+  </body>
+</html>
