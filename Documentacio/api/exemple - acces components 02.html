@@ -1,0 +1,21 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+  	<a-scene>
+
+      <!-- Basic box. -->
+      <a-box id="capsa" position="0 1.6 -3" material="color:tomato" depth="2" height="2" width="2">
+      </a-box>
+
+        <a-text value="" position="-1 1.6 -1" color="black" align="left"></a-text>
+ 
+    </a-scene>
+  </body>
+<script>
+    <!-- Accés als components d'una entitat (a través de components) -->
+    var c = document.querySelector('#capsa').components.material.material.color;
+    document.querySelector('a-text').setAttribute('value', "R:" + c.r +"\nG:"+c.g+"\nB:"+c.b);
+</script>
+</html>

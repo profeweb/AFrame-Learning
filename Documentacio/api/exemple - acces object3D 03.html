@@ -1,0 +1,24 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+  	<a-scene>
+
+      <!-- Basic box. -->
+      <a-box id="capsa" position="0 1.6 -3" material="color:tomato" depth="2" height="2" width="2">
+      </a-box>
+
+        <a-text value="" position="0 1.6 -1" color="black" align="center"></a-text>
+ 
+    </a-scene>
+  </body>
+<script>
+    <!-- Accés a l'objecte 3D de ThreeJS inherent a les entitats A-Frame -->
+    var groupObject3D = document.querySelector('#capsa').object3D;
+    console.log(groupObject3D.parent);
+    console.log(groupObject3D.children);
+    var p = groupObject3D.parent.children[0].position;
+    document.querySelector('a-text').setAttribute('value', "X:" + p.x +"\nY:"+p.y+"\nP:"+p.z);
+</script>
+</html>

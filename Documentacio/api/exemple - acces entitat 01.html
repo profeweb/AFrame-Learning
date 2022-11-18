@@ -1,0 +1,21 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+  	<a-scene>
+
+      <!-- Basic box. -->
+      <a-box id="capsa" position="0 1.6 -3" color="tomato" depth="2" height="2" width="2">
+      </a-box>
+
+        <a-text value="" position="0 1.6 -1" color="black" align="center"></a-text>
+ 
+    </a-scene>
+  </body>
+<script>
+    <!-- Accés a entitat (a través de l'identificador) -->
+    var idCapsa = document.querySelector('#capsa').id;
+    document.querySelector('a-text').setAttribute('value', "ID:" + idCapsa);
+</script>
+</html>
