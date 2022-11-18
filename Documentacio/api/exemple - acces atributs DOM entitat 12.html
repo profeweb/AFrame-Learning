@@ -1,0 +1,101 @@
+<html>
+<head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <style>
+        #overlay {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 0;
+            /*   height: 100px; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+        }
+        #overlay > div {
+            text-align: center;
+        }
+        #overlay > div > button {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            padding: 0.8em 2em;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        #overlay > div > a {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            padding: 0.8em 2em;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        a-scene {
+            display: block;
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        #app {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<script>
+
+    function getGeometry(){
+        var txt = document.querySelector('#capsa').getDOMAttribute('geometry');
+        document.querySelector('a-text').setAttribute('value', JSON.stringify(txt));
+    }
+
+    function getPrimitive(){
+        var txt = document.querySelector('#capsa').getDOMAttribute('geometry').primitive;
+        document.querySelector('a-text').setAttribute('value', txt);
+    }
+
+    function getPosition(){
+        var txt = document.querySelector('#capsa').getDOMAttribute('position');
+        document.querySelector('a-text').setAttribute('value', JSON.stringify(txt));
+    }
+
+    function getDepth(){
+        var txt = document.querySelector('#capsa').getDOMAttribute('geometry').depth;
+        document.querySelector('a-text').setAttribute('value', JSON.stringify(txt));
+    }
+
+    function getPropi(){
+        var txt = document.querySelector('#capsa').getDOMAttribute('propi');
+        document.querySelector('a-text').setAttribute('value', txt);
+    }
+
+</script>
+<div id="overlay">
+    <div>
+        <button onclick="getGeometry();">GET GEOMETRY</button>
+        <button onclick="getPrimitive();">GET PRIMITIVE</button>
+        <button onclick="getPosition();">GET POSITION</button>
+        <button onclick="getDepth();">GET DEPTH</button>
+        <button onclick="getPropi();">GET PROPI</button>
+    </div>
+</div>
+<a-scene>
+
+    <a-entity id="capsa" propi="meu" geometry="primitive:box; width:2; height:2;" position="0 1.6 -5" material="color:tomato">
+    </a-entity>
+
+    <a-text value="info" position="0 1.6 -2" align="center" color="black"></a-text>
+
+</a-scene>
+</body>
+</html>
