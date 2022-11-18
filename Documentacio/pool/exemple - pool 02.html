@@ -34,7 +34,7 @@
       })
 
   </script>
-  <a-scene pool__spheres='mixin: ball; size: 10' cursor='rayOrigin: mouse'>
+  <a-scene pool__spheres='mixin: ball; size: 10' cursor='rayOrigin: mouse' raycaster="objects:a-plane">
       <a-assets>
           <a-mixin id="ball" geometry='primitive: sphere' material="color: red" scale='0.1 0.1 0.1' click-return>
           </a-mixin>
