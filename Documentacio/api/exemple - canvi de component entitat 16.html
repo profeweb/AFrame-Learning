@@ -1,0 +1,92 @@
+<html>
+<head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <style>
+        #overlay {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 0;
+            /*   height: 100px; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+        }
+        #overlay > div {
+            text-align: center;
+        }
+        #overlay > div > button {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            padding: 0.8em 2em;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        #overlay > div > a {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            padding: 0.8em 2em;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        a-scene {
+            display: block;
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        #app {
+            position: relative;
+        }
+    </style>
+</head>
+    <body>
+    <script>
+
+        function setRandomPosition(){
+            document.querySelector('.capsa').setAttribute('position', getRandomPosition());
+        }
+
+        function getRandomPosition() {
+            let x = Math.random()*8 - 4;
+            let y = Math.random()*6 - 3;
+            let z = - 3;
+            return x+" "+y+" "+z;
+        }
+
+    </script>
+    <div id="overlay">
+        <div>
+            <button onclick="setRandomPosition();">SET RANDOM POSITION</button>
+        </div>
+    </div>
+    <a-scene>
+
+        <!-- Basic color animated box. -->
+        <a-box class="capsa" position="0 1.6 -3" material="color:green;"></a-box>
+        <a-text value="" position="0 1.6 -2" color="black" align="center"></a-text>
+
+    </a-scene>
+    <script>
+        document.querySelector('a-box').addEventListener('componentchanged', function (evt) {
+            if (evt.detail.name === 'position') {
+                let p = evt.target.getAttribute('position');
+                let pTxt = "X:"+p.x+"\nY:"+p.y+ "\nZ:"+p.z;
+                console.log('Entitat ha canviat a', p, '!');
+                document.querySelector('a-text').setAttribute('value', pTxt);
+            }
+        });
+    </script>
+</body>
+</html>

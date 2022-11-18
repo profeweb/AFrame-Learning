@@ -1,0 +1,86 @@
+<html>
+<head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <style>
+        #overlay {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 0;
+            /*   height: 100px; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+        }
+        #overlay > div {
+            text-align: center;
+        }
+        #overlay > div > button {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            padding: 0.8em 2em;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        #overlay > div > a {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            padding: 0.8em 2em;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        a-scene {
+            display: block;
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        #app {
+            position: relative;
+        }
+    </style>
+</head>
+    <body>
+    <script>
+
+        function setAtribut(atribut, valor){
+            document.querySelector('.capsa').setAttribute(atribut, valor);
+        }
+
+        function setAtribut2(atribut, propietat, valor){
+            document.querySelector('.capsa').setAttribute(atribut, propietat, valor);
+        }
+
+        function setAtributResetAll(atribut, valor){
+            document.querySelector('.capsa').setAttribute(atribut, valor, true);
+            document.querySelector('.capsa').flushToDOM();
+        }
+
+    </script>
+    <div id="overlay">
+        <div>
+            <button onclick="setAtribut('visible', false);">SET VISIBLE FALSE</button>
+            <button onclick="setAtribut2('material','color', 'red');">SET MATERIAL COLOR RED</button>
+            <button onclick="setAtribut('position',{ x: 0, y: 1.6, z: -10 });">SET POSITION {1,1.6,-10}</button>
+            <button onclick="setAtributResetAll('geometry', 'primitive:sphere');">SET & DEFAULT ALL</button>
+        </div>
+    </div>
+    <a-scene>
+
+    <!-- Basic color animated box. -->
+    <a-entity class="capsa" geometry="primitive:box; width:2; height:2; depth:2;" position="0 1.6 -3" material="color:green;"></a-entity>
+
+</a-scene>
+</body>
+</html>
