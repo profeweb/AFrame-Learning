@@ -6,7 +6,7 @@
          {
             "id":1,
             "titol":"Child with Dove",
-            "file": "child-width-dove.jpg"
+            "file": "child-with-dove.jpg"
          },
          {
             "id":2,
@@ -16,7 +16,7 @@
          {
             "id":3,
             "titol":"Girl on the ball",
-            "file": "gril-on-the-ball.jpg"
+            "file": "girl-on-the-ball.jpg"
          },
          {
             "id":4,
@@ -27,6 +27,26 @@
             "id":5,
             "titol":"The Corrida",
             "file": "the-corrida.jpg"
+         },
+         {
+            "id":6,
+            "titol":"The Girls of Avignon",
+            "file": "the-girls-of-avignon.jpg"
+         },
+         {
+            "id":7,
+            "titol":"The Picador",
+            "file": "the-picador.jpg"
+         },
+         {
+            "id":8,
+            "titol":"Portrait of Dora Maar",
+            "file": "portrait-of-dora-maar.jpg"
+         },
+         {
+            "id":9,
+            "titol":"Portrait of Ambroise Vollard",
+            "file": "portrait-of-ambroise-vollard.jpg"
          }
       ]
    },

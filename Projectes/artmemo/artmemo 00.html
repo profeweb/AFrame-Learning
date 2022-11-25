@@ -14,22 +14,6 @@
     <!-- Components Propis -->
     <script src="components/galeria.js"></script>
     <script src="components/cartes.js"></script>
-
-    <!-- Plantilla de CARTA (template component) -->
-    <script id="carta" type="text/html">
-        <a-entity class="card"
-            animation="property:rotation; from:0 0 0; to:0 180 0; startEvents: click">
-            <a-entity class="cardA"
-                      geometry="primitive: box; height: 1.2; width: 1; depth:0.1"
-                      material="src:#texturaCarta" position="0 0 0">
-            </a-entity>
-
-            <a-entity class="cardB"
-                      geometry="primitive: box; height: 1.2; width: 1; depth:0.1"
-                      material="shader: flat; src: ${img}" position="0 0 -0.1">
-            </a-entity>
-        </a-entity>
-    </script>
 </head>
 <body>
     <a-scene background="color:#222" galeria="informacio:assets/galeria.json">
@@ -95,7 +79,7 @@
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        document.querySelector('#cards').setAttribute('cartes', 'informacio:assets/galeria.json; numero:9;');
+        document.querySelector('#cards').setAttribute('parells', 'numero:9;');
         document.querySelector('a-scene').flushToDOM(true);
     });
 </script>

@@ -22,18 +22,20 @@ AFRAME.registerComponent('galeria', {
         let galeries = JSON.parse(file);
 
         let numGaleries = galeries.length;
-        console.log(numGaleries);
+        let galeriaRand = Math.floor(Math.random()*numGaleries);
+        //console.log(galeriaRand);
+        galeriaRand=0;
 
-        let galeria = galeries[0];
-        console.log(galeria);
+        let galeria = galeries[galeriaRand];
 
         document.querySelector('#titol').setAttribute('value', galeria.tema);
         let assets = document.querySelector('a-assets');
 
+
         for (let obra of galeria.pics) {
-            // <img id="texturaCarta" src="assets/cartaTextura.png"/>
             let entity = document.createElement('img');
-            entity.setAttribute('id', obra.id);
+            entity.setAttribute('id', 'obra'+obra.id);
+            entity.setAttribute('class', 'obra');
             entity.setAttribute('src', 'assets/imgs/'+obra.file);
             assets.appendChild(entity);
         };
