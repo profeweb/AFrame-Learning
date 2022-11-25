@@ -20,27 +20,23 @@ AFRAME.registerComponent('galeria', {
 
     onDataLoaded: function (file) {
         let galeries = JSON.parse(file);
+
+        let numGaleries = galeries.length;
+        console.log(numGaleries);
+
         let galeria = galeries[0];
         console.log(galeria);
 
         document.querySelector('#titol').setAttribute('value', galeria.tema);
-        /*
-        for (let obra of obres) {
-            let entity = document.createElement('a-entity');
-            entity.setAttribute('geometry', 'primitive', obra['primitiva']);
-            entity.setAttribute('position', obra['x']+" "+obra['y']+" "+obra['z']);
-            entity.setAttribute('material', 'color', obra['color']);
-            this.el.appendChild(entity);
+        let assets = document.querySelector('a-assets');
 
-            let info = document.createElement('a-text');
-            info.setAttribute('value', obra['info']);
-            info.setAttribute('color', 'black');
-            info.setAttribute('align', 'center');
-            info.setAttribute('position', "0 -1 0");
-            entity.appendChild(info);
-
+        for (let obra of galeria.pics) {
+            // <img id="texturaCarta" src="assets/cartaTextura.png"/>
+            let entity = document.createElement('img');
+            entity.setAttribute('id', obra.id);
+            entity.setAttribute('src', 'assets/imgs/'+obra.file);
+            assets.appendChild(entity);
         };
 
-         */
     }
 });
