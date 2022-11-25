@@ -6,6 +6,12 @@
     <script src="https://unpkg.com/aframe-template-component@3.x.x/dist/aframe-template-component.min.js"></script>
     <script src="https://unpkg.com/aframe-layout-component@4.x.x/dist/aframe-layout-component.min.js"></script>
 
+    <!-- App -->
+    <script src="app.js"></script>
+
+    <!-- Components Propis -->
+    <script src="components/galeria.js"></script>
+
     <!-- Plantilla de CARTA (template component) -->
     <script id="carta" type="text/html">
         <a-entity class="card"
@@ -24,7 +30,7 @@
 
 </head>
 <body>
-    <a-scene background="color:#222" >
+    <a-scene background="color:#222" galeria="informacio:assets/galeria.json">
 
         <!-- Assets -->
         <a-assets>
@@ -86,7 +92,7 @@
             </a-entity>
 
             <!-- ZONA INFO -->
-            <a-text value="Pintures de Picasso" width="10" position="0 -0.0 0" align="center" font="assets/fonts/Sono-Bold-msdf.json" color="#E1594C" negate="false"></a-text>
+            <a-text id="titol" value="Pintures de ..." width="10" position="0 -0.0 0" align="center" font="assets/fonts/Sono-Bold-msdf.json" color="#E1594C" negate="false"></a-text>
 
             <!-- ZONA MARCADOR -->
             <a-entity id="marcador" position="4 0 0">
@@ -106,4 +112,5 @@
 
     </a-scene>
 </body>
+
 </html>

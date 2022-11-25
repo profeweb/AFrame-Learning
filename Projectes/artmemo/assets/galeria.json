@@ -1,7 +1,7 @@
 [
    {
       "id":1,
-      "tema":"Picasso",
+      "tema":"Pintures de Picasso",
       "pics":[
          {
             "id":1,
@@ -32,7 +32,7 @@
    },
    {
       "id":2,
-      "tema":"Miro",
+      "tema":"Pintures de Miro",
       "pics":[
          {
             "id":1,
