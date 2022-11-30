@@ -2,7 +2,7 @@ AFRAME.registerComponent('outline', {
 
     schema: {
         color: {default: 'red'},
-        scale: {default: 1.25},
+        scale: {default: 1.05},
         pulse: {default: false},
         frequency: {default: 1}
     },

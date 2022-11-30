@@ -27,7 +27,7 @@ function emparella(){
     parells++;
     for(let c in parelles){
         let idCarta = "#"+parelles[c];
-        //document.querySelector(idCarta).setAttribute('outline', 'color:red; pulse:true;');
+        document.querySelector(idCarta).setAttribute('outline', 'color:#E1594C; pulse:false;');
     }
 }
 
