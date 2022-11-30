@@ -56,28 +56,48 @@
       "pics":[
          {
             "id":1,
-            "titol":"",
-            "file": "xxxx.jpg"
+            "titol":"Child with Dove",
+            "file": "child-with-dove.jpg"
          },
          {
             "id":2,
-            "titol":"",
-            "file": "xxxx.jpg"
+            "titol":"Figures at the seaside",
+            "file": "figures-at-the-seaside.jpg"
          },
          {
             "id":3,
-            "titol":"",
-            "file": "xxxx.jpg"
+            "titol":"Girl on the ball",
+            "file": "girl-on-the-ball.jpg"
          },
          {
             "id":4,
-            "titol":"",
-            "file": "xxxx.jpg"
+            "titol":"Old Guitarist Chicago",
+            "file": "old-guitarist-chicago.jpg"
          },
          {
             "id":5,
-            "titol":"",
-            "file": "xxxx.jpg"
+            "titol":"The Corrida",
+            "file": "the-corrida.jpg"
+         },
+         {
+            "id":6,
+            "titol":"The Girls of Avignon",
+            "file": "the-girls-of-avignon.jpg"
+         },
+         {
+            "id":7,
+            "titol":"The Picador",
+            "file": "the-picador.jpg"
+         },
+         {
+            "id":8,
+            "titol":"Portrait of Dora Maar",
+            "file": "portrait-of-dora-maar.jpg"
+         },
+         {
+            "id":9,
+            "titol":"Portrait of Ambroise Vollard",
+            "file": "portrait-of-ambroise-vollard.jpg"
          }
       ]
    }

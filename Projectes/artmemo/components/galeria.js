@@ -1,6 +1,7 @@
 AFRAME.registerComponent('galeria', {
     schema: {
-        informacio: {type: 'asset'}
+        informacio: {type: 'asset'},
+        galeria:{type:'number', default:0}
     },
 
     init: function () {
@@ -19,18 +20,13 @@ AFRAME.registerComponent('galeria', {
     },
 
     onDataLoaded: function (file) {
+
         let galeries = JSON.parse(file);
-
-        let numGaleries = galeries.length;
-        let galeriaRand = Math.floor(Math.random()*numGaleries);
-        //console.log(galeriaRand);
-        galeriaRand=0;
-
-        let galeria = galeries[galeriaRand];
+        let galeriaNum = this.data.galeria;
+        let galeria = galeries[galeriaNum];
 
         document.querySelector('#titol').setAttribute('value', galeria.tema);
         let assets = document.querySelector('a-assets');
-
 
         for (let obra of galeria.pics) {
             let entity = document.createElement('img');

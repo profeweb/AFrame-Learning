@@ -1,8 +1,11 @@
 AFRAME.registerComponent('cartes', {
     schema: {
         informacio: {type: 'asset'},
-        numero: {type: 'number'}
+        numero: {type: 'number'},
+        galeria: {type:'number', default:0}
     },
+
+    dependencies: ['carta'],
 
     init: function () {
         this.loader = new THREE.FileLoader();
@@ -25,7 +28,7 @@ AFRAME.registerComponent('cartes', {
         let numGaleries = galeries.length;
         let galeriaRand = Math.floor(Math.random()*numGaleries);
         //console.log(galeriaRand);
-        galeriaRand=0;
+        galeriaRand= this.data.galeria;
 
         let galeria = galeries[galeriaRand];
 
@@ -33,20 +36,23 @@ AFRAME.registerComponent('cartes', {
         let cards = document.querySelector('#cards');
 
         let obres = galeria.pics;
-        obres.sort((a, b) => 0.5 - Math.random());
+        //obres.sort((a, b) => 0.5 - Math.random());
 
+        let numCarta = 0;
         for(let t=0; t<2; t++) {
+            for(let i=0; i<this.data.numero; i++){
 
-        for(let i=0; i<this.data.numero; i++){
+                //console.log(obres[i].file);
 
-            console.log(obres[i].file);
-
-            let imgObra = obres[i].file;
-
+                let imgObra = obres[i].file;
 
                 let entity = document.createElement('a-entity');
+                entity.setAttribute('id', 'carta_'+numCarta)
                 entity.setAttribute('class', 'card');
-                entity.setAttribute('animation', 'property:rotation; from:0 0 0; to:0 180 0; startEvents: click');
+                entity.setAttribute('carta', 'id:'+numCarta);
+                entity.setAttribute('data-img', imgObra);
+                entity.setAttribute('animation__girar', 'property:rotation; from:0 0 0; to:0 180 0; startEvents: girar');
+                entity.setAttribute('animation__desgirar', 'property:rotation; from:0 180 0; to:0 0 0; startEvents: desgirar; delay:3000');
 
                 let caraA = document.createElement('a-entity');
                 caraA.setAttribute('class', 'cardA');
@@ -64,6 +70,8 @@ AFRAME.registerComponent('cartes', {
                 entity.appendChild(caraB);
 
                 cards.appendChild(entity);
+
+                numCarta++;
             }
         }
 
