@@ -24,7 +24,7 @@ AFRAME.registerComponent('timer', {
             this.el.setAttribute('value', this.data.temps);
             if(this.data.temps==0){
                 console.log("EMMIT END");
-                this.el.emit('end');
+                document.querySelector('#cards').emit('end', false);
             }
         }
     },

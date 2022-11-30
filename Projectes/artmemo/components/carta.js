@@ -12,7 +12,7 @@ AFRAME.registerComponent('carta', {
 
         el.addEventListener('click', function(event){
 
-            if(el.getAttribute('class')==='card' && girades.length<2) {
+            if(!endedGame && el.getAttribute('class')==='card' && girades.length<2) {
 
                 let idElement = el.getAttribute('id');
                 console.log("CLICK SOBRE CARTA "+idElement);
@@ -33,11 +33,14 @@ AFRAME.registerComponent('carta', {
 
                     if(girades.length==2){
 
-                        let punt = emparellades();
-                        if(punt) {
+                        if(emparellades()) {
                             console.log("EMET EMPARELLAMENT");
+                            parelles.push(girades[0]);
+                            parelles.push(girades[1]);
+
                             document.querySelector('#cards').emit('emparellament', false);
                             girades = [];
+
                             if(parells == 9){
                                 document.querySelector('#cards').emit('guanya', false);
                             }

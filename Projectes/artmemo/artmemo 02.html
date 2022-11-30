@@ -17,9 +17,10 @@
     <script src="components/carta.js"></script>
     <script src="components/cartes.js"></script>
     <script src="components/timer.js"></script>
+    <script src="components/outline.js"></script>
 </head>
 <body>
-    <a-scene background="color:#222" galeria="informacio:assets/galeria.json; galeria:0;" physics="debug: true; gravity: -9.8;">
+    <a-scene background="color:#222" galeria="informacio:assets/galeria.json; galeria:0;" physics="debug: false; gravity: -9.8;">
 
         <!-- Assets -->
         <a-assets>
@@ -34,7 +35,7 @@
         <a-entity id="cards" layout="type: box; columns:6; margin: 1.5" position="-3.8 1 -4"></a-entity>
 
         <!-- TERRA -->
-        <a-plane id="terra" position="0 -2 -3" width="10" height="10" rotation="-60 0 0" visible="false"></a-plane>
+        <a-box id="terra" position="0 -2 -3" width="100" height="100" rotation="-90 0 0" visible="false"  body="type: static; mass: 0; shape: box;"></a-box>
 
         <!-- INFO DRETA -->
         <a-entity id="info" position="5.5 2.5 -3.5" rotation="0 -60 0">
@@ -67,7 +68,7 @@
                 <a-text value="Girs: " position="0 0.1 0" align="right" font="assets/fonts/Sono-Bold-msdf.json" color="#E1594C" negate="false"></a-text>
                 <a-text id="girs" value="0" position="0.05 0.1 0" align="left" font="assets/fonts/Sono-Bold-msdf.json" color="#FFFFFF" negate="false"></a-text>
                 <a-text value="Temps: " width="6" position="0 -0.1 0" align="right" font="assets/fonts/Sono-Bold-msdf.json"  color="#64A3D3" negate="false"></a-text>
-                <a-text timer="temps:20" value="" width="6" position="0.05 -0.1 0" align="left" font="assets/fonts/DS-DIGIB.TTF-msdf.json"  color="#FFFFFF" negate="false"></a-text>
+                <a-text timer="temps:500" value="" width="6" position="0.05 -0.1 0" align="left" font="assets/fonts/DS-DIGIB.TTF-msdf.json"  color="#FFFFFF" negate="false"></a-text>
             </a-entity>
 
         </a-entity>
@@ -86,29 +87,17 @@
         document.querySelector('#cards').setAttribute('cartes', 'informacio:assets/galeria.json; galeria:0; numero:9;');
 
         document.querySelector('#cards').addEventListener('desgirar', function (){
-            setTimeout(girarGirades, 3000 );
+            setTimeout(girarGirades, 2000);
         });
 
         document.querySelector('#cards').addEventListener('emparellament', function (){
-            parells++;
+            emparella();
         });
 
         document.querySelector('#cards').addEventListener('end', function (){
-            console.log("END GAME");
+            endGame();
         });
 
     });
-
-    function girarGirades(){
-        for(let c in girades){
-            let idCarta = "#"+girades[c];
-            document.querySelector(idCarta).emit('desgirar', false);
-        }
-        girades = [];
-    }
-
-    function fisica(){
-
-    }
 </script>
 </html>
