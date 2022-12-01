@@ -20,11 +20,24 @@ AFRAME.registerComponent('carta', {
                 if(!data.girada) {
 
                     el.emit('girar', {'id':data.id});
+                    document.querySelector('#speaker').emit('playCarta');
                     console.log("EMET EVENT GIRAR");
                     data.girada = true;
+                    girades.push(idElement);
+
                     girs++;
                     document.querySelector('#girs').setAttribute('value', girs);
-                    girades.push(idElement);
+
+                    document.querySelector('#info1').setAttribute('visible', 'true');
+                    document.querySelector('#info2').setAttribute('visible', 'true');
+
+                    let idAsset = document.querySelector("#"+girades[girades.length-1]).getAttribute('data-asset');
+                    document.querySelector('#layer1').setAttribute('layer', 'src', '#'+idAsset);
+                    document.querySelector('#layer2').setAttribute('layer', 'src', '#'+idAsset);
+                    let textCarta = document.querySelector("#"+girades[girades.length-1]).getAttribute('data-text');
+                    document.querySelector('#text1').setAttribute('value', textCarta);
+                    document.querySelector('#text2').setAttribute('value', textCarta);
+
                     if(!startedTimer){
                         startedTimer = true;
                         console.log("EMIT START");

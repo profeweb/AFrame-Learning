@@ -45,6 +45,7 @@ AFRAME.registerComponent('cartes', {
                 //console.log(obres[i].file);
 
                 let imgObra = obres[i].file;
+                let textObra = obres[i].titol;
 
                 let entity = document.createElement('a-entity');
                 entity.setAttribute('id', 'carta_'+numCarta)
@@ -53,7 +54,9 @@ AFRAME.registerComponent('cartes', {
                 entity.setAttribute('material', 'opacity:0.15');
                 entity.setAttribute('carta', 'id:'+numCarta);
                 entity.setAttribute('data-img', imgObra);
-                entity.setAttribute('sound', 'on:click; src:#click-sound')
+                entity.setAttribute('data-asset', 'obra'+(i+1));
+                entity.setAttribute('data-text', textObra);
+                //entity.setAttribute('sound', 'on:click; src:#click-sound')
                 entity.setAttribute('animation__girar', 'property:rotation; from:0 0 0; to:0 180 0; startEvents: girar');
                 entity.setAttribute('animation__desgirar', 'property:rotation; from:0 180 0; to:0 0 0; startEvents: desgirar; delay:3000');
 

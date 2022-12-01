@@ -27,13 +27,22 @@ function emparella(){
     parells++;
     for(let c in parelles){
         let idCarta = "#"+parelles[c];
-        document.querySelector(idCarta).setAttribute('outline', 'color:#E1594C; pulse:false;');
+        document.querySelector(idCarta).setAttribute('outline', 'color:#64A3D3; pulse:false;');
     }
 }
 
 function endGame(){
     console.log("END GAME");
     endedGame = true;
+
+    /*
+    document.querySelectorAll('[sound]').forEach(function(element, index, arr){
+        //element.removeAttribute('sound');
+        element.components.sound.remove();
+    });
+
+     */
+
     document.querySelectorAll('[carta]').forEach(function(element, index, arr){
         element.setAttribute('body', 'shape:box;')
     });
