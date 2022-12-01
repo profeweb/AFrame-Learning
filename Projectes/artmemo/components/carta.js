@@ -20,7 +20,7 @@ AFRAME.registerComponent('carta', {
                 if(!data.girada) {
 
                     el.emit('girar', {'id':data.id});
-                    document.querySelector('#speaker').emit('playCarta');
+                    document.querySelector('#speaker').emit('clickCarta');
                     console.log("EMET EVENT GIRAR");
                     data.girada = true;
                     girades.push(idElement);

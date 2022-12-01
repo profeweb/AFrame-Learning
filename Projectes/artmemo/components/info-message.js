@@ -2,7 +2,7 @@ AFRAME.registerComponent('info-message', {
     schema: {
         htmlSrc: {type: 'selector'},
         startOpened: {default: false},
-        width: {default: 240},
+        width: {default: 320},
         height: {default: 220}
     },
     init: function () {
