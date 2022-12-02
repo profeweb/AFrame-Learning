@@ -109,8 +109,8 @@ class ArtMemo {
             element.setAttribute('body', 'shape:box;')
         });
 
-        //document.querySelector('#info1').setAttribute('body', 'shape:box;');
-        //document.querySelector('#info2').setAttribute('body', 'shape:box;');
+        document.querySelector('#info1').setAttribute('body', 'shape:box;');
+        document.querySelector('#info2').setAttribute('body', 'shape:box;');
         //document.querySelector('#hud').setAttribute('body', 'shape:box;');
 
         document.querySelector('#next').setAttribute('visible', 'true');
@@ -131,6 +131,20 @@ class ArtMemo {
         this.girades = [];
         this.parelles = [];
 
+        // ZONA ASSETS
+
+        var escena = document.querySelector('a-scene');
+        escena.removeAttribute('galeria');
+
+        document.querySelectorAll('.obra').forEach(function(item, key, parent){
+            item.parentNode.removeChild(item);
+        });
+
+        escena.setAttribute('galeria', 'informacio:assets/galeria.json; galeria:1;');
+        escena.flushToDOM();
+
+
+        // ZONA CARDS
 
         var cardsContainer = document.querySelector('#cards');
         cardsContainer.removeAttribute('cartes');
@@ -138,7 +152,7 @@ class ArtMemo {
         cardsContainer.removeAttribute('body');
         cardsContainer.flushToDOM();
 
-        document.querySelectorAll('.card').forEach(function(item, key, paren){
+        document.querySelectorAll('.card').forEach(function(item, key, parent){
            item.parentNode.removeChild(item);
         });
 
@@ -146,6 +160,7 @@ class ArtMemo {
         cardsContainer.setAttribute('rotation', '0 0 0');
         document.querySelector('#cards').setAttribute('cartes', 'informacio:assets/galeria.json; galeria:1; numero:9;');
 
+        // ZONA MARCADOR
         document.querySelector('#girs').setAttribute('value', this.girs);
         document.querySelector('[timer]').setAttribute('timer', 'temps:5; start:false;');
         document.querySelector('[timer]').setAttribute('value', '5');
