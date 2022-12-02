@@ -7,19 +7,19 @@ AFRAME.registerComponent('carta', {
 
     init: function () {
 
-        var el = this.el;
-        var data = this.data;
+        let el = this.el;
+        let data = this.data;
 
         el.addEventListener('click', function(event){
 
             if(joc.clickable() && el.getAttribute('class')==='card') {
 
-                let idElement = el.getAttribute('id');
-
                 if(!data.girada) {
+
                     data.girada = true;
                     el.emit('girar', {'id':data.id});
 
+                    let idElement = el.getAttribute('id');
                     joc.girarCarta(idElement);
                     joc.informar();
 
@@ -28,10 +28,8 @@ AFRAME.registerComponent('carta', {
                     }
 
                     if(joc.numCartesGirades() == 2){
-
                         if(joc.cartesParells()) {
                             joc.emparellament();
-
                             if(joc.numCartesEmparellades() == 9){
                                 joc.guanya();
                             }

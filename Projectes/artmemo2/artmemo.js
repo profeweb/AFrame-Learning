@@ -1,8 +1,10 @@
 class ArtMemo {
 
     constructor() {
+
         this.girs = 0;
         this.parells = 0;
+
         this.startedTimer = false;
         this.endedGame = false;
 
@@ -107,7 +109,52 @@ class ArtMemo {
             element.setAttribute('body', 'shape:box;')
         });
 
-        document.querySelector('#info1').setAttribute('body', 'shape:box;');
-        document.querySelector('#info2').setAttribute('body', 'shape:box;');
+        //document.querySelector('#info1').setAttribute('body', 'shape:box;');
+        //document.querySelector('#info2').setAttribute('body', 'shape:box;');
+        //document.querySelector('#hud').setAttribute('body', 'shape:box;');
+
+        document.querySelector('#next').setAttribute('visible', 'true');
+        document.querySelector('#botoNext').setAttribute('class', 'cardA');
+        document.querySelector('#botoNext').setAttribute('click-next', '');
+    }
+
+    resetGame(){
+
+        console.log("RESET GAME");
+
+        this.girs = 0;
+        this.parells = 0;
+
+        this.startedTimer = false;
+        this.endedGame = false;
+
+        this.girades = [];
+        this.parelles = [];
+
+
+        var cardsContainer = document.querySelector('#cards');
+        cardsContainer.removeAttribute('cartes');
+        cardsContainer.removeAttribute('carta');
+        cardsContainer.removeAttribute('body');
+        cardsContainer.flushToDOM();
+
+        document.querySelectorAll('.card').forEach(function(item, key, paren){
+           item.parentNode.removeChild(item);
+        });
+
+        cardsContainer.setAttribute('position', '-3.8 1 -4');
+        cardsContainer.setAttribute('rotation', '0 0 0');
+        document.querySelector('#cards').setAttribute('cartes', 'informacio:assets/galeria.json; galeria:1; numero:9;');
+
+        document.querySelector('#girs').setAttribute('value', this.girs);
+        document.querySelector('[timer]').setAttribute('timer', 'temps:5; start:false;');
+        document.querySelector('[timer]').setAttribute('value', '5');
+
+        document.querySelector('#next').setAttribute('visible', 'false');
+        document.querySelector('#botoNext').removeAttribute('class');
+
+
+
+
     }
 }
