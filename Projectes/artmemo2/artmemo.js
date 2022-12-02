@@ -165,11 +165,19 @@ class ArtMemo {
         document.querySelector('[timer]').setAttribute('timer', 'temps:5; start:false;');
         document.querySelector('[timer]').setAttribute('value', '5');
 
+        // ZONES INFO
+        document.querySelector("#info1").removeAttribute('body');
+        document.querySelector("#info1").setAttribute('position','6.5 2.5 -2.0');
+        document.querySelector("#info1").setAttribute('rotation','-15 -60 0');
+        document.querySelector("#info1").setAttribute('visible','false');
+
+        document.querySelector("#info2").removeAttribute('body');
+        document.querySelector("#info2").setAttribute('position','-6.5 2.5 -2.0');
+        document.querySelector("#info2").setAttribute('rotation','-15 60 0');
+        document.querySelector("#info2").setAttribute('visible','false');
+
         document.querySelector('#next').setAttribute('visible', 'false');
         document.querySelector('#botoNext').removeAttribute('class');
-
-
-
 
     }
 }
