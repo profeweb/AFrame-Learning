@@ -28,7 +28,6 @@ class ArtMemo {
     }
 
     cartaJaGirada(){
-        console.log("CARTA JA GIRADA");
         document.querySelector('#soError').emit('errorCarta');
     }
 
@@ -39,17 +38,22 @@ class ArtMemo {
         document.querySelector('#soClick').emit('clickCarta');
     }
 
+    getIdDarreraGirada(){
+        return "#"+this.girades[this.girades.length-1];
+    }
+
     informar(){
+        let idAsset = "#" + document.querySelector(this.getIdDarreraGirada()).getAttribute('data-asset');
+        let textCarta = document.querySelector(this.getIdDarreraGirada()).getAttribute('data-text');
 
-        document.querySelector('#info1').setAttribute('visible', 'true');
-        document.querySelector('#info2').setAttribute('visible', 'true');
+        this.updateInfo("#info1", "#layer1", idAsset,"#text1", textCarta);
+        this.updateInfo("#info2", "#layer2", idAsset,"#text2", textCarta);
+    }
 
-        let idAsset = document.querySelector("#"+this.girades[this.girades.length-1]).getAttribute('data-asset');
-        document.querySelector('#layer1').setAttribute('layer', 'src', '#'+idAsset);
-        document.querySelector('#layer2').setAttribute('layer', 'src', '#'+idAsset);
-        let textCarta = document.querySelector("#"+this.girades[this.girades.length-1]).getAttribute('data-text');
-        document.querySelector('#text1').setAttribute('value', textCarta);
-        document.querySelector('#text2').setAttribute('value', textCarta);
+    updateInfo(idInfo, idLayer, idAsset, idText, textCarta){
+        document.querySelector(idInfo).setAttribute('visible', 'true');
+        document.querySelector(idLayer).setAttribute('layer', 'src', idAsset);
+        document.querySelector(idText).setAttribute('value', textCarta);
     }
 
     desgirar(){
