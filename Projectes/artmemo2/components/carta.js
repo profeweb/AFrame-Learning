@@ -12,30 +12,27 @@ AFRAME.registerComponent('carta', {
 
         el.addEventListener('click', function(event){
 
-            if(!joc.endedGame && el.getAttribute('class')==='card' && joc.cartesGirades()<2) {
+            if(joc.clickable() && el.getAttribute('class')==='card') {
 
                 let idElement = el.getAttribute('id');
-                console.log("CLICK SOBRE CARTA "+idElement);
 
                 if(!data.girada) {
-
                     data.girada = true;
-                    console.log("EMET EVENT GIRAR");
                     el.emit('girar', {'id':data.id});
 
-                    joc.girar(idElement);
+                    joc.girarCarta(idElement);
                     joc.informar();
 
                     if(!joc.startedTimer){
                         joc.iniciaJoc();
                     }
 
-                    if(joc.cartesGirades() == 2){
+                    if(joc.numCartesGirades() == 2){
 
-                        if(joc.emparellades()) {
+                        if(joc.cartesParells()) {
                             joc.emparellament();
 
-                            if(joc.cartesEmparellades() == 9){
+                            if(joc.numCartesEmparellades() == 9){
                                 joc.guanya();
                             }
                         }
