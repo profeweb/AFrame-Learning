@@ -1,0 +1,146 @@
+<html>
+<head>
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+
+    <!-- Components comunitaris -->
+    <script src="https://unpkg.com/aframe-template-component@3.x.x/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@4.x.x/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.x.x/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+    <script src="aframe-physics-system.js"></script>
+
+    <!-- App -->
+    <script src="app.js"></script>
+
+    <!-- Components Propis -->
+    <script src="components/galeria.js"></script>
+    <script src="components/carta.js"></script>
+    <script src="components/cartes.js"></script>
+    <script src="components/timer.js"></script>
+    <script src="components/outline.js"></script>
+    <script src="components/info-message.js"></script>
+    <script src="components/highlight.js"></script>
+    <script src="components/info-panel.js"></script>
+
+    <!-- Plantilla de VISOR (template component) -->
+    <script id="visor" type="text/html">
+        <a-entity id="info1" position="5.5 2.5 -2.0" rotation="0 -60 0" visible="false">
+            <a-entity id="layer1" layer="src:#imgLogo; width: 2; height: 3.5" color="#FFFFFF"></a-entity>
+            <a-text id="text1" position="0 -2 0" value="" width="5" font="assets/fonts/Sono-Bold-msdf.json" color="#000000" align="center">Títol de l'obra</a-text>
+            <a-box width="4" height="5" depth="0.1" color="#FFFFFF" position="0 0 -0.1"></a-box>
+        </a-entity>
+    </script>
+</head>
+<body>
+    <a-scene background="color:#222"
+             galeria="informacio:assets/galeria.json; galeria:0;"
+             physics="debug: false; gravity: -9.8;"
+             info-message="htmlSrc: #messageText">
+
+        <!-- Assets -->
+        <a-assets>
+
+            <!-- Imatges -->
+            <img id="imgLogo" src="assets/logoPaleta.png"/>
+            <img id="imgPincell" src="assets/pincell.png"/>
+            <img id="texturaCarta" src="assets/cartaTextura.png"/>
+
+            <!-- Audios-->
+            <audio id="click-sound" src="assets/audio/click.ogg"></audio>
+            <audio id="error-sound" src="assets/audio/error.wav"></audio>
+            <audio id="parell-sound" src="assets/audio/parell.wav"></audio>
+            <audio id="perd-sound" src="assets/audio/gameover.wav"></audio>
+            <audio id="desgirar-sound" src="assets/audio/desgirar.ogg"></audio>
+            <audio id="guanya-sound" src="assets/audio/victory.mp3"></audio>
+
+            <!-- Text del panell informatiu -->
+            <a-asset-item id="messageText" src="components/message.html"></a-asset-item>
+
+        </a-assets>
+
+        <!-- Graella de Cartes -->
+        <a-entity id="cards" layout="type: box; columns:6; margin: 1.5" position="-3.8 1 -4"></a-entity>
+
+        <!-- TERRA -->
+        <a-box id="terra" position="0 -2 -3" width="100" height="100" rotation="-90 0 0" visible="false"  body="type: static; mass: 0; shape: box;"></a-box>
+
+        <!-- INFO  -->
+        <a-entity id="info">
+
+            <!-- INFO DRETA -->
+            <a-entity id="info1" position="5.5 2.5 -2.0" rotation="0 -60 0" visible="false">
+                <a-entity id="layer1" layer="src:#imgLogo; width: 2; height: 3.5"  color="#FFFFFF"></a-entity>
+                <a-text id="text1" position="0 -2 0" value="" width="5" font="assets/fonts/Sono-Bold-msdf.json"   color="#000000" align="center">Títol de l'obra</a-text>
+                <a-box width="4" height="5" depth="0.1" color="#FFFFFF" position="0 0 -0.1"></a-box>
+            </a-entity>
+
+            <!-- INFO ESQ -->
+            <a-entity id="info2" position="-5.5 2.5 -2.0" rotation="0 60 0" visible="false">
+                <a-entity id="layer2" layer="src:#imgLogo; width: 2; height: 3.5"  color="#FFFFFF"></a-entity>
+                <a-text id="text2" position="0 -2 0" value="" width="5" font="assets/fonts/Sono-Bold-msdf.json" color="#000000" align="center">Títol de l'obra</a-text>
+                <a-box  width="4" height="5" depth="0.1" color="#FFFFFF" position="0 0 -0.1"></a-box>
+            </a-entity>
+
+        </a-entity>
+
+
+        <!-- HUD -->
+        <a-entity id="hud" position ="0 0 -3">
+
+            <!-- ZONA LOGO -->
+            <a-entity id="logo" position="-4 0 0">
+                <a-image src="#imgLogo" scale="1 1 1" position="-0.5 0 0"></a-image>
+                <a-text value="ART" position="0.15 0.2 0" width="13"  font="assets/fonts/PopArt-Regular-msdf.json" color="#64A3D3" negate="false"></a-text>
+                <a-text value="memo" position="0.15 -0.1 0" width="9" font="assets/fonts/GAU_pop_magic.TTF-msdf.json" color="#E1594C" negate="false"></a-text>
+            </a-entity>
+
+            <!-- ZONA INFO -->
+            <a-text id="titol" value="." width="10" position="0 -0.0 0" align="center" font="assets/fonts/Sono-Bold-msdf.json" color="#E1594C" negate="false"></a-text>
+
+            <!-- ZONA MARCADOR -->
+            <a-entity id="marcador" position="4 0 0">
+                <a-text value="Girs: " position="0 0.1 0" align="right" font="assets/fonts/Sono-Bold-msdf.json" color="#E1594C" negate="false"></a-text>
+                <a-text id="girs" value="0" position="0.05 0.1 0" align="left" font="assets/fonts/Sono-Bold-msdf.json" color="#FFFFFF" negate="false"></a-text>
+                <a-text value="Temps: " width="6" position="0 -0.1 0" align="right" font="assets/fonts/Sono-Bold-msdf.json"  color="#64A3D3" negate="false"></a-text>
+                <a-text timer="temps:5" value="" width="6" position="0.05 -0.1 0" align="left" font="assets/fonts/DS-DIGIB.TTF-msdf.json"  color="#FFFFFF" negate="false"></a-text>
+            </a-entity>
+
+        </a-entity>
+
+        <!-- VISOR -->
+        <a-camera>
+            <a-cursor raycaster="objects:.cardA" color="#FFFFFF">
+                <a-entity id="audioPlayer">
+                    <a-sound id="soClick" src="#click-sound" on="clickCarta"></a-sound>
+                    <a-sound id="soError" src="#error-sound" on="errorCarta"></a-sound>
+                    <a-sound id="soParell" src="#parell-sound" on="parellCarta"></a-sound>
+                    <a-sound id="soDesgirar" src="#desgirar-sound" on="desgirarCarta"></a-sound>
+                    <a-sound id="soPerd" src="#perd-sound" on="perdPartida"></a-sound>
+                    <a-sound id="soGuanya" src="#guanya-sound" on="guanyaPartida"></a-sound>
+                </a-entity>
+                <a-image src="#imgPincell" width="0.06" height="0.422" position="0 -0.23 0"></a-image>
+            </a-cursor>
+        </a-camera>
+
+    </a-scene>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        document.querySelector('#cards').setAttribute('cartes', 'informacio:assets/galeria.json; galeria:0; numero:9;');
+
+        document.querySelector('#cards').addEventListener('emparellament', function (){
+            joc.emparella();
+        });
+
+        document.querySelector('#cards').addEventListener('end', function (){
+            joc.endGame();
+        });
+
+    });
+
+    let joc = new ArtMemo();
+
+</script>
+</html>

@@ -56,9 +56,9 @@ AFRAME.registerComponent('cartes', {
                 entity.setAttribute('data-img', imgObra);
                 entity.setAttribute('data-asset', 'obra'+(i+1));
                 entity.setAttribute('data-text', textObra);
-                //entity.setAttribute('sound', 'on:click; src:#click-sound')
                 entity.setAttribute('animation__girar', 'property:rotation; from:0 0 0; to:0 180 0; startEvents: girar');
-                entity.setAttribute('animation__desgirar', 'property:rotation; from:0 180 0; to:0 0 0; startEvents: desgirar; delay:3000');
+                entity.setAttribute('animation__desgirar1', 'property:rotation; from:0 180 0; to:0 0 0; startEvents: desgirar1; delay:3000');
+                entity.setAttribute('animation__desgirar2', 'property:rotation; from:0 180 0; to:0 0 0; startEvents: desgirar2; delay:3000');
 
                 let caraA = document.createElement('a-entity');
                 caraA.setAttribute('class', 'cardA');

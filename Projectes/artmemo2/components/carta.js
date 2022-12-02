@@ -12,73 +12,49 @@ AFRAME.registerComponent('carta', {
 
         el.addEventListener('click', function(event){
 
-            if(!endedGame && el.getAttribute('class')==='card' && girades.length<2) {
+            if(!joc.endedGame && el.getAttribute('class')==='card' && joc.cartesGirades()<2) {
 
                 let idElement = el.getAttribute('id');
                 console.log("CLICK SOBRE CARTA "+idElement);
 
                 if(!data.girada) {
 
-                    el.emit('girar', {'id':data.id});
-                    document.querySelector('#soClick').emit('clickCarta');
-                    console.log("EMET EVENT GIRAR");
                     data.girada = true;
-                    girades.push(idElement);
+                    console.log("EMET EVENT GIRAR");
+                    el.emit('girar', {'id':data.id});
 
-                    girs++;
-                    document.querySelector('#girs').setAttribute('value', girs);
+                    joc.girar(idElement);
+                    joc.informar();
 
-                    document.querySelector('#info1').setAttribute('visible', 'true');
-                    document.querySelector('#info2').setAttribute('visible', 'true');
-
-                    let idAsset = document.querySelector("#"+girades[girades.length-1]).getAttribute('data-asset');
-                    document.querySelector('#layer1').setAttribute('layer', 'src', '#'+idAsset);
-                    document.querySelector('#layer2').setAttribute('layer', 'src', '#'+idAsset);
-                    let textCarta = document.querySelector("#"+girades[girades.length-1]).getAttribute('data-text');
-                    document.querySelector('#text1').setAttribute('value', textCarta);
-                    document.querySelector('#text2').setAttribute('value', textCarta);
-
-                    if(!startedTimer){
-                        startedTimer = true;
-                        console.log("EMIT START");
-                        document.querySelector('[timer]').emit('start');
+                    if(!joc.startedTimer){
+                        joc.iniciaJoc();
                     }
 
-                    if(girades.length==2){
+                    if(joc.cartesGirades() == 2){
 
-                        if(emparellades()) {
-                            console.log("EMET EMPARELLAMENT");
-                            document.querySelector('#soParell').emit('parellCarta');
-                            parelles.push(girades[0]);
-                            parelles.push(girades[1]);
+                        if(joc.emparellades()) {
+                            joc.emparellament();
 
-                            document.querySelector('#cards').emit('emparellament', false);
-                            girades = [];
-
-                            if(parells == 9){
-                                document.querySelector('#cards').emit('guanya', false);
-                                document.querySelector('#soGuanya').emit('guanyaPartida');
-                                document.querySelector('[timer]').emit('stop');
+                            if(joc.cartesEmparellades() == 9){
+                                joc.guanya();
                             }
                         }
                         else {
-                            console.log("EMET DESGIRAR");
-                            document.querySelector('#soError').emit('errorCarta');
-                            document.querySelector('#cards').emit('desgirar', false);
-                            setTimeout( function() {
-                                document.querySelector('#soDesgirar').emit('desgirarCarta');
-                            }, 5000);
+                            joc.desgirar();
                         }
                     }
                 }
                 else {
-                    console.log("CARTA JA GIRADA");
-                    document.querySelector('#soError').emit('errorCarta');
+                    joc.cartaJaGirada();
                 }
             }
         });
 
-        el.addEventListener('desgirar', function (){
+        el.addEventListener('desgirar1', function (){
+            data.girada = false;
+        });
+
+        el.addEventListener('desgirar2', function (){
             data.girada = false;
         });
 
