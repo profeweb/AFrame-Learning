@@ -51,12 +51,15 @@ AFRAME.registerComponent('cartes', {
                 entity.setAttribute('id', 'carta_'+numCarta)
                 entity.setAttribute('class', 'card');
                 entity.setAttribute('geometry', 'primitive:box; width:1; height:1.2; depth:0.25;');
+                entity.setAttribute('scale', '0 0 0');
                 entity.setAttribute('material', 'opacity:0.15');
                 entity.setAttribute('carta', 'id:'+numCarta);
                 entity.setAttribute('data-img', imgObra);
                 entity.setAttribute('data-asset', 'obra'+(i+1));
                 entity.setAttribute('data-text', textObra);
+                entity.setAttribute('creix', 'start:true');
                 entity.setAttribute('animation__girar', 'property:rotation; from:0 0 0; to:0 180 0; startEvents: girar');
+                //entity.setAttribute('animation__creix', 'property:scale; from:0 0 0; to:1 1 1; dur:1000; startEvents: creix');
                 entity.setAttribute('animation__desgirar1', 'property:rotation; from:0 180 0; to:0 0 0; startEvents: desgirar1; delay:3000');
                 entity.setAttribute('animation__desgirar2', 'property:rotation; from:0 180 0; to:0 0 0; startEvents: desgirar2; delay:3000');
 

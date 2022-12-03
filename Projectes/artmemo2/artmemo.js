@@ -1,7 +1,7 @@
 class ArtMemo {
 
     constructor() {
-
+        this.galeria = 0;
         this.girs = 0;
         this.parells = 0;
 
@@ -79,7 +79,6 @@ class ArtMemo {
     }
 
     emparella(){
-        console.log("EMPARALLATS");
         this.parells++;
         for(let c in this.parelles){
             let idCarta = "#"+this.parelles[c];
@@ -99,6 +98,7 @@ class ArtMemo {
         document.querySelector('#cards').emit('guanya', false);
         document.querySelector('#soGuanya').emit('guanyaPartida');
         document.querySelector('[timer]').emit('stop');
+        this.endGame();
     }
 
     endGame(){
@@ -111,16 +111,24 @@ class ArtMemo {
 
         document.querySelector('#info1').setAttribute('body', 'shape:box;');
         document.querySelector('#info2').setAttribute('body', 'shape:box;');
-        //document.querySelector('#hud').setAttribute('body', 'shape:box;');
 
         document.querySelector('#next').setAttribute('visible', 'true');
+       //document.querySelector('#next').setAttribute('scale', '0.1 0.1 0.1');
         document.querySelector('#botoNext').setAttribute('class', 'cardA');
         document.querySelector('#botoNext').setAttribute('click-next', '');
+        setTimeout(function (){
+            document.querySelector('#next').setAttribute('creix', 'initValue:0; start:true');
+        }, 2000);
+
+
     }
 
     resetGame(){
 
-        console.log("RESET GAME");
+        let partida = this.galeria;
+        if(this.parells == 9){
+            partida++;
+        }
 
         this.girs = 0;
         this.parells = 0;
@@ -140,7 +148,7 @@ class ArtMemo {
             item.parentNode.removeChild(item);
         });
 
-        escena.setAttribute('galeria', 'informacio:assets/galeria.json; galeria:1;');
+        escena.setAttribute('galeria', 'informacio:assets/galeria.json; galeria:'+partida+';');
         escena.flushToDOM();
 
 
@@ -158,7 +166,8 @@ class ArtMemo {
 
         cardsContainer.setAttribute('position', '-3.8 1 -4');
         cardsContainer.setAttribute('rotation', '0 0 0');
-        document.querySelector('#cards').setAttribute('cartes', 'informacio:assets/galeria.json; galeria:1; numero:9;');
+        document.querySelector('#cards').setAttribute('cartes', 'informacio:assets/galeria.json; galeria:'+partida+'; numero:9;');
+        document.querySelector('#cards').emit('creix');
 
         // ZONA MARCADOR
         document.querySelector('#girs').setAttribute('value', this.girs);
@@ -176,7 +185,10 @@ class ArtMemo {
         document.querySelector("#info2").setAttribute('rotation','-15 60 0');
         document.querySelector("#info2").setAttribute('visible','false');
 
+        // BOTÓ
         document.querySelector('#next').setAttribute('visible', 'false');
+        document.querySelector('#next').setAttribute('scale', '0 0 0');
+        document.querySelector('#next').removeAttribute('creix');
         document.querySelector('#botoNext').removeAttribute('class');
 
     }

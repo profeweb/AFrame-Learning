@@ -1,0 +1,40 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent('creix', {
+
+        schema: {
+          initValue: {type:'number', default:0},
+          finalValue: {type:'number', default:100},
+          amtValue:  {type:'number', default:0.1},
+          start: {type:'boolean', default:false}
+        },
+
+        init: function () {
+
+          var el = this.el;
+          var data = this.data;
+
+          this.currentValue = this.data.initValue;
+        },
+
+        tick: function (time, deltaTime) {
+          if(this.data.start && this.currentValue<1){
+            this.currentValue+= this.data.amtValue;
+            let scaleValue = this.currentValue+" "+this.currentValue+" "+this.currentValue;
+            this.el.setAttribute('scale', scaleValue)
+          }
+        },
+
+      });
+
+    </script>
+
+    <a-scene>
+        <a-entity id="c" creix="amtValue:0.01; start:true;" geometry="primitive:box" color="tomato" position="0 1.6 -3"></a-entity>
+    </a-scene>
+  </body>
+</html>

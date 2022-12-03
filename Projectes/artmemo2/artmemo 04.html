@@ -24,6 +24,7 @@
     <script src="components/highlight.js"></script>
     <script src="components/info-panel.js"></script>
     <script src="components/clickNext.js"></script>
+    <script src="components/creix.js"></script>
 
 </head>
 <body>
@@ -80,9 +81,9 @@
 
 
         <!-- Botó Següent Galeria -->
-        <a-entity id="next" position="0 1.6 -4" visible="false">
-            <a-text value="Play" position="0 0 0.1" align="center" font="assets/fonts/Sono-Bold-msdf.json" color="#FFFFFF" negate="false" side="double"></a-text>
-            <a-box id="botoNext" color="#64A3D3"  width="1" height="0.5" depth="0.1"></a-box>
+        <a-entity id="next" position="0 1.6 -4" visible="false" scale="0 0 0">
+            <a-text value="Nova Galeria" position="0 0 0.1" align="center" font="assets/fonts/Sono-Bold-msdf.json" color="#FFFFFF" negate="false" side="double"></a-text>
+            <a-box id="botoNext" color="#E1594C"  width="1.8" height="0.5" depth="0.1"></a-box>
         </a-entity>
 
         <!-- HUD -->
@@ -90,26 +91,23 @@
 
             <!-- ZONA LOGO -->
             <a-entity id="logo" position="-4 0 0" >
-                <a-image src="#imgLogo" scale="1 1 1" position="-0.5 0 0" side="double"></a-image>
-                <a-text value="ART" position="0.15 0.2 0" width="13"  font="assets/fonts/PopArt-Regular-msdf.json" color="#64A3D3" negate="false" side="double"></a-text>
-                <a-text value="memo" position="0.15 -0.1 0" width="9" font="assets/fonts/GAU_pop_magic.TTF-msdf.json" color="#E1594C" negate="false" side="double"></a-text>
+                <a-image creix="start:true" src="#imgLogo" scale="1 1 1" position="-0.5 0 0" side="double"></a-image>
+                <a-text creix="start:true" value="ART" position="0.15 0.2 0" width="13"  font="assets/fonts/PopArt-Regular-msdf.json" color="#64A3D3" negate="false" side="double"></a-text>
+                <a-text creix="start:true" value="memo" position="0.15 -0.1 0" width="9" font="assets/fonts/GAU_pop_magic.TTF-msdf.json" color="#E1594C" negate="false" side="double"></a-text>
             </a-entity>
 
             <!-- ZONA INFO -->
-            <a-text id="titol" value="." width="10" position="0 -0.0 0" align="center" font="assets/fonts/Sono-Bold-msdf.json" color="#E1594C" negate="false" side="double"></a-text>
+            <a-text creix="start:true" id="titol" value="." width="10" position="0 -0.0 0" align="center" font="assets/fonts/Sono-Bold-msdf.json" color="#E1594C" negate="false" side="double"></a-text>
 
             <!-- ZONA MARCADOR -->
             <a-entity id="marcador" position="4 0 0">
                 <a-text value="Girs: " position="0 0.1 0" align="right" font="assets/fonts/Sono-Bold-msdf.json" color="#E1594C" negate="false" side="double"></a-text>
                 <a-text id="girs" value="0" position="0.05 0.1 0" align="left" font="assets/fonts/Sono-Bold-msdf.json" color="#FFFFFF" negate="false" side="double"></a-text>
                 <a-text value="Temps: " width="6" position="0 -0.1 0" align="right" font="assets/fonts/Sono-Bold-msdf.json"  color="#64A3D3" negate="false" side="double"></a-text>
-                <a-text timer="temps:5" value="" width="6" position="0.05 -0.1 0" align="left" font="assets/fonts/DS-DIGIB.TTF-msdf.json"  color="#FFFFFF" negate="false" side="double"></a-text>
+                <a-text timer="temps:500" value="" width="6" position="0.05 -0.1 0" align="left" font="assets/fonts/DS-DIGIB.TTF-msdf.json"  color="#FFFFFF" negate="false" side="double"></a-text>
             </a-entity>
 
-
         </a-entity>
-
-
 
         <!-- VISOR -->
         <a-camera>
