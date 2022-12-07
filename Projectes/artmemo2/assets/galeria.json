@@ -56,48 +56,48 @@
       "pics":[
          {
             "id":1,
-            "titol":"Child with Dove",
-            "file": "child-with-dove.jpg"
+            "titol":"Untitled (1964)",
+            "file": "untitled-1964.jpg"
          },
          {
             "id":2,
-            "titol":"Figures at the seaside",
-            "file": "figures-at-the-seaside.jpg"
+            "titol":"Woman in front of the sun",
+            "file": "woman-in-front-of-the-sun.jpg"
          },
          {
             "id":3,
-            "titol":"Girl on the ball",
-            "file": "girl-on-the-ball.jpg"
+            "titol":"Woman encircled by the flight of a brid",
+            "file": "woman-encircledby-the-flight-of-a-bird.jpg"
          },
          {
             "id":4,
-            "titol":"Old Guitarist Chicago",
-            "file": "old-guitarist-chicago.jpg"
+            "titol":"The red sun (1948)",
+            "file": "the-red-sun-1984.jpg"
          },
          {
             "id":5,
-            "titol":"The Corrida",
-            "file": "the-corrida.jpg"
+            "titol":"The great carnivore (1969)",
+            "file": "the-great-carnivore-1969.jpg"
          },
          {
             "id":6,
-            "titol":"The Girls of Avignon",
-            "file": "the-girls-of-avignon.jpg"
+            "titol":"Self portrait",
+            "file": "self-portrait-1.jpg"
          },
          {
             "id":7,
-            "titol":"The Picador",
-            "file": "the-picador.jpg"
+            "titol":"Portrait of a young girl",
+            "file": "portrait-of-a-young-girl.jpg"
          },
          {
             "id":8,
-            "titol":"Portrait of Dora Maar",
-            "file": "portrait-of-dora-maar.jpg"
+            "titol":"Carota",
+            "file": "carota.jpg"
          },
          {
             "id":9,
-            "titol":"Portrait of Ambroise Vollard",
-            "file": "portrait-of-ambroise-vollard.jpg"
+            "titol":"Figures and dog in front od the sun",
+            "file": "figures-and-dog-in-front-of-the-sun.jpg"
          }
       ]
    }
