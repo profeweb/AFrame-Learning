@@ -10,6 +10,8 @@ class ArtMemo {
 
         this.girades = [];
         this.parelles = [];
+
+        this.temps = 500;
     }
 
     iniciaJoc(){
@@ -171,8 +173,8 @@ class ArtMemo {
 
         // ZONA MARCADOR
         document.querySelector('#girs').setAttribute('value', this.girs);
-        document.querySelector('[timer]').setAttribute('timer', 'temps:5; start:false;');
-        document.querySelector('[timer]').setAttribute('value', '5');
+        document.querySelector('[timer]').setAttribute('timer', 'temps:'+this.temps+'; start:false;');
+        document.querySelector('[timer]').setAttribute('value', this.temps);
 
         // ZONES INFO
         document.querySelector("#info1").removeAttribute('body');

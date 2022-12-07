@@ -67,12 +67,63 @@
          {
             "id":3,
             "titol":"Woman encircled by the flight of a brid",
-            "file": "woman-encircledby-the-flight-of-a-bird.jpg"
+            "file": "woman-encircled-by-the-flight-of-a-bird.jpg"
          },
          {
             "id":4,
             "titol":"The red sun (1948)",
-            "file": "the-red-sun-1984.jpg"
+            "file": "the-red-sun-1948.jpg"
+         },
+         {
+            "id":5,
+            "titol":"The great carnivore (1969)",
+            "file": "the-great-carnivore-1969.jpg"
+         },
+         {
+            "id":6,
+            "titol":"Self portrait",
+            "file": "self-portrait-1.jpg"
+         },
+         {
+            "id":7,
+            "titol":"Portrait of a young girl",
+            "file": "portrait-of-a-young-girl.jpg"
+         },
+         {
+            "id":8,
+            "titol":"Carota",
+            "file": "carota.jpg"
+         },
+         {
+            "id":9,
+            "titol":"Figures and dog in front od the sun",
+            "file": "figures-and-dog-in-front-of-the-sun.jpg"
+         }
+      ]
+   },
+   {
+      "id":3,
+      "tema":"Pintures de Dali",
+      "pics":[
+         {
+            "id":1,
+            "titol":"Untitled (1964)",
+            "file": "untitled-1964.jpg"
+         },
+         {
+            "id":2,
+            "titol":"Woman in front of the sun",
+            "file": "woman-in-front-of-the-sun.jpg"
+         },
+         {
+            "id":3,
+            "titol":"Woman encircled by the flight of a brid",
+            "file": "woman-encircled-by-the-flight-of-a-bird.jpg"
+         },
+         {
+            "id":4,
+            "titol":"The red sun (1948)",
+            "file": "the-red-sun-1948.jpg"
          },
          {
             "id":5,
