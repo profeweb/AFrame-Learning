@@ -1,0 +1,31 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+  <a-scene>
+      <a-entity cursor="rayOrigin:mouse;" rayCaster="objects:.A">
+
+          <a-box class="A" position="-2 1.5 -3" color="tomato"></a-box>
+          <a-sphere class="B" position="2 1.5 -3" color="blue"></a-sphere>
+
+      </a-entity>>
+
+  </a-scene>
+  <script>
+
+      document.addEventListener('DOMContentLoaded', function () {
+
+          document.querySelector('a-box').addEventListener('click', e => {
+                  console.log('A-BOX:', e.detail);
+                  document.querySelector('[rayCaster]').setAttribute('rayCaster', 'objects:.B');
+              });
+
+          document.querySelector('a-sphere').addEventListener('click', e => {
+                  console.log('A-SPHERE:', e.detail);
+                  document.querySelector('[rayCaster]').setAttribute('rayCaster', 'objects:.A');
+              });
+      });
+  </script>
+  </body>
+</html>

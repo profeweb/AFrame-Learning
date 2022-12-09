@@ -130,7 +130,11 @@ class ArtMemo {
         let partida = this.galeria;
         if(this.parells == 9){
             partida++;
+            this.galeria++;
         }
+
+        let numTextura = partida%4;
+        document.querySelector('#texturaCarta').setAttribute('src', 'assets/cartaTextura'+numTextura+'.png');
 
         this.girs = 0;
         this.parells = 0;
@@ -151,7 +155,7 @@ class ArtMemo {
         });
 
         escena.setAttribute('galeria', 'informacio:assets/galeria.json; galeria:'+partida+';');
-        escena.flushToDOM();
+        //escena.flushToDOM();
 
 
         // ZONA CARDS
