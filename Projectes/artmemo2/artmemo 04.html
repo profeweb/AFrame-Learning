@@ -26,8 +26,17 @@
     <script src="components/clickNext.js"></script>
     <script src="components/creix.js"></script>
 
+    <link rel="stylesheet" href="preload.css">
+
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="splash" style="background-color: rgba(0, 0, 0, 0.85);">
+        <div class="loading"></div>
+        <div class="loading-text">Loading</div>
+    </div>
+
+    <!-- Escena -->
     <a-scene background="color:#222"
              galeria="informacio:assets/galeria.json; galeria:0;"
              physics="debug: false; gravity: -9.8;"
@@ -64,17 +73,17 @@
         <a-entity id="info">
 
             <!-- INFO DRETA -->
-            <a-entity id="info1" position="6.5 2.5 -2.0" rotation="-15 -60 0" visible="false">
-                <a-entity id="layer1" layer="src:#imgLogo; width: 2; height: 3.5"  color="#FFFFFF"></a-entity>
-                <a-text id="text1" position="0 -2 0" value="" width="5" font="assets/fonts/Sono-Bold-msdf.json"   color="#000000" align="center" wrap-count="20">Títol de l'obra</a-text>
-                <a-box width="4" height="5" depth="0.1" color="#FFFFFF" position="0 0 -0.1"></a-box>
+            <a-entity id="info1" position="6.5 2.75 -2.0" rotation="-15 -60 0" visible="false">
+                <a-entity id="layer1" position="0 0.5 0" layer="src:#imgLogo; width: 2; height: 3.5"  color="#FFFFFF"></a-entity>
+                <a-text id="text1" position="0 -1.75 0" value="" width="5" font="assets/fonts/Sono-Bold-msdf.json"   color="#000000" align="center" wrap-count="15">Títol de l'obra</a-text>
+                <a-box width="4.85" height="5.75" depth="0.1" color="#FFFFFF" position="0 0.25 -0.1"></a-box>
             </a-entity>
 
             <!-- INFO ESQ -->
-            <a-entity id="info2" position="-6.5 2.5 -2.0" rotation="-15 60 0" visible="false">
-                <a-entity id="layer2" layer="src:#imgLogo; width: 2; height: 3.5"  color="#FFFFFF"></a-entity>
-                <a-text id="text2" position="0 -2 0" value="" width="5" font="assets/fonts/Sono-Bold-msdf.json" color="#000000" align="center" wrap-count="20">Títol de l'obra</a-text>
-                <a-box  width="4" height="5" depth="0.1" color="#FFFFFF" position="0 0 -0.1"></a-box>
+            <a-entity id="info2" position="-6.5 2.75 -2.0" rotation="-15 60 0" visible="false">
+                <a-entity id="layer2" position="0 0.5 0" layer="src:#imgLogo; width: 2; height: 3.5"  color="#FFFFFF"></a-entity>
+                <a-text id="text2" position="0 -1.75 0" value="" width="5" font="assets/fonts/Sono-Bold-msdf.json" color="#000000" align="center" wrap-count="15">Títol de l'obra</a-text>
+                <a-box  width="4.85" height="5.75" depth="0.1" color="#FFFFFF" position="0 0.25 -0.1"></a-box>
             </a-entity>
 
         </a-entity>

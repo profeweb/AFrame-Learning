@@ -2,18 +2,31 @@ let joc = new ArtMemo();
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    document.querySelector('#cards').setAttribute('cartes', 'informacio:assets/galeria.json; galeria:0; numero:9;');
+    const scene = document.querySelector('a-scene');
+    const cards = document.querySelector('#cards');
+    const splash = document.querySelector('#splash');
+    const loading = document.querySelector('#splash .loading');
 
-    document.querySelector('#cards').addEventListener('emparellament', function (){
+    cards.setAttribute('cartes', 'informacio:assets/galeria.json; galeria:0; numero:9;');
+
+    cards.addEventListener('emparellament', function (){
         joc.emparella();
     });
 
-    document.querySelector('#cards').addEventListener('end', function (){
+    cards.addEventListener('end', function (){
         joc.endGame();
     });
 
-    document.querySelector('a-scene').addEventListener('nextGame', function (){
+    scene.addEventListener('nextGame', function (){
         joc.resetGame();
     });
+
+    scene.addEventListener('loaded', function (e) {
+        setTimeout(() => {
+            loading.style.display = 'none';
+            splash.style.display = 'none';
+        }, 50);
+    });
+
 
 });
