@@ -1,0 +1,52 @@
+<html>
+  <head>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.misc.min.js"></script>
+    <script src="https://rawgit.com/wmurphyrd/aframe-super-hands-component/master/dist/super-hands.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent('pegamento', {
+
+        schema: {
+          target: {type: 'selector'},
+          distancia: {type: 'number', default: 1.0 },
+        },
+
+        init: function () {
+
+        },
+
+        tick: function (time, timeDelta) {
+
+          let distancia = this.el.object3D.position.distanceTo(this.data.target.object3D.position);
+          if(distancia<=this.data.distancia){
+            console.log("GOL");
+          }
+          console.log(distancia);
+        }
+
+      });
+
+    </script>
+    <a-scene background="color:#AAA">
+
+      <!-- MANS-->
+      <a-entity>
+        <a-camera></a-camera>
+        <a-entity sphere-collider="objects: a-box" super-hands hand-controls="hand: left"></a-entity>
+        <a-entity sphere-collider="objects: a-box" super-hands hand-controls="hand: right"></a-entity>
+      </a-entity>
+
+      <!-- MOVIBLE -->
+      <a-box pegamento="target:#final; distancia:1" hoverable grabbable stretchable draggable dropppable
+             position="-3 0 -5" material="color:green" width="1" height="0.5" depth="1"></a-box>
+
+      <!-- DESTÍ -->
+      <a-box position="0 0 -3" rotation="-90 0 0"  color="red" height="2" width="2" depth="0.1"></a-box>
+
+      <!- PLA INFERIOR -->
+      <a-plane id="final"  position="0 0 -3" rotation="-90 0 0"  color="black" height="20" width="20"></a-plane>
+    </a-scene>
+  </body>
+</html>
